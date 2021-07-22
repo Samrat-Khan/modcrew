@@ -9,5 +9,9 @@ class RouteName {
   static String account = '/account';
   static String signup = '/signup';
   static String privacy_policy = '/privacy_policy';
+  static String search = '/search';
+  static String checkout = '/checkout';
+  static String initScreen = '/initScreen';
+
   // static String  = '/privecy_policy';
 }

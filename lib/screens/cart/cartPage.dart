@@ -5,6 +5,7 @@ import 'package:shopping_page/const_and_theme/textStyles.dart';
 import 'package:shopping_page/controller/authController.dart';
 import 'package:shopping_page/controller/cartController.dart';
 import 'package:shopping_page/dummyData/cartData.dart';
+import 'package:shopping_page/routes/routeNames.dart';
 import 'package:shopping_page/screens/screens.dart';
 import 'package:shopping_page/widgets/widgets.dart';
 
@@ -168,24 +169,33 @@ class _CartPageState extends State<CartPage> {
                                     height: 40,
                                     child: ElevatedButton(
                                       onPressed: () {
-                                        if (authController
-                                            .authToken.value.isEmpty) {
-                                          showDialog(
-                                              context: context,
-                                              builder: (context) {
-                                                return DoAuthDialog();
-                                              });
-                                        } else {
-                                          showDialog(
-                                              context: context,
-                                              builder: (context) {
-                                                return InfoDialogForError(
-                                                  content:
-                                                      'Waiting for delivery agency\'s api',
-                                                  title: 'Order Place',
-                                                );
-                                              });
-                                        }
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => CheckOut(
+                                              // totaPrice: cartController
+                                              //     .totalPrice.value
+                                              //     .toString(),
+                                              totaPrice: "50145",
+                                            ),
+                                          ),
+                                        );
+                                        // if (authController
+                                        //     .authToken.value.isEmpty) {
+                                        //   showDialog(
+                                        //       context: context,
+                                        //       builder: (context) {
+                                        //         return DoAuthDialog();
+                                        //       });
+                                        // } else {
+                                        //   // Navigator.of(context).pushNamed(
+                                        //   //   RouteName.checkout,
+                                        //   //   arguments: cartController
+                                        //   //       .totalPrice.value
+                                        //   //       .toString(),
+                                        //   // );
+
+                                        // }
                                       },
                                       child: Text(
                                         "Place Order",
@@ -313,43 +323,3 @@ class _CartPageState extends State<CartPage> {
     );
   }
 }
-
-// Row(
-//                                                     children: [
-//                                                       iconsButton(Icons.remove,
-//                                                           () {
-//                                                         decrement(
-//                                                             itemCount:
-//                                                                 controller
-//                                                                     .itemCount
-//                                                                     .value,
-//                                                             productRealPrice:
-//                                                                 controller
-//                                                                     .cartList
-//                                                                     .value[
-//                                                                         index]
-//                                                                     .productPrice);
-//                                                       }),
-//                                                       SizedBox(width: 10),
-//                                                       Text(
-//                                                         "${controller.itemCount.value}",
-//                                                         style: Styles
-//                                                             .subContentStyle,
-//                                                       ),
-//                                                       SizedBox(width: 10),
-//                                                       iconsButton(Icons.add,
-//                                                           () {
-//                                                         increment(
-//                                                             itemCount:
-//                                                                 controller
-//                                                                     .itemCount
-//                                                                     .value,
-//                                                             productRealPrice:
-//                                                                 controller
-//                                                                     .cartList
-//                                                                     .value[
-//                                                                         index]
-//                                                                     .productPrice);
-//                                                       }),
-//                                                     ],
-//                                                   ),

@@ -29,8 +29,8 @@ class SignInSignUp {
       body: encodeBody,
     );
     var jsonBody = jsonDecode(token.body);
+    AuthKeyStorage.setValue(key: jsonBody["token"]);
 
-    print(jsonBody);
     return jsonBody;
   }
 
@@ -52,7 +52,7 @@ class SignInSignUp {
         },
       );
       var jsonBody = jsonDecode(token.body);
-      print(jsonBody);
+      AuthKeyStorage.setValue(key: jsonBody["token"]);
       return jsonBody;
     } on HttpException catch (e) {
       print("Error duing sign in ${e.message}");
@@ -67,11 +67,11 @@ class SignInSignUp {
       });
 
       var jsonBody = jsonDecode(data.body);
+      print(jsonBody);
       return jsonBody;
     } on http.ClientException catch (e) {
       print(e.message);
     }
-
     // return jsonBody;
   }
 }

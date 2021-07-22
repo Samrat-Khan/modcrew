@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:shopping_page/screens/screens.dart';
+import 'package:shopping_page/screens/search/search.dart';
 import 'package:shopping_page/widgets/widgets.dart';
 
 class AppRouter {
@@ -57,6 +58,24 @@ class AppRouter {
         return MaterialPageRoute(
           settings: settings,
           builder: (_) => UserAccount(),
+        );
+      case '/search':
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => SearchPage(
+            productName: args as String,
+          ),
+        );
+      case '/checkout':
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => CheckOut(
+            totaPrice: args as String,
+          ),
+        );
+      case '/initScreen':
+        return MaterialPageRoute(
+          builder: (_) => InitScreen(),
         );
       default:
         return _errorRoute();

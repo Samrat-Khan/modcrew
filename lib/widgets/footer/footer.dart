@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shopping_page/const_and_theme/textStyles.dart';
+import 'package:shopping_page/screens/screens.dart';
 import 'package:shopping_page/screens/signup_login/signup_login.dart';
 import 'package:shopping_page/widgets/util/responsive.dart';
 

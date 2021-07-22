@@ -24,10 +24,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Modecrew',
+      title: 'Modcrew',
       theme: Customtheme.lightTheme,
       onGenerateRoute: AppRouter.generatedRoute,
-      initialRoute: RouteName.home,
+      initialRoute: RouteName.cart,
       // home: JWTToekn(),
     );
   }
