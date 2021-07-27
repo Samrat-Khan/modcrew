@@ -23,3 +23,4 @@ export 'payment/fakeUI.dart';
 export 'payment/paymentUI.dart';
 export 'signup_login/sign_In.dart';
 export 'signup_login/sign_Up.dart';
+export 'templateLayout/defultAppBar/defultAppBar.dart';

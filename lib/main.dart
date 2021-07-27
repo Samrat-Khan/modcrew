@@ -1,21 +1,19 @@
-import 'dart:convert';
-
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:shopping_page/controller/authController.dart';
 import 'package:shopping_page/controller/cartController.dart';
+import 'package:shopping_page/controller/navChanagingController.dart';
 import 'package:shopping_page/routes/route.dart';
 import 'package:shopping_page/const_and_theme/theme.dart';
 import 'package:shopping_page/routes/routeNames.dart';
-import 'package:shopping_page/services/constData.dart';
 import 'package:url_strategy/url_strategy.dart';
-import 'package:http/http.dart' as http;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   setPathUrlStrategy();
   Get.put(CartController());
   Get.put(AuthController());
+  Get.put(NavChangeController());
   runApp(MyApp());
 }
 
@@ -27,7 +25,7 @@ class MyApp extends StatelessWidget {
       title: 'Modcrew',
       theme: Customtheme.lightTheme,
       onGenerateRoute: AppRouter.generatedRoute,
-      initialRoute: RouteName.cart,
+      initialRoute: RouteName.home,
       // home: JWTToekn(),
     );
   }

@@ -169,33 +169,33 @@ class _CartPageState extends State<CartPage> {
                                     height: 40,
                                     child: ElevatedButton(
                                       onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => CheckOut(
-                                              // totaPrice: cartController
-                                              //     .totalPrice.value
-                                              //     .toString(),
-                                              totaPrice: "50145",
-                                            ),
-                                          ),
-                                        );
-                                        // if (authController
-                                        //     .authToken.value.isEmpty) {
-                                        //   showDialog(
-                                        //       context: context,
-                                        //       builder: (context) {
-                                        //         return DoAuthDialog();
-                                        //       });
-                                        // } else {
-                                        //   // Navigator.of(context).pushNamed(
-                                        //   //   RouteName.checkout,
-                                        //   //   arguments: cartController
-                                        //   //       .totalPrice.value
-                                        //   //       .toString(),
-                                        //   // );
-
-                                        // }
+                                        // Navigator.push(
+                                        //   context,
+                                        //   MaterialPageRoute(
+                                        //     builder: (context) => CheckOut(
+                                        //       // totaPrice: cartController
+                                        //       //     .totalPrice.value
+                                        //       //     .toString(),
+                                        //       totaPrice: "5648",
+                                        //     ),
+                                        //   ),
+                                        // );
+                                        if (authController
+                                            .authToken.value.isEmpty) {
+                                          showDialog(
+                                              context: context,
+                                              builder: (context) {
+                                                return DoAuthDialog();
+                                              });
+                                        } else {
+                                          Navigator.of(context).pushNamed(
+                                            RouteName.checkout,
+                                            arguments: (cartController
+                                                        .totalPrice.value *
+                                                    100)
+                                                .toString(),
+                                          );
+                                        }
                                       },
                                       child: Text(
                                         "Place Order",

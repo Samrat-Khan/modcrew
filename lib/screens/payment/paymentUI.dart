@@ -1,6 +1,8 @@
 import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:shopping_page/routes/routeNames.dart';
 import 'fakeUI.dart' if (dart.library.html) 'dart:ui' as ui;
 
 class WebPayment extends StatelessWidget {
@@ -28,6 +30,7 @@ class WebPayment extends StatelessWidget {
               Navigator.pop(context);
             } else if (element.data == 'SUCCESS') {
               print('PAYMENT SUCCESSFULL!!!!!!!');
+              Get.offAll(RouteName.home);
             }
           },
         );

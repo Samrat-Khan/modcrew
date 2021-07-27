@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shopping_page/controller/authController.dart';
-import 'package:shopping_page/dummyData/dummyData.dart';
 import 'package:shopping_page/models/models.dart';
 import 'package:shopping_page/widgets/widgets.dart';
 
@@ -113,7 +112,7 @@ class ProductDetailsScreen extends StatelessWidget {
                 ),
               ),
               CustomerReviewWidgets(
-                review: productModel.reviews,
+                review: [],
               ),
               SizedBox(height: 30),
               Responsive.isDesktop(context) ? DividerMessage() : SizedBox(),

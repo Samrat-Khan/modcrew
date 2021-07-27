@@ -9,6 +9,7 @@ class AuthController extends GetxController {
   final SignInSignUp signInSignUp = SignInSignUp();
   RxString authToken = ''.obs;
   var userData = RxList<UserDataModel>().obs;
+
   static AuthController get to => Get.find<AuthController>();
   getAuthToken({required String token}) {
     // authToken.value = token;

@@ -1,10 +1,5 @@
 import 'dart:convert';
-import 'package:colorize/colorize.dart';
 import 'package:http/http.dart' as http;
-
-import 'package:flutter/cupertino.dart';
-import 'package:shopping_page/models/models.dart';
-import 'package:shopping_page/services/services.dart';
 
 class HTTPService {
   String baseUrl = "https://modcrew.herokuapp.com/api/v1";

@@ -53,7 +53,7 @@ class _LogInTabState extends State<LogInTab> {
       }
 
       authController.authToken.value = tokenData["token"];
-
+      print("Token Data " + " " + tokenData["token"]);
       // getting userdata
       Map<String, dynamic> userData =
           await signInSignUp.getUserData(token: tokenData["token"]);

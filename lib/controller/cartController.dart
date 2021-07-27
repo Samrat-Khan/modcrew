@@ -5,7 +5,7 @@ class CartController extends GetxController {
   var cartList = RxList<CartModel>().obs;
   RxDouble price = 1.0.obs;
   RxInt itemCount = 1.obs;
-  var totalPrice = 0.0.obs;
+  RxDouble totalPrice = 0.0.obs;
   static CartController get to => Get.find<CartController>();
   // Cart List Controller
   addItemToCart({required CartModel product}) {

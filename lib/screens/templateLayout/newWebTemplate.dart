@@ -5,8 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shopping_page/const_and_theme/theme.dart';
 import 'package:shopping_page/controller/authController.dart';
 import 'package:shopping_page/controller/cartController.dart';
-
-import 'package:shopping_page/dummyData/cartData.dart';
+import 'package:shopping_page/controller/navChanagingController.dart';
 import 'package:shopping_page/routes/routeNames.dart';
 import 'package:shopping_page/widgets/widgets.dart';
 
@@ -23,6 +22,7 @@ class _LayoutTemplateState extends State<LayoutTemplate> {
   int initIndex = 0;
   final cartController = CartController.to;
   final authController = AuthController.to;
+  final navObserver = NavChangeController.to;
   @override
   void dispose() {
     _controller.dispose();
@@ -35,9 +35,7 @@ class _LayoutTemplateState extends State<LayoutTemplate> {
   }
 
   chnageIndex(int index) {
-    setState(() {
-      initIndex = index;
-    });
+    navObserver.setIndex(currentIndex: index);
   }
 
   bool checkRouteName(String routeName) {
@@ -70,78 +68,73 @@ class _LayoutTemplateState extends State<LayoutTemplate> {
                 : ForAuthUser(
                     cartBadge: cartBage(context),
                   ),
-            // cartBage(context),
-            // authController.authToken.value == ""
-            //     ? SizedBox()
-            //     : InkWell(
-            //         onTap: () {
-            //           checkRouteName(RouteName.account)
-            //               ? null
-            //               : Navigator.of(context).pushNamed(RouteName.account);
-            //         },
-            //         child: CircleAvatar(
-            //           radius: 18,
-            //           backgroundImage: AssetImage("assets/images/u1.png"),
-            //         ),
-            //       ),
-            // SizedBox(width: 20),
           ],
           bottom: PreferredSize(
             preferredSize: Size.fromHeight(20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TextButton(
-                  style: TextButton.styleFrom(
-                    primary: initIndex == 0 ? Colors.black : Colors.black54,
-                  ),
-                  onPressed: () {
-                    chnageIndex(0);
-                    checkRouteName(RouteName.home)
-                        ? null
-                        : Navigator.of(context).pushNamed(RouteName.home);
-                  },
-                  child: Text("Home"),
-                ),
+                Obx(() => TextButton(
+                      style: TextButton.styleFrom(
+                        primary: navObserver.index.value == 0
+                            ? Colors.black
+                            : Colors.black54,
+                      ),
+                      onPressed: () {
+                        chnageIndex(0);
+                        checkRouteName(RouteName.home)
+                            ? null
+                            : Navigator.of(context).pushNamed(RouteName.home);
+                      },
+                      child: Text("Home"),
+                    )),
                 SizedBox(width: 20),
-                TextButton(
-                  style: TextButton.styleFrom(
-                    primary: initIndex == 1 ? Colors.black : Colors.black54,
-                  ),
-                  onPressed: () {
-                    chnageIndex(1);
-                    checkRouteName(RouteName.shop)
-                        ? null
-                        : Navigator.of(context).pushNamed(RouteName.shop);
-                  },
-                  child: Text("Shop"),
-                ),
+                Obx(() => TextButton(
+                      style: TextButton.styleFrom(
+                        primary: navObserver.index.value == 1
+                            ? Colors.black
+                            : Colors.black54,
+                      ),
+                      onPressed: () {
+                        chnageIndex(1);
+                        checkRouteName(RouteName.shop)
+                            ? null
+                            : Navigator.of(context).pushNamed(RouteName.shop);
+                      },
+                      child: Text("Shop"),
+                    )),
                 SizedBox(width: 20),
-                TextButton(
-                  style: TextButton.styleFrom(
-                    primary: initIndex == 2 ? Colors.black : Colors.black54,
-                  ),
-                  onPressed: () {
-                    chnageIndex(2);
-                    checkRouteName(RouteName.aboutus)
-                        ? null
-                        : Navigator.of(context).pushNamed(RouteName.aboutus);
-                  },
-                  child: Text("About Us"),
-                ),
+                Obx(() => TextButton(
+                      style: TextButton.styleFrom(
+                        primary: navObserver.index.value == 2
+                            ? Colors.black
+                            : Colors.black54,
+                      ),
+                      onPressed: () {
+                        chnageIndex(2);
+                        checkRouteName(RouteName.aboutus)
+                            ? null
+                            : Navigator.of(context)
+                                .pushNamed(RouteName.aboutus);
+                      },
+                      child: Text("About Us"),
+                    )),
                 SizedBox(width: 20),
-                TextButton(
-                  style: TextButton.styleFrom(
-                    primary: initIndex == 3 ? Colors.black : Colors.black54,
-                  ),
-                  onPressed: () {
-                    chnageIndex(3);
-                    checkRouteName(RouteName.contactus)
-                        ? null
-                        : Navigator.of(context).pushNamed(RouteName.contactus);
-                  },
-                  child: Text("Contact Us"),
-                ),
+                Obx(() => TextButton(
+                      style: TextButton.styleFrom(
+                        primary: navObserver.index.value == 3
+                            ? Colors.black
+                            : Colors.black54,
+                      ),
+                      onPressed: () {
+                        chnageIndex(3);
+                        checkRouteName(RouteName.contactus)
+                            ? null
+                            : Navigator.of(context)
+                                .pushNamed(RouteName.contactus);
+                      },
+                      child: Text("Contact Us"),
+                    )),
               ],
             ),
           ),

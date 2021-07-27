@@ -84,6 +84,7 @@ class _SignUpTabState extends State<SignUpTab> {
               });
         }
         authController.authToken.value = data["token"];
+
         Map<String, dynamic> userData =
             await signInSignUp.getUserData(token: data["token"]);
         authController.addUserData(
@@ -175,6 +176,7 @@ class _SignUpTabState extends State<SignUpTab> {
                 CustomTextField(
                   size: widget.size,
                   hintText: "phone number",
+                  isNeedMaxLength: true,
                   controller: widget._signUpPhoneController,
                   valiadtor: (value) {
                     if (!GetUtils.isPhoneNumber(value!) ||

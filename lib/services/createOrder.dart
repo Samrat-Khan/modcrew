@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 
 class CreateOrderService {
   postOrder({required String amount}) async {
-    String baseUrl = "https://f6fb61d50a72.ngrok.io/payment/order/";
+    String baseUrl = "https://1f4233821b8a.ngrok.io/payment/order/";
 
     try {
       Map body = {

@@ -29,16 +29,11 @@
             //  alert(response.razorpay_payment_id);
             //  alert(response.razorpay_order_id);
             //  alert(response.razorpay_signature)    
-            const baseUrl = "https://f6fb61d50a72.ngrok.io/payment/orderData/";
+            const baseUrl = "https://1f4233821b8a.ngrok.io/payment/orderData/";
             fetch(baseUrl,{
                method:"POST",
-               
                headers:{
-                  body:JSON.stringify({
-                     razorpay_payment_id:    response.razorpay_payment_id,
-                     razorpay_order_id: response.razorpay_order_id,
-                     razorpay_signature:   response.razorpay_signature
-                  }),
+                  body:JSON.stringify(response),
                   "Content-Type":"application/json",
                }
             }).then(response=> response.json() )

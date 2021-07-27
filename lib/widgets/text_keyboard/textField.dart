@@ -8,7 +8,7 @@ class CustomTextField extends StatefulWidget {
   final Size size;
   final String hintText;
   final Function(String?) valiadtor;
-  final bool isPassword;
+  final bool isPassword, isNeedMaxLength;
 
   const CustomTextField({
     Key? key,
@@ -19,6 +19,7 @@ class CustomTextField extends StatefulWidget {
     required this.controller,
     required this.valiadtor,
     this.isPassword = false,
+    this.isNeedMaxLength = false,
   }) : super(key: key);
 
   @override
@@ -47,6 +48,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       ),
       child: TextFormField(
         controller: widget.controller,
+        maxLength: widget.isNeedMaxLength ? 10 : null,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         validator: (val) => widget.valiadtor(val),
         keyboardType:

@@ -29,6 +29,7 @@ class SignInSignUp {
       body: encodeBody,
     );
     var jsonBody = jsonDecode(token.body);
+
     AuthKeyStorage.setValue(key: jsonBody["token"]);
 
     return jsonBody;
@@ -61,17 +62,19 @@ class SignInSignUp {
 
   Future getUserData({required String token}) async {
     try {
-      var data = await http.get(Uri.parse(GET_USER), headers: <String, String>{
-        HttpHeaders.contentTypeHeader: 'application/json',
-        HttpHeaders.authorizationHeader: 'Bearer $token',
-      });
+      var data = await http.get(
+        Uri.parse(GET_USER),
+        headers: <String, String>{
+          HttpHeaders.contentTypeHeader: 'application/json',
+          HttpHeaders.authorizationHeader: 'Bearer $token',
+        },
+      );
 
       var jsonBody = jsonDecode(data.body);
-      print(jsonBody);
+
       return jsonBody;
-    } on http.ClientException catch (e) {
+    } on HttpException catch (e) {
       print(e.message);
     }
-    // return jsonBody;
   }
 }

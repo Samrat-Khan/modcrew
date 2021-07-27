@@ -1,13 +1,15 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shopping_page/const_and_theme/textStyles.dart';
+import 'package:shopping_page/controller/cartController.dart';
 import 'package:shopping_page/screens/screens.dart';
 import 'package:shopping_page/screens/signup_login/signup_login.dart';
 import 'package:shopping_page/widgets/util/responsive.dart';
 
 class Footer extends StatelessWidget {
-  const Footer({Key? key}) : super(key: key);
+  Footer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -164,14 +166,6 @@ class SecondFooterContent extends StatelessWidget {
         InkWell(
           onTap: () {},
           child: Text(
-            "Car",
-            style: Styles.kFooterContent,
-          ),
-        ),
-        SizedBox(height: 8),
-        InkWell(
-          onTap: () {},
-          child: Text(
             "Fashion",
             style: Styles.kFooterContent,
           ),
@@ -180,20 +174,28 @@ class SecondFooterContent extends StatelessWidget {
         InkWell(
           onTap: () {},
           child: Text(
-            "Accessories",
+            "Collectibles",
             style: Styles.kFooterContent,
           ),
         ),
+        SizedBox(height: 8),
+        // InkWell(
+        //   onTap: () {},
+        //   child: Text(
+        //     "Accessories",
+        //     style: Styles.kFooterContent,
+        //   ),
+        // ),
       ],
     );
   }
 }
 
 class FirstFooterContent extends StatelessWidget {
-  const FirstFooterContent({
+  FirstFooterContent({
     Key? key,
   }) : super(key: key);
-
+  final cartController = CartController.to;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -243,7 +245,9 @@ class FirstFooterContent extends StatelessWidget {
             Navigator.of(context).pushNamed('/cart');
           },
           icon: Icon(Icons.shopping_cart),
-          label: Text("Cart"),
+          label: Obx(
+            () => Text("Cart (${cartController.cartList.value.length})"),
+          ),
         ),
       ],
     );
