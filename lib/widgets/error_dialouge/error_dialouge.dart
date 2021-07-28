@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shopping_page/routes/routeNames.dart';
 
 class InfoDialogForError extends StatelessWidget {
@@ -42,13 +43,19 @@ class DoAuthDialog extends StatelessWidget {
       content: Text("Please sign up or log in to conitune"),
       actions: <Widget>[
         TextButton(
-          child: Text("Log In"),
+          child: Text(
+            "Log In",
+            style: GoogleFonts.ubuntu(),
+          ),
           onPressed: () {
             Get.toNamed(RouteName.login);
           },
         ),
         TextButton(
-          child: Text("Sign In"),
+          child: Text(
+            "Sign Up",
+            style: GoogleFonts.ubuntu(),
+          ),
           onPressed: () {
             Get.toNamed(RouteName.signup);
           },

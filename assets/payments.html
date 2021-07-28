@@ -6,9 +6,9 @@
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
    const queryString = window.location.search;
-   console.log(queryString);
+ 
    const urlParams = new URLSearchParams(queryString);
-   console.log("urlParanms", urlParams)
+  
    const name = urlParams.get('name')
    const price = urlParams.get('price')
    const phone = urlParams.get('phone')
@@ -24,12 +24,12 @@
            "order_id": orderId,
         //   "image":image,
           "handler": function (response){
-             console.log("response", response)
-            // window.parent.postMessage("SUCCESS","*");      //2 
+         
+             window.parent.postMessage("SUCCESS","*");     
             //  alert(response.razorpay_payment_id);
             //  alert(response.razorpay_order_id);
             //  alert(response.razorpay_signature)    
-            const baseUrl = "https://1f4233821b8a.ngrok.io/payment/orderData/";
+            const baseUrl = "https://db9c0e93c255.ngrok.io/payment/orderData/";
             fetch(baseUrl,{
                method:"POST",
                headers:{
@@ -38,7 +38,7 @@
                }
             }).then(response=> response.json() )
             .catch(error=>console.log(error))
-
+               console.log( "Response ",response.json());
           },    
           "prefill": {        
              "name": name,        
@@ -59,9 +59,9 @@
        };
       
        var rzp1 = new Razorpay(options);
-       console.log(1 , rzp1)
+      
        window.onload = function(e){  //1  
-         console.log( 2, rzp1)
+         
           rzp1.open();
           e.preventDefault();
        }

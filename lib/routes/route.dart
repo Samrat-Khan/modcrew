@@ -72,10 +72,19 @@ class AppRouter {
             totaPrice: args as String,
           ),
         );
+      case '/orderConfrim':
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => OrderConfirm(
+            orderId: args as String,
+            // orderId: "order_DaZlswtdcn9UNV",
+          ),
+        );
       case '/initScreen':
         return MaterialPageRoute(
           builder: (_) => InitScreen(),
         );
+
       default:
         return _errorRoute();
     }

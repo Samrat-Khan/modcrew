@@ -1,7 +1,8 @@
 import 'dart:html';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:shopping_page/controller/cartController.dart';
+
 import 'package:shopping_page/routes/routeNames.dart';
 import 'fakeUI.dart' if (dart.library.html) 'dart:ui' as ui;
 
@@ -16,7 +17,7 @@ class WebPayment extends StatelessWidget {
     required this.email,
     required this.orderId,
   }) : super(key: key);
-
+  final cartController = CartController.to;
   @override
   Widget build(BuildContext context) {
     ui.platformViewRegistry.registerViewFactory(
@@ -27,10 +28,15 @@ class WebPayment extends StatelessWidget {
           (element) {
             print('Event Received in callback: ${element.data}');
             if (element.data == 'MODAL_CLOSED') {
+              print(element.data);
+
               Navigator.pop(context);
             } else if (element.data == 'SUCCESS') {
-              print('PAYMENT SUCCESSFULL!!!!!!!');
-              Get.offAll(RouteName.home);
+              print('$element');
+              print('${element.data}');
+              cartController.deleteCart();
+              Navigator.of(context).pushReplacementNamed(RouteName.orderConfrim,
+                  arguments: orderId);
             }
           },
         );

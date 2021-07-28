@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:shopping_page/controller/authController.dart';
@@ -28,18 +29,18 @@ class _CheckOutState extends State<CheckOut> {
   final Razorpay razorPay = Razorpay();
 
   order() async {
+    UserDataModel model = authController.userData.value[0];
     Map<String, dynamic> response =
         await createOrderService.postOrder(amount: widget.totaPrice);
-    print(response);
     createOrderModel = CreateOrderModel.fromJson(response);
 
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => WebPayment(
-          name: "Samrat ",
-          phone: "7001276983",
+          name: "${model.firstName} ${model.lastName}",
+          phone: "${model.phone}",
           price: createOrderModel!.amount,
-          email: "wwesamu@gmail.com",
+          email: "${model.email}",
           orderId: createOrderModel!.id,
         ),
       ),
@@ -59,90 +60,76 @@ class _CheckOutState extends State<CheckOut> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-
+    UserDataModel model = authController.userData.value[0];
     return LayoutTemplate(
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Container(
-            width: size.width * 0.3,
-            child: ListView(
-              shrinkWrap: true,
-              children: [
-                Container(
-                  color: Colors.white,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                  child: Column(
-                    children: [
-                      rowForText(
-                        lableName: "Total Price",
-                        labelValue:
-                            "cartController.totalPrice.value.toString()",
-                      ),
-                      SizedBox(height: 10),
-                      Text("Details"),
-                      SizedBox(height: 8),
-                      rowForText(
-                          lableName: "Name",
-                          labelValue:
-                              "model.firstName" + " " + "model.lastName"),
-                      SizedBox(height: 5),
-                      rowForText(
-                          lableName: "Phone Number",
-                          labelValue: " model.phone.toString()"),
-                      SizedBox(height: 5),
-                      rowForText(lableName: "Email", labelValue: "model.email"),
-                      SizedBox(height: 5),
-                      // rowForText(lableName: "Adress", labelValue: model.addressBook[0].addressType),
-                      // CustomCheckBoxGroup(
-                      //   buttonValuesList: selectedLabel,
-                      //   buttonLables: labelName,
-                      //   checkBoxButtonValues: (values) {
-                      //     print("Values $values");
-                      //   },
-                      //   defaultSelected: [labelValue],
-                      //   enableButtonWrap: true,
-                      //   selectedColor: Colors.black,
-                      //   unSelectedColor: Colors.white,
-                      //   autoWidth: true,
-                      //   spacing: 10,
-                      // ),
-                      // GroupButton(
-                      //   isRadio: false,
-                      //   spacing: 10,
-                      //   onSelected: (index, isSelected) {
-                      //     if (index == 0) {
-                      //       setState(() {
-                      //         selectedButtonIndex = 0;
-                      //       });
-                      //     } else {
-                      //       setState(() {
-                      //         selectedButtonIndex = 1;
-                      //       });
-                      //     }
-                      //     print(
-                      //         '$index and $selectedButtonIndex button is selected');
-                      //   },
-                      //   buttons: labelName,
-                      //   selectedButtons: [selectedButtonIndex],
-                      // ),
-                      Row(
+      body: Center(
+        child: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                width: size.width * 0.3,
+                child: ListView(
+                  shrinkWrap: true,
+                  children: [
+                    Container(
+                      color: Colors.white,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 20),
+                      child: Column(
                         children: [
-                          Spacer(),
-                          ElevatedButton(
-                            onPressed: order,
-                            child: Text("Place Order"),
+                          rowForText(
+                            lableName: "Total Price",
+                            labelValue:
+                                cartController.totalPrice.value.toString(),
+                          ),
+                          SizedBox(height: 10),
+                          Row(
+                            children: [
+                              Text("Details"),
+                              Spacer(),
+                            ],
+                          ),
+                          Divider(
+                            color: Colors.white,
+                          ),
+                          SizedBox(height: 8),
+                          rowForText(
+                            lableName: "Name",
+                            labelValue: "${model.firstName}" +
+                                " " +
+                                "${model.lastName}",
+                          ),
+                          SizedBox(height: 5),
+                          rowForText(
+                            lableName: "Phone Number",
+                            labelValue: model.phone.toString(),
+                          ),
+                          SizedBox(height: 5),
+                          rowForText(
+                            lableName: "Email",
+                            labelValue: model.email,
+                          ),
+                          SizedBox(height: 5),
+                          Row(
+                            children: [
+                              Spacer(),
+                              ElevatedButton(
+                                onPressed: order,
+                                child: Text("Place Order"),
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
@@ -151,8 +138,18 @@ class _CheckOutState extends State<CheckOut> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(lableName),
-        Text(labelValue),
+        Text(
+          lableName,
+          style: GoogleFonts.ubuntu(
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+        Text(
+          labelValue,
+          style: GoogleFonts.ubuntu(
+            fontWeight: FontWeight.w900,
+          ),
+        ),
       ],
     );
   }

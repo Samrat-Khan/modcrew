@@ -2,10 +2,11 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
+import 'package:shopping_page/env/apiRoutes.dart';
 
 class CreateOrderService {
   postOrder({required String amount}) async {
-    String baseUrl = "https://1f4233821b8a.ngrok.io/payment/order/";
+    String baseUrl = paymentApi;
 
     try {
       Map body = {

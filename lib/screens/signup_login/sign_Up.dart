@@ -93,7 +93,7 @@ class _SignUpTabState extends State<SignUpTab> {
         setState(() {
           isLoading = false;
         });
-        Get.offAllNamed(RouteName.home);
+        Navigator.of(context).pushReplacementNamed(RouteName.home);
       } else {
         {
           setState(() {

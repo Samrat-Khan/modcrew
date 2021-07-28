@@ -68,4 +68,12 @@ class Styles {
   static var logInPageOtherStyle = GoogleFonts.ubuntu(
     fontWeight: FontWeight.w600,
   );
+  static var confrimOrderMessage = GoogleFonts.ubuntu(
+    fontWeight: FontWeight.w800,
+    fontSize: 20,
+  );
+  static var confrimOrderId = GoogleFonts.ubuntu(
+    fontWeight: FontWeight.bold,
+    fontSize: 18,
+  );
 }
