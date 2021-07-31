@@ -20,7 +20,9 @@ class ForNotAuthUser extends StatelessWidget {
             },
             child: Text(
               "Log In",
-              style: GoogleFonts.ubuntu(),
+              style: GoogleFonts.ubuntu(
+                color: Colors.white,
+              ),
             ),
           ),
           // SizedBox(width: 10),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_page/const_and_theme/colors.dart';
 import 'package:shopping_page/const_and_theme/textStyles.dart';
 
 class DividerMessage extends StatelessWidget {
@@ -6,35 +7,60 @@ class DividerMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Container(
       height: 80,
-      width: MediaQuery.of(context).size.width,
-      color: Colors.black,
+      width: size.width,
+      // color: Color(infoColor),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          messageBox(icon: Icons.security, message: " SAFE & SECURE CHECKOUT"),
+          roundContainer(
+            size: size,
+            child: messageBox(
+                icon: Icons.security, message: " SAFE & SECURE \n CHECKOUT"),
+          ),
           VerticalDivider(color: Colors.white),
-          messageBox(
-              icon: Icons.refresh, message: " NO-HASSLE RETURNS & EXCHANGES"),
+          roundContainer(
+            size: size,
+            child: messageBox(
+                icon: Icons.refresh,
+                message: " NO-HASSLE \n RETURNS & EXCHANGES"),
+          ),
           VerticalDivider(color: Colors.white),
-          messageBox(
-              icon: Icons.sentiment_satisfied,
-              message: " 100% SATISFACTION GUARANTEED"),
+          roundContainer(
+            size: size,
+            child: messageBox(
+                icon: Icons.thumb_up_alt_outlined,
+                message: " 100% SATISFACTION \n GUARANTEED"),
+          ),
         ],
       ),
     );
   }
 
+  Container roundContainer({required Size size, required Widget child}) {
+    return Container(
+      width: size.width * 0.2,
+      height: 140,
+      decoration: BoxDecoration(
+        color: Color(infoColor),
+        borderRadius: BorderRadius.circular(50),
+      ),
+      child: Center(child: child),
+    );
+  }
+
   RichText messageBox({required IconData icon, required String message}) {
     return RichText(
+      textAlign: TextAlign.center,
       text: TextSpan(
         children: [
           WidgetSpan(
             child: Icon(icon, size: 22),
           ),
           TextSpan(
-            text: message,
+            text: "\n" + message,
             style: Styles.dividerMessageStyles,
           ),
         ],

@@ -2,6 +2,7 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shopping_page/const_and_theme/colors.dart';
 import 'package:shopping_page/const_and_theme/theme.dart';
 import 'package:shopping_page/controller/authController.dart';
 import 'package:shopping_page/controller/cartController.dart';
@@ -52,7 +53,7 @@ class _LayoutTemplateState extends State<LayoutTemplate> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(100),
         child: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: Color(appBarAndFooterBGColor),
           leading: Padding(
             padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 5),
             child: SearchBar(controller: _controller),
@@ -159,7 +160,10 @@ class _LayoutTemplateState extends State<LayoutTemplate> {
                   ? null
                   : Navigator.of(context).pushNamed(RouteName.cart);
             },
-            icon: Icon(Icons.shopping_cart_outlined),
+            icon: Icon(
+              Icons.shopping_cart_outlined,
+              color: Colors.white,
+            ),
           ),
           badgeColor: Customtheme.lightTheme.scaffoldBackgroundColor,
           position: BadgePosition(

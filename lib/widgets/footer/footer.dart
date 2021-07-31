@@ -1,11 +1,10 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shopping_page/const_and_theme/colors.dart';
 import 'package:shopping_page/const_and_theme/textStyles.dart';
 import 'package:shopping_page/controller/cartController.dart';
-import 'package:shopping_page/screens/screens.dart';
-import 'package:shopping_page/screens/signup_login/signup_login.dart';
+import 'package:shopping_page/widgets/appBar/modCrewLogo.dart';
 import 'package:shopping_page/widgets/util/responsive.dart';
 
 class Footer extends StatelessWidget {
@@ -14,7 +13,12 @@ class Footer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 50),
+      width: MediaQuery.of(context).size.width,
+      padding: const EdgeInsets.only(top: 8),
+      decoration: BoxDecoration(
+        color: Color(appBarAndFooterBGColor),
+      ),
+      // margin: const EdgeInsets.symmetric(horizontal: 50),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -26,7 +30,7 @@ class Footer extends StatelessWidget {
                     FirstFooterContent(),
                     SecondFooterContent(),
                     ThirstFooterContent(),
-                    FifthFooterContent(),
+                    fifthFooterContent(),
                   ],
                 )
               : Column(
@@ -38,20 +42,21 @@ class Footer extends StatelessWidget {
                     SizedBox(height: 20),
                     ThirstFooterContent(),
                     SizedBox(height: 20),
-                    FifthFooterContent(),
+                    fifthFooterContent(),
                   ],
                 ),
-          Divider(
-            endIndent: 50,
-            indent: 50,
-            color: Colors.white,
-          ),
-          Center(
-            child: Text(
-              "Copyright © 2021\nModCrew, All rights reserved",
-              textAlign: TextAlign.center,
-              style: GoogleFonts.ubuntu(
-                fontWeight: FontWeight.w700,
+          Container(
+            width: MediaQuery.of(context).size.width,
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            color: Color(primaryColor),
+            child: Center(
+              child: Text(
+                "Copyright © 2021\nModCrew, All rights reserved",
+                textAlign: TextAlign.center,
+                style: GoogleFonts.ubuntu(
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white,
+                ),
               ),
             ),
           ),
@@ -60,30 +65,29 @@ class Footer extends StatelessWidget {
     );
   }
 
-  Column FifthFooterContent() {
+  Column fifthFooterContent() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          "#JOINTHECREW",
-          style: Styles.kFooterCategoryTitle,
+        FooterContentTitle(text: "SUPPORT"),
+        SizedBox(height: 10),
+        InkWell(
+          onTap: () {},
+          child: FooterContent(text: "About Us"),
         ),
         SizedBox(height: 10),
         InkWell(
           onTap: () {},
-          child: Text(
-            "About Us",
-            style: Styles.kFooterContent,
-          ),
+          child: FooterContent(text: "Contact Us"),
         ),
         SizedBox(height: 8),
-        InkWell(
-          onTap: () {},
-          child: Text(
-            "BECOME AN AFFILIATE",
-            style: Styles.kFooterContent,
-          ),
-        ),
+        // InkWell(
+        //   onTap: () {},
+        //   child: Text(
+        //     "BECOME AN AFFILIATE",
+        //     style: Styles.kFooterContent,
+        //   ),
+        // ),
       ],
     );
   }
@@ -99,49 +103,24 @@ class ThirstFooterContent extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          "CUSTOMER SERVICE",
-          style: Styles.kFooterCategoryTitle,
-        ),
-        SizedBox(height: 10),
+        FooterContentTitle(text: "Resources"),
+        SizedBox(height: 8),
         InkWell(
           onTap: () {},
-          child: Text(
-            "Contact Us",
-            style: Styles.kFooterContent,
-          ),
+          child: FooterContent(text: "Order Information"),
+        ),
+        SizedBox(height: 8),
+        InkWell(
+            onTap: () {}, child: FooterContent(text: "Returns & Exchanges")),
+        SizedBox(height: 8),
+        InkWell(
+          onTap: () {},
+          child: FooterContent(text: "Privacy Policy"),
         ),
         SizedBox(height: 8),
         InkWell(
           onTap: () {},
-          child: Text(
-            "Order Information",
-            style: Styles.kFooterContent,
-          ),
-        ),
-        SizedBox(height: 8),
-        InkWell(
-          onTap: () {},
-          child: Text(
-            "Returns & Exchanges",
-            style: Styles.kFooterContent,
-          ),
-        ),
-        SizedBox(height: 8),
-        InkWell(
-          onTap: () {},
-          child: Text(
-            "Privacy Policy",
-            style: Styles.kFooterContent,
-          ),
-        ),
-        SizedBox(height: 8),
-        InkWell(
-          onTap: () {},
-          child: Text(
-            "Account Login",
-            style: Styles.kFooterContent,
-          ),
+          child: FooterContent(text: "Account Login"),
         ),
       ],
     );
@@ -158,34 +137,28 @@ class SecondFooterContent extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          "BROWSE BY CATEGORY",
-          style: Styles.kFooterCategoryTitle,
-        ),
+        FooterContentTitle(text: "BROWSE BY CATEGORY"),
         SizedBox(height: 10),
         InkWell(
           onTap: () {},
-          child: Text(
-            "Fashion",
-            style: Styles.kFooterContent,
-          ),
+          child: FooterContent(text: "Home"),
         ),
         SizedBox(height: 8),
         InkWell(
           onTap: () {},
-          child: Text(
-            "Collectibles",
-            style: Styles.kFooterContent,
-          ),
+          child: FooterContent(text: "About Us"),
         ),
         SizedBox(height: 8),
-        // InkWell(
-        //   onTap: () {},
-        //   child: Text(
-        //     "Accessories",
-        //     style: Styles.kFooterContent,
-        //   ),
-        // ),
+        InkWell(
+          onTap: () {},
+          child: FooterContent(text: "Contact Us"),
+        ),
+        SizedBox(height: 8),
+        InkWell(
+          onTap: () {},
+          child: FooterContent(text: "Help"),
+        ),
+        SizedBox(height: 8),
       ],
     );
   }
@@ -201,55 +174,43 @@ class FirstFooterContent extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          "modcrew",
-          style: Styles.kFooterModcrewTitle,
-        ),
-        SizedBox(height: 10),
-        Text(
-          "support@modcrew.com",
-          style: Styles.kFooterContent,
+        ModCrewLogo(),
+        FooterContent(
+          text: "support@modcrew.com",
         ),
         SizedBox(height: 8),
-        Text(
-          "Call Us: +91-123456789",
-          style: Styles.kFooterContent,
-        ),
+        FooterContent(text: "Call Us: +91-123456789"),
         SizedBox(height: 8),
-        Text(
-          "Monday-Friday 11AM - 5PM IST",
-          style: Styles.kFooterContent,
-        ),
-        SizedBox(height: 8),
-        Row(
-          children: [
-            InkWell(
-              onTap: () => print("Google"),
-              child: IconButtonWidget(path: 'assets/icons/google.png'),
-            ),
-            SizedBox(width: 8),
-            InkWell(
-              onTap: () => print("Facebook"),
-              child: IconButtonWidget(path: 'assets/icons/facebook.png'),
-            ),
-            SizedBox(width: 8),
-            InkWell(
-              onTap: () => print("Twitter"),
-              child: IconButtonWidget(path: 'assets/icons/twitter.png'),
-            ),
-          ],
-        ),
-        SizedBox(height: 8),
-        ElevatedButton.icon(
-          onPressed: () {
-            Navigator.of(context).pushNamed('/cart');
-          },
-          icon: Icon(Icons.shopping_cart),
-          label: Obx(
-            () => Text("Cart (${cartController.cartList.value.length})"),
-          ),
-        ),
       ],
+    );
+  }
+}
+
+class FooterContentTitle extends StatelessWidget {
+  final String text;
+  const FooterContentTitle({Key? key, required this.text}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: Styles.kFooterCategoryTitle,
+    );
+  }
+}
+
+class FooterContent extends StatelessWidget {
+  final String text;
+  const FooterContent({
+    Key? key,
+    required this.text,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: Styles.kFooterContent,
     );
   }
 }

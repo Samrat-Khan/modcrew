@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'colors.dart';
+
 class Customtheme {
   static ThemeData get lightTheme {
     return ThemeData(
-      scaffoldBackgroundColor: Color(0xffebeaef),
+      scaffoldBackgroundColor: Color(activeColorAndBg),
       backgroundColor: Color(0xffebeaef),
       textTheme: ThemeData.light().textTheme,
       accentColor: Color(0xff6f68fd),

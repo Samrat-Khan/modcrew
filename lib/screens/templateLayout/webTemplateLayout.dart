@@ -1,12 +1,10 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shopping_page/const_and_theme/textStyles.dart';
 import 'package:shopping_page/const_and_theme/theme.dart';
 
 import 'package:shopping_page/dummyData/cartData.dart';
-import 'package:shopping_page/screens/screens.dart';
 import 'package:shopping_page/widgets/widgets.dart';
 
 class TemplateLayout extends StatefulWidget {
@@ -48,7 +46,7 @@ class _TemplateLayoutState extends State<TemplateLayout>
                 snap: false,
                 forceElevated: innerBoxIsScrolled,
                 automaticallyImplyLeading: false,
-                backgroundColor: Colors.white,
+                backgroundColor: Colors.yellow,
                 title: ModCrewLogo(),
                 elevation: 3,
                 actions: [

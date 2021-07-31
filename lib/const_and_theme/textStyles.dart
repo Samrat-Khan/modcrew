@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shopping_page/const_and_theme/colors.dart';
 
 class Styles {
   static var kAppBar = GoogleFonts.roboto(
@@ -20,21 +21,10 @@ class Styles {
   static var kProductCardTextStyle = GoogleFonts.roboto(
     color: Colors.white,
     fontWeight: FontWeight.w600,
-    // shadows: <Shadow>[
-    //   Shadow(
-    //     offset: Offset(10.0, 10.0),
-    //     blurRadius: 3.0,
-    //     color: Color.fromARGB(255, 0, 0, 0),
-    //   ),
-    //   Shadow(
-    //     offset: Offset(10.0, 10.0),
-    //     blurRadius: 8.0,
-    //     color: Color.fromARGB(125, 0, 0, 255),
-    //   ),
-    // ],
   );
   static var kFooterCategoryTitle = GoogleFonts.ubuntu(
     fontWeight: FontWeight.bold,
+    color: Color(primaryColor),
   );
   static var kFooterModcrewTitle = GoogleFonts.ubuntu(
     fontSize: 22,
@@ -42,6 +32,8 @@ class Styles {
   );
   static var kFooterContent = GoogleFonts.ubuntu(
     fontWeight: FontWeight.w400,
+    color: Colors.white,
+    fontSize: 11,
   );
   static var contentTitleStyle = GoogleFonts.ubuntu(
     fontWeight: FontWeight.w900,
@@ -53,7 +45,7 @@ class Styles {
     fontWeight: FontWeight.w700,
   );
   static var dividerMessageStyles = GoogleFonts.ubuntu(
-    fontWeight: FontWeight.w900,
+    // fontWeight: FontWeight.w900,
     color: Colors.white,
   );
   static var tabTextStyle = GoogleFonts.ubuntu(
@@ -76,4 +68,8 @@ class Styles {
     fontWeight: FontWeight.bold,
     fontSize: 18,
   );
+  static var pdPageProductTitle = GoogleFonts.ubuntu();
+  static var pdPageProductPrice = GoogleFonts.ubuntu();
+  static var pdPageProductDesc = GoogleFonts.ubuntu();
+  static var pdPageProductFilterChip = GoogleFonts.ubuntu();
 }

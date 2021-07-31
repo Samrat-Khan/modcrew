@@ -16,8 +16,8 @@ class SearchPage extends StatelessWidget {
   final SerachProduct searchProduct = SerachProduct();
   @override
   Widget build(BuildContext context) {
-    return LayoutTemplate(
-      body: Container(
+    return NewTemplate(
+      sliverChild: Container(
         child: ProductFutureBuilder(
           future: getSerachProduct(),
         ),

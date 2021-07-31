@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shopping_page/const_and_theme/colors.dart';
 import 'package:shopping_page/const_and_theme/theme.dart';
 import 'package:shopping_page/routes/routeNames.dart';
 
@@ -18,11 +19,11 @@ class SearchBar extends StatefulWidget {
 }
 
 class _SearchBarState extends State<SearchBar> {
-  @override
-  void dispose() {
-    widget._controller.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   widget._controller.dispose();
+  //   super.dispose();
+  // }
 
   serachProduct() async {
     widget._controller.clear();
@@ -33,6 +34,8 @@ class _SearchBarState extends State<SearchBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: MediaQuery.of(context).size.width * 0.4,
+      height: 40,
       alignment: Alignment.center,
       decoration: BoxDecoration(
         color: Customtheme.lightTheme.scaffoldBackgroundColor,
@@ -42,22 +45,29 @@ class _SearchBarState extends State<SearchBar> {
         controller: widget._controller,
         decoration: InputDecoration(
           filled: true,
-          contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
           border: InputBorder.none,
           hintText: "Search",
-          suffixIcon: IconButton(
-            hoverColor: Colors.transparent,
-            splashColor: Colors.transparent,
-            onPressed: serachProduct,
-            icon: Icon(
-              Icons.search,
-              color: Colors.white,
+          suffixIcon: Container(
+            width: 40,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Color(primaryColor),
+            ),
+            child: IconButton(
+              hoverColor: Colors.transparent,
+              splashColor: Colors.transparent,
+              onPressed: serachProduct,
+              icon: Icon(
+                Icons.search,
+                color: Colors.white,
+              ),
             ),
           ),
         ),
         textAlign: TextAlign.justify,
         style: GoogleFonts.ubuntu(
-          fontSize: 16,
+          fontSize: 10,
         ),
       ),
     );
