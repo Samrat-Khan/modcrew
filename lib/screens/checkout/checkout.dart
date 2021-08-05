@@ -8,7 +8,7 @@ import 'package:shopping_page/screens/screens.dart';
 import 'package:shopping_page/services/services.dart';
 import 'package:snapping_sheet/snapping_sheet.dart';
 
-import 'controller/placeOrder.dart';
+import '../../services/placeOrder.dart';
 
 class CheckOut extends StatefulWidget {
   CheckOut({Key? key}) : super(key: key);
@@ -29,11 +29,11 @@ class _CheckOutState extends State<CheckOut> {
 
   order() async {
     String id = placeOrderHttpService.uploadAddress();
-    placeOrderHttpService.razorPayOrder(orderId: id);
+    var razorPayId = placeOrderHttpService.razorPayOrder(orderId: id);
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => WebPayment(
-          orderId: orderId,
+          orderId: razorPayId,
         ),
       ),
     );

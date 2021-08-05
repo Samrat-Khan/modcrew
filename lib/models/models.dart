@@ -1,5 +1,5 @@
-export 'productModel.dart';
+export 'productModel/productModel.dart';
 export 'productFeedbackModel.dart';
-export 'signUp.dart';
-export 'userModel.dart';
-export 'orderModel.dart';
+export 'authModel/signUp.dart';
+export 'userModel/userModel.dart';
+export 'makeOrder/orderModel.dart';

@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shopping_page/env/apiRoutes.dart';
-import 'package:shopping_page/models/signUp.dart';
+import 'package:shopping_page/models/authModel/signUp.dart';
 import 'package:shopping_page/services/services.dart';
 import 'package:shopping_page/widgets/error_dialouge/error_dialouge.dart';
 

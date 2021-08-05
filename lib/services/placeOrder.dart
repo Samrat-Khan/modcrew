@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:shopping_page/controller/authController.dart';
 import 'package:shopping_page/env/apiRoutes.dart';
+import 'package:shopping_page/screens/checkout/model/address_model.dart';
 import 'package:shopping_page/screens/checkout/model/cart_model.dart';
 
 class PlaceOrderHttpService {
@@ -24,9 +25,22 @@ class PlaceOrderHttpService {
   }
 
   uploadAddress() async {
+    final userData = authController.userData.value[0];
+    final mockUserAddress = CheckOutAddress(
+        billingCustomerName: userData.firstName,
+        billingAddress: "Taltala, Kolkata",
+        billingCity: "Kolkata",
+        billingPincode: "700008",
+        billingState: "WB",
+        billingCountry: "IND",
+        billingEmail: userData.email,
+        billingPhone: userData.phone.toString());
+
+    var jsonBody = jsonEncode(mockUserAddress);
     //it will return _id
     var res = await http.post(
       Uri.parse(env_order),
+      body: jsonBody,
       headers: <String, String>{
         HttpHeaders.authorizationHeader:
             "Bearer ${authController.authToken.value}",

@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:shopping_page/env/apiRoutes.dart';
-import 'package:shopping_page/models/createOrder.dart';
+import 'package:shopping_page/models/makeOrder/createOrder.dart';
 
 class CreateOrderService {
   postOrder({required CreateOrder order}) async {

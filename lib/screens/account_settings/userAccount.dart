@@ -8,7 +8,7 @@ import 'package:shopping_page/const_and_theme/textStyles.dart';
 import 'package:shopping_page/controller/authController.dart';
 import 'package:shopping_page/dummyData/orderHistroy.dart';
 import 'package:shopping_page/dummyData/profileData.dart';
-import 'package:shopping_page/models/userModel.dart';
+import 'package:shopping_page/models/userModel/userModel.dart';
 import 'package:shopping_page/screens/screens.dart';
 import 'package:shopping_page/widgets/widgets.dart';
 

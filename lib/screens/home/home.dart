@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shopping_page/const_and_theme/colors.dart';
 import 'package:shopping_page/const_and_theme/theme.dart';
-import 'package:shopping_page/models/productModel.dart';
+import 'package:shopping_page/models/productModel/productModel.dart';
 
 import 'package:shopping_page/screens/screens.dart';
 import 'package:shopping_page/services/callProducts.dart';
