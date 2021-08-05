@@ -25,20 +25,23 @@
         //   "image":image,
           "handler": function (response){
          
-             window.parent.postMessage("SUCCESS","*");     
+             window.parent.postMessage("SUCCESS","*"); 
+             console.log(response.razorpay_payment_id)    
+             console.log(response.razorpay_order_id)    
+             console.log(response.razorpay_signature)    
             //  alert(response.razorpay_payment_id);
             //  alert(response.razorpay_order_id);
             //  alert(response.razorpay_signature)    
-            const baseUrl = "https://454c51d50d41.ngrok.io/api/v1/payments/pay";
-            fetch(baseUrl,{
-               method:"POST",
-               headers:{
-                  body:JSON.stringify(response),
-                  "Content-Type":"application/json",
-               }
-            }).then(response=> response.json() )
-            .catch(error=>console.log(error))
-               console.log( "Response ",response.json());
+            // const baseUrl = "https://modcrew.herokuapp.com/api/v1/payments/pay";
+            // fetch(baseUrl,{
+            //    method:"POST",
+            //    headers:{
+            //       body:JSON.stringify(response),
+            //       "Content-Type":"application/json",
+            //    }
+            // }).then(response=> response.json() )
+            // .catch(error=>console.log(error))
+            //    console.log( "Response ",response.json());
           },    
           "prefill": {        
              "name": name,        

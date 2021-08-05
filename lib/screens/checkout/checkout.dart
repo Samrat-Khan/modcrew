@@ -4,8 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:shopping_page/controller/authController.dart';
 import 'package:shopping_page/models/models.dart';
+import 'package:shopping_page/routes/routeNames.dart';
 import 'package:shopping_page/screens/screens.dart';
-import 'package:shopping_page/services/services.dart';
 import 'package:snapping_sheet/snapping_sheet.dart';
 
 import '../../services/placeOrder.dart';
@@ -19,24 +19,19 @@ class CheckOut extends StatefulWidget {
 
 class _CheckOutState extends State<CheckOut> {
   final authController = AuthController.to;
-  final CreateOrderService createOrderService = CreateOrderService();
+  // final CreateOrderService createOrderService = CreateOrderService();
 
   CreateOrderModel? createOrderModel;
   final PlaceOrderHttpService placeOrderHttpService = PlaceOrderHttpService();
   final String orderId = '';
   int selectedButtonIndex = 1;
-  final Razorpay razorPay = Razorpay();
 
   order() async {
-    String id = placeOrderHttpService.uploadAddress();
-    var razorPayId = placeOrderHttpService.razorPayOrder(orderId: id);
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => WebPayment(
-          orderId: razorPayId,
-        ),
-      ),
-    );
+    String id = await placeOrderHttpService.uploadAddress();
+    String razorPayId = await placeOrderHttpService.razorPayOrder(orderId: id);
+    print("RazorPay Id $razorPayId");
+    Navigator.of(context)
+        .pushNamed(RouteName.webPayment, arguments: razorPayId);
   }
 
   @override
@@ -88,7 +83,7 @@ class _CheckOutState extends State<CheckOut> {
                     width: 100,
                     height: 30,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: order,
                       child: Text("Place Order"),
                     ),
                   ),

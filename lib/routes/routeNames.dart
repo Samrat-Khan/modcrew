@@ -11,6 +11,7 @@ class RouteName {
   static String privacy_policy = '/privacy_policy';
   static String search = '/search';
   static String checkout = '/checkout';
+  static String webPayment = '/webPayment';
   static String initScreen = '/initScreen';
   static String orderConfrim = '/orderConfrim';
   // static String  = '/privecy_policy';

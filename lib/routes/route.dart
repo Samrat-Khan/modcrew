@@ -65,6 +65,13 @@ class AppRouter {
           settings: settings,
           builder: (_) => CheckOut(),
         );
+      case '/webPayment':
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => WebPayment(
+            orderId: args as String,
+          ),
+        );
       case '/orderConfrim':
         return MaterialPageRoute(
           settings: settings,

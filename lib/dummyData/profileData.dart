@@ -25,7 +25,7 @@ final List<ProfileData> profileData = [
     name: "Samrat Khan",
     mobile: "+91-123456789",
     email: "Samrat@mail.com",
-    imagePath: "assets/images/u3.png",
+    imagePath: "assets/images/u7.png",
     address: [
       UserAddress(
           address: "Dutta Pukur, Kolkata, West Bengal,Pin-700008",

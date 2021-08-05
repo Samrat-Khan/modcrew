@@ -87,7 +87,7 @@ class _NewTemplateState extends State<NewTemplate> {
                       },
                       child: CircleAvatar(
                         radius: 15,
-                        backgroundColor: Colors.amberAccent,
+                        backgroundImage: AssetImage("assets/images/u7.png"),
                       ),
                     )
                   : TextButton(

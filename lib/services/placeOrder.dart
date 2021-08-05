@@ -12,16 +12,20 @@ class PlaceOrderHttpService {
   final authController = Get.put(AuthController());
   uploadCart({required List<CheckOutCartModel> cartItms}) async {
     var jsonBody = {"items": cartItms};
-    var body = jsonEncode(jsonBody);
-    await http.post(
-      Uri.parse(env_Cart),
-      body: body,
-      headers: <String, String>{
-        HttpHeaders.authorizationHeader:
-            "Bearer ${authController.authToken.value}",
-        HttpHeaders.contentTypeHeader: 'application/json',
-      },
-    );
+    try {
+      var body = jsonEncode(jsonBody);
+      await http.post(
+        Uri.parse(env_Cart),
+        body: body,
+        headers: <String, String>{
+          HttpHeaders.authorizationHeader:
+              "Bearer ${authController.authToken.value}",
+          HttpHeaders.contentTypeHeader: 'application/json',
+        },
+      );
+    } catch (e) {
+      print("Upload Cart $e");
+    }
   }
 
   uploadAddress() async {
@@ -37,31 +41,44 @@ class PlaceOrderHttpService {
         billingPhone: userData.phone.toString());
 
     var jsonBody = jsonEncode(mockUserAddress);
-    //it will return _id
-    var res = await http.post(
-      Uri.parse(env_order),
-      body: jsonBody,
-      headers: <String, String>{
-        HttpHeaders.authorizationHeader:
-            "Bearer ${authController.authToken.value}",
-        HttpHeaders.contentTypeHeader: 'application/json',
-      },
-    );
-    var jsonResponse = jsonDecode(res.body)["data"];
-    String id = jsonResponse["_id"];
-    return id;
+
+    try {
+      var res = await http.post(
+        Uri.parse(env_order),
+        body: jsonBody,
+        headers: <String, String>{
+          HttpHeaders.authorizationHeader:
+              "Bearer ${authController.authToken.value}",
+          HttpHeaders.contentTypeHeader: 'application/json',
+        },
+      );
+      var jsonResponse = jsonDecode(res.body)["data"];
+
+      String id = jsonResponse["_id"];
+      return id;
+    } catch (e) {
+      print("Error during $e");
+    }
   }
 
   razorPayOrder({required String orderId}) async {
-    var res = await http.post(
-      Uri.parse(
-        env_razor_pay_order(orderId: orderId),
-      ),
-      headers: <String, String>{
-        HttpHeaders.authorizationHeader:
-            "Bearer ${authController.authToken.value}",
-        HttpHeaders.contentTypeHeader: 'application/json',
-      },
-    );
+    try {
+      var res = await http.post(
+        Uri.parse(
+          env_razor_pay_order(orderId: orderId),
+        ),
+        headers: <String, String>{
+          HttpHeaders.authorizationHeader:
+              "Bearer ${authController.authToken.value}",
+          HttpHeaders.contentTypeHeader: 'application/json',
+        },
+      );
+      print(jsonDecode(res.body));
+      var jsonPay = jsonDecode(res.body)["data"];
+      print(jsonPay);
+      return jsonPay["id"];
+    } catch (e) {
+      print("Error on RazorPay OrderId $e");
+    }
   }
 }

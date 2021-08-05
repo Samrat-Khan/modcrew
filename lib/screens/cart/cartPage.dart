@@ -4,8 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shopping_page/const_and_theme/textStyles.dart';
 import 'package:shopping_page/controller/authController.dart';
 import 'package:shopping_page/routes/routeNames.dart';
+import 'package:shopping_page/screens/checkout/model/cart_model.dart';
 
 import 'package:shopping_page/screens/screens.dart';
+import 'package:shopping_page/services/placeOrder.dart';
 import 'package:shopping_page/widgets/widgets.dart';
 
 class CartPage extends StatefulWidget {
@@ -18,9 +20,27 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   final cartController = CartController.to;
   final authController = AuthController.to;
+  final PlaceOrderHttpService placeOrderHttpService = PlaceOrderHttpService();
   @override
   void initState() {
     super.initState();
+  }
+
+  uploadCart() async {
+    final List<CheckOutCartModel> cartItms = [];
+    var data = cartController.cartList.value;
+    for (int i = 0; i < data.length; i++) {
+      cartItms.add(
+        CheckOutCartModel(
+            productId: data[i].productId,
+            sku: data[i].sku,
+            units: data[i].productUnits),
+      );
+    }
+    await placeOrderHttpService.uploadCart(cartItms: cartItms);
+    Navigator.of(context).pushNamed(
+      RouteName.checkout,
+    );
   }
 
   @override
@@ -153,21 +173,19 @@ class _CartPageState extends State<CartPage> {
                                     height: 40,
                                     child: ElevatedButton(
                                       onPressed: () {
-                                        Navigator.of(context).pushNamed(
-                                          RouteName.checkout,
-                                        );
-                                        // if (authController
-                                        //     .authToken.value.isEmpty) {
-                                        //   showDialog(
-                                        //       context: context,
-                                        //       builder: (context) {
-                                        //         return DoAuthDialog();
-                                        //       });
-                                        // } else {
-                                        //   Navigator.of(context).pushNamed(
-                                        //     RouteName.checkout,
-                                        //   );
-                                        // }
+                                        // Navigator.of(context).pushNamed(
+                                        //   RouteName.checkout,
+                                        // );
+                                        if (authController
+                                            .authToken.value.isEmpty) {
+                                          showDialog(
+                                              context: context,
+                                              builder: (context) {
+                                                return DoAuthDialog();
+                                              });
+                                        } else {
+                                          uploadCart();
+                                        }
                                       },
                                       child: Text(
                                         "Place Order",

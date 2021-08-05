@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       title: 'Modcrew',
       theme: Customtheme.lightTheme,
       onGenerateRoute: AppRouter.generatedRoute,
-      initialRoute: RouteName.contactus,
+      initialRoute: RouteName.home,
       // home: OrderTrack(),
     );
   }

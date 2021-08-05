@@ -50,10 +50,24 @@ class _UserAccountState extends State<UserAccount> {
                 OrderHistoryCard(size: size),
               ],
             ),
-            SizedBox(height: 50),
-            DividerMessage(),
-            SizedBox(height: 50),
-            Footer(),
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 50),
+              width: size.width,
+              height: 200,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 1,
+                itemBuilder: (_, i) {
+                  return Card(
+                    child: Container(
+                      height: 150,
+                      width: 200,
+                    ),
+                    color: Colors.amberAccent,
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
@@ -180,7 +194,7 @@ class AccountDetailsCard extends StatelessWidget {
                     TextButton.icon(
                       onPressed: () {},
                       icon: Icon(Icons.add),
-                      label: Text("Adress"),
+                      label: Text("Address"),
                     ),
                   ],
                 ),
@@ -244,62 +258,6 @@ class OrderHistoryCard extends StatelessWidget {
         height: size.height * 0.6,
         margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
         color: Colors.transparent,
-        child: ListView(
-          shrinkWrap: true,
-          children: [
-            Text(
-              "Order History",
-              style: Styles.contentTitleStyle,
-            ),
-            SizedBox(height: 15),
-            ListView.separated(
-              separatorBuilder: (context, index) => Divider(),
-              shrinkWrap: true,
-              itemCount: orderHistory.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  leading: Container(
-                    width: 100,
-                    height: 80,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(orderHistory[index].imagePath),
-                        fit: BoxFit.contain,
-                      ),
-                    ),
-                  ),
-                  title: Text(
-                    "${orderHistory[index].productName}",
-                    style: Styles.contentStyle,
-                  ),
-                  subtitle: Text(
-                    "${orderHistory[index].productPrice} x ${orderHistory[index].buyedProductNo} = \$${orderHistory[index].totalPrice}",
-                    style: Styles.subContentStyle,
-                  ),
-                  trailing: orderHistory[index].isUserGivenReview
-                      ? Icon(
-                          Icons.favorite,
-                          color: Colors.red,
-                        )
-                      : ElevatedButton(
-                          child: Text(
-                            "Add Review",
-                            style: GoogleFonts.ubuntu(),
-                          ),
-                          onPressed: () {
-                            // showDialog(
-                            //   context: context,
-                            //   builder: (BuildContext context) {
-                            //     return PopupReviewProduct();
-                            //   },
-                            // );
-                          },
-                        ),
-                );
-              },
-            ),
-          ],
-        ),
       ),
     );
   }
@@ -330,7 +288,7 @@ class PopupEditProfile extends StatelessWidget {
             SizedBox(height: 25),
             CircleAvatar(
               radius: 50,
-              backgroundImage: AssetImage("assets/images/u4.png"),
+              backgroundImage: AssetImage("assets/images/u7.png"),
             ),
             SizedBox(height: 15),
             CustomTextField(

@@ -236,29 +236,29 @@ class _SignUpTabState extends State<SignUpTab> {
                   ),
                 ),
                 SizedBox(height: 18),
-                Text("Or Signup with", style: Styles.logInPageOtherStyle),
-                SizedBox(height: 18),
-                Row(
-                  children: [
-                    Spacer(),
-                    InkWell(
-                      onTap: () => print("Google"),
-                      child: IconButtonWidget(path: 'assets/icons/google.png'),
-                    ),
-                    SizedBox(width: 10),
-                    InkWell(
-                      onTap: () => print("Facebook"),
-                      child:
-                          IconButtonWidget(path: 'assets/icons/facebook.png'),
-                    ),
-                    SizedBox(width: 10),
-                    InkWell(
-                      onTap: () => print("Twitter"),
-                      child: IconButtonWidget(path: 'assets/icons/twitter.png'),
-                    ),
-                    Spacer(),
-                  ],
-                ),
+                // Text("Or Signup with", style: Styles.logInPageOtherStyle),
+                // SizedBox(height: 18),
+                // Row(
+                //   children: [
+                //     Spacer(),
+                //     InkWell(
+                //       onTap: () => print("Google"),
+                //       child: IconButtonWidget(path: 'assets/icons/google.png'),
+                //     ),
+                //     SizedBox(width: 10),
+                //     InkWell(
+                //       onTap: () => print("Facebook"),
+                //       child:
+                //           IconButtonWidget(path: 'assets/icons/facebook.png'),
+                //     ),
+                //     SizedBox(width: 10),
+                //     InkWell(
+                //       onTap: () => print("Twitter"),
+                //       child: IconButtonWidget(path: 'assets/icons/twitter.png'),
+                //     ),
+                //     Spacer(),
+                //   ],
+                // ),
               ],
             ),
           ],
