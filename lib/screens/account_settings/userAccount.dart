@@ -33,8 +33,8 @@ class _UserAccountState extends State<UserAccount> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return LayoutTemplate(
-      body: SingleChildScrollView(
+    return NewTemplate(
+      sliverChild: SingleChildScrollView(
         child: Column(
           children: [
             Row(

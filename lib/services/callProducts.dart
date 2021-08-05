@@ -1,14 +1,13 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:shopping_page/env/apiRoutes.dart';
 
-class HTTPService {
-  String baseUrl = "https://modcrew.herokuapp.com/api/v1";
-  Future getProductsData({required String endPoint}) async {
-    String url = baseUrl + "/products";
-    var response = await http.get(Uri.parse(url));
+class GetAllProductsHTTPService {
+  Future getAllProduct() async {
+    var response = await http.get(Uri.parse(env_GetProducts));
 
     Map<String, dynamic> jsonBody = json.decode(response.body);
-
+    print(jsonBody);
     return jsonBody;
   }
 

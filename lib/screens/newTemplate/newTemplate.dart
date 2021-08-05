@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shopping_page/const_and_theme/colors.dart';
-import 'package:shopping_page/controller/cartController.dart';
+import 'package:shopping_page/controller/authController.dart';
+import 'package:shopping_page/screens/cart/controller/cartController.dart';
+import 'package:shopping_page/routes/routeNames.dart';
 import 'package:shopping_page/widgets/widgets.dart';
 
 class NewTemplate extends StatefulWidget {
@@ -19,6 +21,12 @@ class NewTemplate extends StatefulWidget {
 class _NewTemplateState extends State<NewTemplate> {
   TextEditingController _searchController = TextEditingController();
   final cartController = CartController.to;
+  final authController = AuthController.to;
+
+  naviagtion({required String routeName}) {
+    Navigator.of(context).pushNamed(routeName);
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -28,44 +36,72 @@ class _NewTemplateState extends State<NewTemplate> {
         slivers: [
           SliverAppBar(
             backgroundColor: Color(appBarAndFooterBGColor),
-            leadingWidth: size.width * 0.2,
+            leadingWidth: size.width * 0.15,
             centerTitle: true,
             leading: ModCrewLogo(),
             title: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  "Home",
-                  style: GoogleFonts.ubuntu(color: Colors.white, fontSize: 12),
+                InkWell(
+                  onTap: () => naviagtion(routeName: RouteName.home),
+                  child: Text(
+                    "Home",
+                    style:
+                        GoogleFonts.ubuntu(color: Colors.white, fontSize: 12),
+                  ),
                 ),
                 SizedBox(width: 15),
-                Text(
-                  "Contact Us",
-                  style: GoogleFonts.ubuntu(color: Colors.white, fontSize: 12),
+                InkWell(
+                  onTap: () => naviagtion(routeName: RouteName.contactus),
+                  child: Text(
+                    "Contact Us",
+                    style:
+                        GoogleFonts.ubuntu(color: Colors.white, fontSize: 12),
+                  ),
                 ),
                 SizedBox(width: 15),
-                Text(
-                  "About Us",
-                  style: GoogleFonts.ubuntu(color: Colors.white, fontSize: 12),
+                InkWell(
+                  onTap: () => naviagtion(routeName: RouteName.aboutus),
+                  child: Text(
+                    "About Us",
+                    style:
+                        GoogleFonts.ubuntu(color: Colors.white, fontSize: 12),
+                  ),
                 ),
                 SizedBox(width: 15),
-                Text(
-                  "Help",
-                  style: GoogleFonts.ubuntu(color: Colors.white, fontSize: 12),
+                InkWell(
+                  onTap: () => naviagtion(routeName: RouteName.home),
+                  child: Text(
+                    "Help",
+                    style:
+                        GoogleFonts.ubuntu(color: Colors.white, fontSize: 12),
+                  ),
                 ),
               ],
             ),
             actions: [
-              TextButton(
-                onPressed: () {},
-                child: Text(
-                  "Login/Signup",
-                  style: GoogleFonts.ubuntu(
-                    color: Colors.white,
-                    fontSize: 11,
-                  ),
-                ),
-              ),
+              authController.authToken.value != ""
+                  ? InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushNamed(RouteName.account);
+                      },
+                      child: CircleAvatar(
+                        radius: 15,
+                        backgroundColor: Colors.amberAccent,
+                      ),
+                    )
+                  : TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(RouteName.login);
+                      },
+                      child: Text(
+                        "Login/Signup",
+                        style: GoogleFonts.ubuntu(
+                          color: Colors.white,
+                          fontSize: 11,
+                        ),
+                      ),
+                    ),
               SizedBox(width: 10),
             ],
             bottom: PreferredSize(

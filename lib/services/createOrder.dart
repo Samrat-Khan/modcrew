@@ -3,17 +3,14 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:shopping_page/env/apiRoutes.dart';
+import 'package:shopping_page/models/createOrder.dart';
 
 class CreateOrderService {
-  postOrder({required String amount}) async {
-    String baseUrl = paymentApi;
+  postOrder({required CreateOrder order}) async {
+    String baseUrl = env_PaymentApi;
 
     try {
-      Map body = {
-        "amount": amount,
-      };
-
-      var encodeBody = jsonEncode(body);
+      var encodeBody = jsonEncode(order);
       var response =
           await http.post(Uri.parse(baseUrl), body: encodeBody, headers: {
         HttpHeaders.contentTypeHeader: 'application/json',

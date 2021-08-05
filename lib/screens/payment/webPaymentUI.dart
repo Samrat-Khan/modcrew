@@ -1,20 +1,16 @@
 import 'dart:html';
 
 import 'package:flutter/material.dart';
-import 'package:shopping_page/controller/cartController.dart';
+import 'package:shopping_page/screens/cart/controller/cartController.dart';
 
 import 'package:shopping_page/routes/routeNames.dart';
 import 'fakeUI.dart' if (dart.library.html) 'dart:ui' as ui;
 
 class WebPayment extends StatelessWidget {
-  final String name, phone, email, orderId;
-  final int price;
+  final String orderId;
+
   WebPayment({
     Key? key,
-    required this.name,
-    required this.phone,
-    required this.price,
-    required this.email,
     required this.orderId,
   }) : super(key: key);
   final cartController = CartController.to;
@@ -41,8 +37,7 @@ class WebPayment extends StatelessWidget {
           },
         );
 
-        element.src =
-            'assets/payments.html?name=$name&price=$price&phone=$phone&email=$email&orderId=$orderId';
+        element.src = 'assets/payments.html?orderId=$orderId';
         element.style.border = 'none';
 
         return element;

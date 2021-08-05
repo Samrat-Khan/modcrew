@@ -6,3 +6,4 @@ export 'localStorage.dart';
 export 'createOrder.dart';
 export 'razor.dart';
 export 'makeOrder.dart';
+export 'CartService.dart';

@@ -29,26 +29,33 @@ class SnapshotGridBuilder extends StatelessWidget {
         context,
         index,
       ) {
-        ProductModel model = ProductModel.fromJson(snapshot.data[index]);
+        ProductModelData model =
+            ProductModelData.fromJson(snapshot.data[index]);
 
-        ProductModel data = ProductModel(
+        ProductModelData data = ProductModelData(
           description: model.description,
           category: model.category,
           isPublished: model.isPublished,
-          id: model.id,
-          createdAt: model.createdAt,
-          title: model.title,
-          price: model.price,
+          isFeatured: model.isFeatured,
           variations: model.variations,
-          reviews: model.reviews,
-          v: model.v,
           images: model.images,
+          reviews: model.reviews,
+          id: model.id,
+          title: model.title,
+          color: model.color,
+          mrp: model.mrp,
+          sellingPrice: model.sellingPrice,
+          tax: model.tax,
+          hsn: model.hsn,
+          createdAt: model.createdAt,
+          updatedAt: model.updatedAt,
+          v: model.v,
         );
 
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
           child: ProductCard(
-            productModel: data,
+            productModelData: data,
           ),
         );
       },

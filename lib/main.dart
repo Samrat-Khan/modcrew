@@ -1,13 +1,15 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:shopping_page/controller/authController.dart';
-import 'package:shopping_page/controller/cartController.dart';
+import 'package:shopping_page/screens/cart/controller/cartController.dart';
 import 'package:shopping_page/controller/navChanagingController.dart';
 import 'package:shopping_page/routes/route.dart';
 import 'package:shopping_page/const_and_theme/theme.dart';
 import 'package:shopping_page/routes/routeNames.dart';
 import 'package:shopping_page/screens/newTemplate/newTemplate.dart';
 import 'package:url_strategy/url_strategy.dart';
+
+import 'widgets/orderTack/orderTrack.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,8 +28,8 @@ class MyApp extends StatelessWidget {
       title: 'Modcrew',
       theme: Customtheme.lightTheme,
       onGenerateRoute: AppRouter.generatedRoute,
-      initialRoute: RouteName.home,
-      // home: NewTemplate(),
+      initialRoute: RouteName.contactus,
+      // home: OrderTrack(),
     );
   }
 }

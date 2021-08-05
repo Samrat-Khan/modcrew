@@ -9,8 +9,9 @@ import 'package:shopping_page/widgets/util/responsive.dart';
 import 'package:shopping_page/widgets/widgets.dart';
 
 class ProductCard extends StatelessWidget {
-  final ProductModel productModel;
-  const ProductCard({Key? key, required this.productModel}) : super(key: key);
+  final ProductModelData productModelData;
+  const ProductCard({Key? key, required this.productModelData})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +23,16 @@ class ProductCard extends StatelessWidget {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => ProductDetailsScreen(
-              productModel: productModel,
+              productModelData: productModelData,
             ),
           ),
         );
       },
       child: Card(
         elevation: 7,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
         child: Container(
           width: size.width * 0.2,
           height: size.height * 0.41,
@@ -40,12 +44,13 @@ class ProductCard extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 9),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Container(
                   height: size.height * 0.2,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: NetworkImage(productModel.images[0]),
+                      image: NetworkImage(productModelData.images[0]),
                       fit: BoxFit.contain,
                     ),
                   ),
@@ -54,10 +59,8 @@ class ProductCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      starAndFav(),
-                      SizedBox(height: 2),
                       Text(
-                        "Somthing Prodcut Name",
+                        productModelData.title,
                         softWrap: true,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -87,17 +90,17 @@ class ProductCard extends StatelessWidget {
                   color: Color(starColor),
                 ),
               ),
-              TextSpan(text: "4.5"),
+              TextSpan(text: productModelData.reviews.length.toString()),
             ],
           ),
         ),
-        IconButton(
-          onPressed: () {},
-          icon: Icon(
-            Icons.favorite_outline,
-            color: Colors.black,
-          ),
-        ),
+        // IconButton(
+        //   onPressed: () {},
+        //   icon: Icon(
+        //     Icons.favorite_outline,
+        //     color: Colors.black,
+        //   ),
+        // ),
       ],
     );
   }
@@ -109,36 +112,38 @@ class ProductCard extends StatelessWidget {
         RichText(
           text: TextSpan(children: [
             TextSpan(
-              text: "$rupee 800/-",
+              text: "$rupee ${productModelData.sellingPrice}/-",
             ),
             TextSpan(text: "   "),
             TextSpan(
-              text: "$rupee 500/-",
+              text: "$rupee ${productModelData.mrp}/-",
               style: TextStyle(
                 decoration: TextDecoration.lineThrough,
               ),
             ),
           ]),
         ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CircleAvatar(
-              radius: 12,
-              backgroundColor: Color(bgRedColor),
-              child: Text(
-                "80",
-                style: TextStyle(color: Colors.white, fontSize: 11),
-              ),
-            ),
-            Text(
-              "Sold",
-              style: TextStyle(
-                color: Color(bgRedColor),
-              ),
-            )
-          ],
-        ),
+        starAndFav(),
+        // SizedBox(height: 10),
+        // Column(
+        //   mainAxisAlignment: MainAxisAlignment.center,
+        //   children: [
+        //     CircleAvatar(
+        //       radius: 12,
+        //       backgroundColor: Color(bgRedColor),
+        //       child: Text(
+        //         "80",
+        //         style: TextStyle(color: Colors.white, fontSize: 11),
+        //       ),
+        //     ),
+        //     Text(
+        //       "Sold",
+        //       style: TextStyle(
+        //         color: Color(bgRedColor),
+        //       ),
+        //     )
+        //   ],
+        // ),
       ],
     );
   }

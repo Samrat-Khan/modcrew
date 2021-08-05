@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shopping_page/const_and_theme/colors.dart';
 import 'package:shopping_page/const_and_theme/textStyles.dart';
-import 'package:shopping_page/controller/cartController.dart';
+import 'package:shopping_page/screens/cart/controller/cartController.dart';
 import 'package:shopping_page/widgets/appBar/modCrewLogo.dart';
 import 'package:shopping_page/widgets/util/responsive.dart';
 
@@ -168,7 +168,7 @@ class FirstFooterContent extends StatelessWidget {
   FirstFooterContent({
     Key? key,
   }) : super(key: key);
-  final cartController = CartController.to;
+  // final cartController = CartController.to;
   @override
   Widget build(BuildContext context) {
     return Column(

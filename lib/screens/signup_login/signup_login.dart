@@ -62,8 +62,8 @@ class _SignUpLogInState extends State<SignUpLogIn>
     var size = MediaQuery.of(context).size;
     var desktop = Responsive.isDesktop(context);
     double width = desktop ? 0.3 : 0.8;
-    return LayoutTemplate(
-      body: Center(
+    return NewTemplate(
+      sliverChild: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: Container(

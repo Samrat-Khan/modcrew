@@ -3,9 +3,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shopping_page/const_and_theme/textStyles.dart';
 import 'package:shopping_page/controller/authController.dart';
-import 'package:shopping_page/controller/cartController.dart';
-import 'package:shopping_page/dummyData/cartData.dart';
 import 'package:shopping_page/routes/routeNames.dart';
+
 import 'package:shopping_page/screens/screens.dart';
 import 'package:shopping_page/widgets/widgets.dart';
 
@@ -21,27 +20,14 @@ class _CartPageState extends State<CartPage> {
   final authController = AuthController.to;
   @override
   void initState() {
-    // cartController.updatePrice(
-    //     item: 1, priceX: 500); //TODO: Data Needs to change
     super.initState();
-  }
-
-  void increment({required double productRealPrice, required int itemCount}) {
-    cartController.incrementItemCount();
-
-    cartController.updatePrice(item: itemCount, priceX: productRealPrice);
-  }
-
-  void decrement({required double productRealPrice, required int itemCount}) {
-    cartController.deccrementItemCount();
-    cartController.updatePrice(item: itemCount, priceX: productRealPrice);
   }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return LayoutTemplate(
-      body: CustomScrollView(
+    return NewTemplate(
+      sliverChild: CustomScrollView(
         shrinkWrap: true,
         slivers: [
           SliverToBoxAdapter(
@@ -103,7 +89,7 @@ class _CartPageState extends State<CartPage> {
                                                         cartController
                                                             .cartList
                                                             .value[index]
-                                                            .productImage),
+                                                            .image),
                                                     fit: BoxFit.contain,
                                                   ),
                                                 ),
@@ -114,10 +100,8 @@ class _CartPageState extends State<CartPage> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    cartController
-                                                        .cartList
-                                                        .value[index]
-                                                        .productName,
+                                                    cartController.cartList
+                                                        .value[index].name,
                                                     style: GoogleFonts.ubuntu(
                                                       fontWeight:
                                                           FontWeight.w900,
@@ -126,7 +110,7 @@ class _CartPageState extends State<CartPage> {
                                                   ),
                                                   SizedBox(height: 10),
                                                   Text(
-                                                    "$rupee${cartController.cartList.value[index].productPrice} x ${cartController.cartList.value[index].productQuentity}",
+                                                    "$rupee${cartController.cartList.value[index].productPrice} x ${cartController.cartList.value[index].productUnits}",
                                                     style: GoogleFonts.ubuntu(
                                                       fontWeight:
                                                           FontWeight.w700,
@@ -139,7 +123,7 @@ class _CartPageState extends State<CartPage> {
                                               TextButton.icon(
                                                 onPressed: () {
                                                   cartController
-                                                      .removeItemFromCart(
+                                                      .removieItemFromCart(
                                                           index: index);
                                                 },
                                                 icon: Icon(Icons.delete),
@@ -169,33 +153,21 @@ class _CartPageState extends State<CartPage> {
                                     height: 40,
                                     child: ElevatedButton(
                                       onPressed: () {
-                                        // Navigator.push(
-                                        //   context,
-                                        //   MaterialPageRoute(
-                                        //     builder: (context) => CheckOut(
-                                        //       // totaPrice: cartController
-                                        //       //     .totalPrice.value
-                                        //       //     .toString(),
-                                        //       totaPrice: "5648",
-                                        //     ),
-                                        //   ),
-                                        // );
-                                        if (authController
-                                            .authToken.value.isEmpty) {
-                                          showDialog(
-                                              context: context,
-                                              builder: (context) {
-                                                return DoAuthDialog();
-                                              });
-                                        } else {
-                                          Navigator.of(context).pushNamed(
-                                            RouteName.checkout,
-                                            arguments: (cartController
-                                                        .totalPrice.value *
-                                                    100)
-                                                .toString(),
-                                          );
-                                        }
+                                        Navigator.of(context).pushNamed(
+                                          RouteName.checkout,
+                                        );
+                                        // if (authController
+                                        //     .authToken.value.isEmpty) {
+                                        //   showDialog(
+                                        //       context: context,
+                                        //       builder: (context) {
+                                        //         return DoAuthDialog();
+                                        //       });
+                                        // } else {
+                                        //   Navigator.of(context).pushNamed(
+                                        //     RouteName.checkout,
+                                        //   );
+                                        // }
                                       },
                                       child: Text(
                                         "Place Order",
@@ -253,10 +225,10 @@ class _CartPageState extends State<CartPage> {
                                           style: Styles.contentTitleStyle,
                                         ),
                                         Spacer(),
-                                        Text(
-                                          "$rupee ${cartController.totalPrice.value}",
-                                          style: Styles.subContentStyle,
-                                        ),
+                                        Obx(() => Text(
+                                              " ${cartController.subTotal}",
+                                              style: Styles.subContentStyle,
+                                            )),
                                       ],
                                     ),
                                     rowOfPurchaseData(
@@ -268,9 +240,12 @@ class _CartPageState extends State<CartPage> {
                                       endValue: 00,
                                     ),
                                     Divider(),
-                                    rowOfPurchaseData(
-                                      startText: "Sub Total ",
-                                      endValue: cartController.totalPrice.value,
+                                    Obx(
+                                      () => rowOfPurchaseData(
+                                        startText: "Sub Total ",
+                                        endValue:
+                                            cartController.subTotal.toDouble(),
+                                      ),
                                     ),
                                   ],
                                 ),

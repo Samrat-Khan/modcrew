@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:shopping_page/screens/screens.dart';
 import 'package:shopping_page/screens/search/search.dart';
 
@@ -13,11 +12,7 @@ class AppRouter {
           settings: settings,
           builder: (_) => Home(),
         );
-      case '/shop':
-        return MaterialPageRoute(
-          settings: settings,
-          builder: (_) => Shop(),
-        );
+
       case '/aboutus':
         return MaterialPageRoute(
           settings: settings,
@@ -28,16 +23,16 @@ class AppRouter {
           settings: settings,
           builder: (_) => ContactUs(),
         );
-      case '/aboutus':
-        return MaterialPageRoute(
-          settings: settings,
-          builder: (_) => AboutUs(),
-        );
-      case '/contact':
-        return MaterialPageRoute(
-          settings: settings,
-          builder: (_) => ContactUs(),
-        );
+      // case '/aboutus':
+      //   return MaterialPageRoute(
+      //     settings: settings,
+      //     builder: (_) => AboutUs(),
+      //   );
+      // case '/contact':
+      //   return MaterialPageRoute(
+      //     settings: settings,
+      //     builder: (_) => ContactUs(),
+      //   );
       case '/login':
         return MaterialPageRoute(
           settings: settings,
@@ -62,15 +57,13 @@ class AppRouter {
         return MaterialPageRoute(
           settings: settings,
           builder: (_) => SearchPage(
-            productName: args as String,
+            productName: args == null ? " " : args as String,
           ),
         );
       case '/checkout':
         return MaterialPageRoute(
           settings: settings,
-          builder: (_) => CheckOut(
-            totaPrice: args as String,
-          ),
+          builder: (_) => CheckOut(),
         );
       case '/orderConfrim':
         return MaterialPageRoute(

@@ -6,7 +6,7 @@ export 'util/dividerMessage.dart';
 export 'util/responsive.dart';
 export 'text_keyboard/textField.dart';
 export 'footer/footer.dart';
-export 'drawer/appDrawer.dart';
+
 export 'appBar/appBarOther.dart';
 export 'appBar/modCrewLogo.dart';
 export 'appBar/searchBar.dart';

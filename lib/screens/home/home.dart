@@ -18,20 +18,13 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   Colorize colorString = new Colorize();
-  HTTPService httpService = HTTPService();
+  GetAllProductsHTTPService httpService = GetAllProductsHTTPService();
   TabController? _tabController;
-
-  getProductData() async {
-    Map<String, dynamic> data =
-        await httpService.getProductsData(endPoint: "products");
-
-    return (data["data"]);
-  }
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 5, vsync: this, initialIndex: 0);
+    _tabController = TabController(length: 2, vsync: this, initialIndex: 0);
   }
 
   @override
@@ -69,19 +62,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               unselectedLabelColor: Colors.white,
               tabs: [
                 Tab(
-                  text: "Men",
+                  text: "Fashion",
                 ),
                 Tab(
-                  text: "Women",
-                ),
-                Tab(
-                  text: "Accessories",
-                ),
-                Tab(
-                  text: "Collectible",
-                ),
-                Tab(
-                  text: "Stationary",
+                  text: "Collectibles",
                 ),
               ],
             ),
@@ -93,11 +77,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             child: TabBarView(
               controller: _tabController,
               children: <Widget>[
-                MensCategory(),
-                WomensCategory(),
-                AccessoriesCategory(),
+                FashionCategory(),
                 CollectibleCategory(),
-                StationaryCategory(),
               ],
             ),
           ),

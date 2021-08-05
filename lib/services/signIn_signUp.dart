@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shopping_page/env/apiRoutes.dart';
 import 'package:shopping_page/models/signUp.dart';
 import 'package:shopping_page/services/services.dart';
 import 'package:shopping_page/widgets/error_dialouge/error_dialouge.dart';
@@ -22,7 +23,7 @@ class SignInSignUp {
     var encodeBody = jsonEncode(body);
 
     var token = await http.post(
-      Uri.parse(SIGN_UP),
+      Uri.parse(env_SignUp),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -46,7 +47,7 @@ class SignInSignUp {
       };
       var encodeBody = jsonEncode(body);
       var token = await http.post(
-        Uri.parse(SIGN_IN),
+        Uri.parse(env_SignIn),
         body: encodeBody,
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
@@ -63,7 +64,7 @@ class SignInSignUp {
   Future getUserData({required String token}) async {
     try {
       var data = await http.get(
-        Uri.parse(GET_USER),
+        Uri.parse(env_GetUser),
         headers: <String, String>{
           HttpHeaders.contentTypeHeader: 'application/json',
           HttpHeaders.authorizationHeader: 'Bearer $token',

@@ -5,17 +5,17 @@ class CustomChipChoice extends StatefulWidget {
   final String filter;
   final Function(bool) action;
   final Color color;
-  final bool isAvaterNeed;
-  final IconData avater;
+  final bool isIconAvaterNeed;
+  final IconData iconAvater;
   final bool isSelected;
   const CustomChipChoice({
     Key? key,
     required this.action,
     required this.filter,
     required this.color,
-    this.avater = Icons.arrow_downward,
+    this.iconAvater = Icons.arrow_downward,
     this.isSelected = false,
-    this.isAvaterNeed = false,
+    this.isIconAvaterNeed = false,
   }) : super(key: key);
 
   @override
@@ -33,14 +33,15 @@ class _CustomChipChoiceState extends State<CustomChipChoice> {
   Widget build(BuildContext context) {
     return Container(
       child: ChoiceChip(
-        avatar: !widget.isAvaterNeed
+        elevation: 7,
+        avatar: !widget.isIconAvaterNeed
             ? Text(
                 widget.filter[0].toUpperCase(),
                 style: GoogleFonts.ubuntu(
                     color: widget.isSelected ? Colors.white : Colors.black),
               )
             : Icon(
-                widget.avater,
+                widget.iconAvater,
                 color: widget.isSelected ? Colors.white : Colors.black,
               ),
         backgroundColor: Colors.white,

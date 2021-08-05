@@ -42,13 +42,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
       width: desktop
           ? widget.size.width * widget.widthVal
           : widget.size.width * 0.6,
-      height: widget.needMultiline ? 180 : null,
+      height: widget.needMultiline ? 150 : null,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
       ),
       child: TextFormField(
         controller: widget.controller,
-        maxLength: widget.isNeedMaxLength ? 10 : null,
+        maxLength: widget.isNeedMaxLength ? 5 : null,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         validator: (val) => widget.valiadtor(val),
         keyboardType:

@@ -6,8 +6,8 @@ class AboutUs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutTemplate(
-      body: Container(),
+    return NewTemplate(
+      sliverChild: Container(),
     );
   }
 }
