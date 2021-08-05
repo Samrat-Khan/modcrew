@@ -7,7 +7,7 @@ class CheckOutAddress {
     required this.billingCity,
     required this.billingPincode,
     required this.billingState,
-    required this.billingCountry,
+    this.billingCountry = "IND",
     required this.billingEmail,
     required this.billingPhone,
     this.paymentMethod = "Prepaid",

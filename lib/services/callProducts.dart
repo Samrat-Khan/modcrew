@@ -7,7 +7,7 @@ class GetAllProductsHTTPService {
     var response = await http.get(Uri.parse(env_GetProducts));
 
     Map<String, dynamic> jsonBody = json.decode(response.body);
-    print(jsonBody);
+
     return jsonBody;
   }
 

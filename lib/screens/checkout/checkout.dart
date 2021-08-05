@@ -5,7 +5,8 @@ import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:shopping_page/controller/authController.dart';
 import 'package:shopping_page/models/models.dart';
 import 'package:shopping_page/routes/routeNames.dart';
-import 'package:shopping_page/screens/screens.dart';
+import 'package:shopping_page/screens/orderConfirm/controller/orderConfirmController.dart';
+
 import 'package:snapping_sheet/snapping_sheet.dart';
 
 import '../../services/placeOrder.dart';
@@ -25,11 +26,12 @@ class _CheckOutState extends State<CheckOut> {
   final PlaceOrderHttpService placeOrderHttpService = PlaceOrderHttpService();
   final String orderId = '';
   int selectedButtonIndex = 1;
-
+  final orderIdController = OrderIdController.to;
   order() async {
     String id = await placeOrderHttpService.uploadAddress();
+    // orderIdController.setOrderId(id: id);
     String razorPayId = await placeOrderHttpService.razorPayOrder(orderId: id);
-    print("RazorPay Id $razorPayId");
+
     Navigator.of(context)
         .pushNamed(RouteName.webPayment, arguments: razorPayId);
   }

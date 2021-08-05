@@ -54,19 +54,22 @@ class _UserAccountState extends State<UserAccount> {
               margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 50),
               width: size.width,
               height: 200,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 1,
-                itemBuilder: (_, i) {
-                  return Card(
-                    child: Container(
-                      height: 150,
-                      width: 200,
-                    ),
-                    color: Colors.amberAccent,
-                  );
-                },
+              child: Center(
+                child: Text("No Orders Found"),
               ),
+              // child: ListView.builder(
+              //   scrollDirection: Axis.horizontal,
+              //   itemCount: 1,
+              //   itemBuilder: (_, i) {
+              //     return Card(
+              //       child: Container(
+              //         height: 150,
+              //         width: 200,
+              //       ),
+              //       color: Colors.amberAccent,
+              //     );
+              //   },
+              // ),
             ),
           ],
         ),

@@ -48,8 +48,6 @@ class CartHTTPService {
               'Bearer ${authController.authToken.value}',
         },
       );
-      print("Response cart");
-      print(jsonDecode(res.body));
     } on HttpException catch (e) {
       print(e.message);
     }

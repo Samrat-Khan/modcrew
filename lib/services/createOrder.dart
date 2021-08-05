@@ -17,11 +17,8 @@ class CreateOrderService {
       });
       if (response.statusCode == 200) {
         Map<String, dynamic> jsonData = jsonDecode(response.body);
-        print(" Json Data " + "   " + jsonData.toString());
+
         return jsonData;
-      } else {
-        print("Stat code  ${response.statusCode}");
-        print("${response.body}");
       }
     } on HttpException catch (e) {
       print("${e.message}");

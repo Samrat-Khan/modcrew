@@ -7,8 +7,10 @@ import 'package:shopping_page/controller/authController.dart';
 import 'package:shopping_page/env/apiRoutes.dart';
 import 'package:shopping_page/screens/checkout/model/address_model.dart';
 import 'package:shopping_page/screens/checkout/model/cart_model.dart';
+import 'package:shopping_page/screens/orderConfirm/controller/orderConfirmController.dart';
 
 class PlaceOrderHttpService {
+  final orderIdController = OrderIdController.to;
   final authController = Get.put(AuthController());
   uploadCart({required List<CheckOutCartModel> cartItms}) async {
     var jsonBody = {"items": cartItms};
@@ -55,6 +57,7 @@ class PlaceOrderHttpService {
       var jsonResponse = jsonDecode(res.body)["data"];
 
       String id = jsonResponse["_id"];
+
       return id;
     } catch (e) {
       print("Error during $e");
@@ -75,6 +78,9 @@ class PlaceOrderHttpService {
       );
       print(jsonDecode(res.body));
       var jsonPay = jsonDecode(res.body)["data"];
+      print("I need Recipt $jsonPay");
+      print("Recipt ${jsonPay["receipt"]}");
+      orderIdController.setOrderId(id: jsonPay["receipt"]);
       print(jsonPay);
       return jsonPay["id"];
     } catch (e) {

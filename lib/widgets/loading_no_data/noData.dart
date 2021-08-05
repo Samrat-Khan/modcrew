@@ -8,13 +8,13 @@ class NoData extends StatelessWidget {
     return Center(
       child: Column(
         children: [
-          SizedBox(height: 50),
-          ImageIcon(
-            AssetImage(noDataType == "review"
-                ? "assets/images/review.png"
-                : "assets/images/no-data.png"),
-            size: 25,
-          ),
+          // SizedBox(height: 50),
+          // ImageIcon(
+          //   AssetImage(noDataType == "review"
+          //       ? "assets/images/review.png"
+          //       : "assets/images/no-data.png"),
+          //   size: 25,
+          // ),
           SizedBox(height: 15),
           Text(noDataType == "review" ? "No Review Yet" : "No Data Found"),
         ],

@@ -24,12 +24,8 @@ class WebPayment extends StatelessWidget {
           (element) {
             print('Event Received in callback: ${element.data}');
             if (element.data == 'MODAL_CLOSED') {
-              print(element.data);
-
               Navigator.pop(context);
             } else if (element.data == 'SUCCESS') {
-              print('$element');
-              print('${element.data}');
               cartController.deleteCart();
               Navigator.of(context).pushReplacementNamed(RouteName.orderConfrim,
                   arguments: orderId);

@@ -1,6 +1,8 @@
+import 'package:awesome_dropdown/awesome_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:menu_button/menu_button.dart';
 
 import 'package:shopping_page/const_and_theme/colors.dart';
 
@@ -28,14 +30,15 @@ class ContainerForProductBuy extends StatefulWidget {
 class _ContainerForProductBuyState extends State<ContainerForProductBuy> {
   final cartController = CartController.to;
   final authController = AuthController.to;
-  Variation? variation;
+  String sku = 'Select Variation';
   int itemCount = 1;
-  final List<bool> sizeList = [];
+  final List<String> sizeList = [];
+
   @override
   void initState() {
     widget.productModelData.variations.forEach(
       (element) {
-        sizeList.add(false);
+        sizeList.add(element.sku);
       },
     );
     super.initState();
@@ -54,15 +57,17 @@ class _ContainerForProductBuyState extends State<ContainerForProductBuy> {
   }
 
   checkVariationClicked() {
-    if (widget.productModelData.variations.isNotEmpty &&
-        variation!.id.isNotEmpty) {
+    if (widget.productModelData.variations.isEmpty) {
       return true;
-    } else
+    } else if (sku == "Select Variation") {
       return false;
+    } else
+      return true;
   }
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     Size size = MediaQuery.of(context).size;
     return Container(
       child: Column(
@@ -105,43 +110,31 @@ class _ContainerForProductBuyState extends State<ContainerForProductBuy> {
                 //Product Variations
                 widget.productModelData.variations.length == 0
                     ? SizedBox()
-                    : Wrap(
-                        children: [
-                          Container(
-                            height: 30,
-                            child: ListView.builder(
-                              shrinkWrap: true,
-                              scrollDirection: Axis.horizontal,
-                              itemCount:
-                                  widget.productModelData.variations.length,
-                              itemBuilder: (_, i) {
-                                var data =
-                                    widget.productModelData.variations[i];
-
-                                return varitationChip(
-                                  label: data.size,
-                                  selected: sizeList[i],
-                                  function: (val) {
-                                    setState(() {
-                                      sizeList[i] = !sizeList[i];
-                                    });
-                                    if (sizeList[i])
-                                      variation = Variation(
-                                          id: data.id,
-                                          size: data.size,
-                                          sku: data.sku,
-                                          stockQuantity: data.stockQuantity,
-                                          user: data.user,
-                                          product: data.product,
-                                          createdAt: data.createdAt,
-                                          updatedAt: data.updatedAt,
-                                          v: data.v);
-                                  },
-                                );
-                              },
-                            ),
+                    : Container(
+                        width: 150,
+                        height: 60,
+                        child: MenuButton<String>(
+                          child: NormalChildButton(sku: sku),
+                          items: sizeList,
+                          itemBuilder: (String value) => Container(
+                            height: 40,
+                            alignment: Alignment.centerLeft,
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 0.0, horizontal: 16),
+                            child: Text(value),
                           ),
-                        ],
+                          toggledChild: Container(
+                            child: NormalChildButton(sku: sku),
+                          ),
+                          onItemSelected: (String value) {
+                            setState(() {
+                              sku = value;
+                            });
+                          },
+                          onMenuButtonToggle: (bool isToggle) {
+                            print(isToggle);
+                          },
+                        ),
                       ),
                 Divider(
                   color: Colors.white,
@@ -274,7 +267,7 @@ class _ContainerForProductBuyState extends State<ContainerForProductBuy> {
                               productUnits: cartController.itemCount.value,
                               productPrice: widget.productModelData.sellingPrice
                                   .toDouble(),
-                              sku: variation!.sku,
+                              sku: sku,
                               subTotal: (widget.productModelData.sellingPrice *
                                       cartController.itemCount.value)
                                   .toDouble(),
@@ -304,6 +297,39 @@ class _ContainerForProductBuyState extends State<ContainerForProductBuy> {
       selectedColor: Colors.blueAccent,
       selected: selected,
       onSelected: function,
+    );
+  }
+}
+
+class NormalChildButton extends StatelessWidget {
+  final String sku;
+  const NormalChildButton({Key? key, required this.sku}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 93,
+      height: 40,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 16, right: 11),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Flexible(child: Text(sku, overflow: TextOverflow.ellipsis)),
+            const SizedBox(
+              width: 12,
+              height: 17,
+              child: FittedBox(
+                fit: BoxFit.fill,
+                child: Icon(
+                  Icons.arrow_drop_down,
+                  color: Colors.grey,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

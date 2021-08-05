@@ -12,3 +12,5 @@ const String env_order = '$baseUrl/orders';
 // ignore: non_constant_identifier_names
 String env_razor_pay_order({required String orderId}) =>
     "$baseUrl/orders/$orderId/pay";
+// ignore: non_constant_identifier_names
+String env_orderStaus({required String orderId}) => '$baseUrl/orders/$orderId';

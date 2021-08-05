@@ -7,6 +7,7 @@ import 'package:shopping_page/routes/route.dart';
 import 'package:shopping_page/const_and_theme/theme.dart';
 import 'package:shopping_page/routes/routeNames.dart';
 import 'package:shopping_page/screens/newTemplate/newTemplate.dart';
+import 'package:shopping_page/screens/orderConfirm/controller/orderConfirmController.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 import 'widgets/orderTack/orderTrack.dart';
@@ -17,6 +18,7 @@ void main() {
   Get.put(CartController());
   Get.put(AuthController());
   Get.put(NavChangeController());
+  Get.put(OrderIdController());
   runApp(MyApp());
 }
 
