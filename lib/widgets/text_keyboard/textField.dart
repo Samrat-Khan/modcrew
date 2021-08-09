@@ -48,7 +48,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       ),
       child: TextFormField(
         controller: widget.controller,
-        maxLength: widget.isNeedMaxLength ? 5 : null,
+        maxLength: widget.isNeedMaxLength ? 10 : null,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         validator: (val) => widget.valiadtor(val),
         keyboardType:

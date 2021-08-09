@@ -38,9 +38,19 @@ class _CartPageState extends State<CartPage> {
       );
     }
     await placeOrderHttpService.uploadCart(cartItms: cartItms);
-    Navigator.of(context).pushNamed(
-      RouteName.checkout,
-    );
+    // Navigator.of(context).pushNamed(
+    //   RouteName.checkout,
+    // );
+    order();
+  }
+
+  order() async {
+    String id = await placeOrderHttpService.uploadAddress();
+
+    String razorPayId = await placeOrderHttpService.razorPayOrder(orderId: id);
+
+    Navigator.of(context)
+        .pushNamed(RouteName.webPayment, arguments: razorPayId);
   }
 
   @override
@@ -183,6 +193,8 @@ class _CartPageState extends State<CartPage> {
                                               builder: (context) {
                                                 return DoAuthDialog();
                                               });
+                                        } else if (cartController
+                                            .cartList.value.isEmpty) {
                                         } else {
                                           uploadCart();
                                         }

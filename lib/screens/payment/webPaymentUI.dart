@@ -1,3 +1,4 @@
+// ignore: avoid_web_libraries_in_flutter
 import 'dart:html';
 
 import 'package:flutter/material.dart';
@@ -27,6 +28,7 @@ class WebPayment extends StatelessWidget {
               Navigator.pop(context);
             } else if (element.data == 'SUCCESS') {
               cartController.deleteCart();
+              Future.delayed(Duration(seconds: 5)).then((value) {});
               Navigator.of(context).pushReplacementNamed(RouteName.orderConfrim,
                   arguments: orderId);
             }
