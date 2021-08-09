@@ -13,7 +13,7 @@ class FashionCategory extends StatefulWidget {
 
 class _FashionCategoryState extends State<FashionCategory> {
   GetAllProductsHTTPService httpService = GetAllProductsHTTPService();
-  final List<String> categoryList = [
+  final List<String> mainCategoryList = [
     "Active Wear",
     "Top Wear",
     "Bottom Wear",
@@ -29,6 +29,8 @@ class _FashionCategoryState extends State<FashionCategory> {
   final List<bool> selectedAccessoried = [false, false, false];
   bool priceLowToHigh = false, priceHighToLow = false;
   final List<bool> selectedCategory = [false, false, false, false];
+  String mainSelectItem = '';
+  String subSelectItem = '';
   @override
   void initState() {
     super.initState();
@@ -36,7 +38,6 @@ class _FashionCategoryState extends State<FashionCategory> {
 
   getProductData() async {
     Map<String, dynamic> data = await httpService.getAllProduct();
-    print(data["data"][0]);
     return data["data"];
   }
 
@@ -80,44 +81,56 @@ class _FashionCategoryState extends State<FashionCategory> {
       spacing: 10,
       children: [
         categoryChip(
-          label: categoryList[0],
+          label: mainCategoryList[0],
           selected: selectedCategory[0],
           function: (val) {
             setState(() {
               selectedCategory[0] = !selectedCategory[0];
+              selectedCategory[0] == true
+                  ? mainSelectItem = mainCategoryList[0]
+                  : mainSelectItem = '';
               selectedCategory[1] =
                   selectedCategory[2] = selectedCategory[3] = false;
             });
           },
         ),
         categoryChip(
-          label: categoryList[1],
+          label: mainCategoryList[1],
           selected: selectedCategory[1],
           function: (val) {
             setState(() {
               selectedCategory[1] = !selectedCategory[1];
+              selectedCategory[1] == true
+                  ? mainSelectItem = mainCategoryList[1]
+                  : mainSelectItem = '';
               selectedCategory[0] =
                   selectedCategory[2] = selectedCategory[3] = false;
             });
           },
         ),
         categoryChip(
-          label: categoryList[2],
+          label: mainCategoryList[2],
           selected: selectedCategory[2],
           function: (val) {
             setState(() {
               selectedCategory[2] = !selectedCategory[2];
+              selectedCategory[2] == true
+                  ? mainSelectItem = mainCategoryList[2]
+                  : mainSelectItem = '';
               selectedCategory[0] =
                   selectedCategory[1] = selectedCategory[3] = false;
             });
           },
         ),
         categoryChip(
-          label: categoryList[3],
+          label: mainCategoryList[3],
           selected: selectedCategory[3],
           function: (val) {
             setState(() {
               selectedCategory[3] = !selectedCategory[3];
+              selectedCategory[3] == true
+                  ? mainSelectItem = mainCategoryList[3]
+                  : mainSelectItem = '';
               selectedCategory[0] =
                   selectedCategory[1] = selectedCategory[2] = false;
             });
@@ -179,6 +192,14 @@ class _FashionCategoryState extends State<FashionCategory> {
             function: (val) {
               setState(() {
                 selected[index] = !selected[index];
+                selected[index] == true
+                    ? subSelectItem = lable[index]
+                    : subSelectItem = '';
+                for (int i = 0; i < lable.length; i++) {
+                  if (index == i) {
+                  } else
+                    selected[i] = false;
+                }
               });
             }),
       ),
