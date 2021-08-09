@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_page/const_and_theme/colors.dart';
 import 'package:shopping_page/widgets/widgets.dart';
 
 import '../../screens.dart';
@@ -26,6 +27,7 @@ class _CollectibleCategoryState extends State<CollectibleCategory> {
     false,
     false
   ];
+  bool priceLowToHigh = false, priceHighToLow = false;
   @override
   void initState() {
     super.initState();
@@ -50,6 +52,8 @@ class _CollectibleCategoryState extends State<CollectibleCategory> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 filterByCategory(),
+                SizedBox(height: 15),
+                filterByPrice(),
               ],
             ),
           ),
@@ -148,6 +152,43 @@ class _CollectibleCategoryState extends State<CollectibleCategory> {
       selectedColor: Colors.blueAccent,
       selected: selected,
       onSelected: function,
+    );
+  }
+
+  Wrap filterByPrice() {
+    return Wrap(
+      alignment: WrapAlignment.center,
+      runAlignment: WrapAlignment.center,
+      spacing: 10,
+      runSpacing: 10,
+      children: [
+        CustomChipChoice(
+          color: Color(primaryColor),
+          action: (val) {
+            setState(() {
+              priceLowToHigh = false;
+              priceHighToLow = !priceHighToLow;
+            });
+          },
+          isSelected: priceHighToLow,
+          filter: "High to Low",
+          isIconAvaterNeed: true,
+          iconAvater: Icons.arrow_upward,
+        ),
+        CustomChipChoice(
+          color: Color(primaryColor),
+          action: (valu) {
+            setState(() {
+              priceHighToLow = false;
+              priceLowToHigh = !priceLowToHigh;
+            });
+          },
+          isSelected: priceLowToHigh,
+          filter: "Low to High",
+          isIconAvaterNeed: true,
+          iconAvater: Icons.arrow_downward,
+        ),
+      ],
     );
   }
 }

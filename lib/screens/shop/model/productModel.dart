@@ -31,9 +31,7 @@ class ProductModelData {
     required this.category,
     required this.isPublished,
     required this.isFeatured,
-    required this.variations,
     required this.images,
-    required this.reviews,
     required this.id,
     required this.title,
     required this.color,
@@ -41,28 +39,28 @@ class ProductModelData {
     required this.sellingPrice,
     required this.tax,
     required this.hsn,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.v,
+    required this.user,
+    required this.avgRating,
+    required this.reviews,
+    required this.variations,
   });
 
   final List<String> description;
   final List<String> category;
   final bool isPublished;
   final bool isFeatured;
-  final List<Variation> variations;
   final List<String> images;
-  final List<Review> reviews;
   final String id;
   final String title;
   final String color;
   final int mrp;
+  final int sellingPrice;
   final int tax;
   final int hsn;
-  final int sellingPrice;
-  final DateTime createdAt;
-  final DateTime updatedAt;
-  final int v;
+  final String user;
+  final double avgRating;
+  final List<Review> reviews;
+  final List<Variation> variations;
 
   factory ProductModelData.fromRawJson(String str) =>
       ProductModelData.fromJson(json.decode(str));
@@ -75,20 +73,20 @@ class ProductModelData {
         category: List<String>.from(json["category"].map((x) => x)),
         isPublished: json["isPublished"],
         isFeatured: json["isFeatured"],
-        variations: List<Variation>.from(
-            json["variations"].map((x) => Variation.fromJson(x))),
         images: List<String>.from(json["images"].map((x) => x)),
-        reviews: List<Review>.from(json["reviews"].map((x) => x)),
-        id: json["_id"] ?? "",
-        title: json["title"] ?? "",
-        color: json["color"] ?? "",
+        id: json["_id"],
+        title: json["title"],
+        color: json["color"],
         mrp: json["mrp"],
-        sellingPrice: json['sellingPrice'],
+        sellingPrice: json["sellingPrice"],
         tax: json["tax"],
         hsn: json["hsn"],
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
-        v: json["__v"],
+        user: json["user"],
+        avgRating: json["avgRating"].toDouble(),
+        reviews:
+            List<Review>.from(json["reviews"].map((x) => Review.fromJson(x))),
+        variations: List<Variation>.from(
+            json["variations"].map((x) => Variation.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -96,9 +94,7 @@ class ProductModelData {
         "category": List<dynamic>.from(category.map((x) => x)),
         "isPublished": isPublished,
         "isFeatured": isFeatured,
-        "variations": List<dynamic>.from(variations.map((x) => x.toJson())),
         "images": List<dynamic>.from(images.map((x) => x)),
-        "reviews": List<Review>.from(reviews.map((x) => x)),
         "_id": id,
         "title": title,
         "color": color,
@@ -106,9 +102,55 @@ class ProductModelData {
         "sellingPrice": sellingPrice,
         "tax": tax,
         "hsn": hsn,
-        "createdAt": createdAt.toIso8601String(),
-        "updatedAt": updatedAt.toIso8601String(),
-        "__v": v,
+        "user": user,
+        "avgRating": avgRating,
+        "reviews": List<dynamic>.from(reviews.map((x) => x.toJson())),
+        "variations": List<dynamic>.from(variations.map((x) => x.toJson())),
+      };
+}
+
+class Review {
+  Review({
+    required this.id,
+    required this.rating,
+    required this.title,
+    required this.body,
+    required this.product,
+    required this.user,
+    required this.name,
+  });
+
+  final String id;
+  final int rating;
+  final String title;
+  final String body;
+  final String product;
+  final String user;
+
+  final String name;
+
+  factory Review.fromRawJson(String str) => Review.fromJson(json.decode(str));
+
+  String toRawJson() => json.encode(toJson());
+
+  factory Review.fromJson(Map<String, dynamic> json) => Review(
+        id: json["_id"],
+        rating: json["rating"],
+        title: json["title"],
+        body: json["body"],
+        product: json["product"],
+        user: json["user"],
+        name: json["name"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "_id": id,
+        "rating": rating,
+        "title": title,
+        "body": body,
+        "product": product,
+        "user": user,
+        "name": name,
       };
 }
 
@@ -118,22 +160,14 @@ class Variation {
     required this.size,
     required this.sku,
     required this.stockQuantity,
-    required this.user,
     required this.product,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.v,
   });
 
   final String id;
   final String size;
   final String sku;
   final int stockQuantity;
-  final String user;
   final String product;
-  final DateTime createdAt;
-  final DateTime updatedAt;
-  final int v;
 
   factory Variation.fromRawJson(String str) =>
       Variation.fromJson(json.decode(str));
@@ -145,11 +179,7 @@ class Variation {
         size: json["size"],
         sku: json["sku"],
         stockQuantity: json["stockQuantity"],
-        user: json["user"],
         product: json["product"],
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
-        v: json["__v"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -157,45 +187,6 @@ class Variation {
         "size": size,
         "sku": sku,
         "stockQuantity": stockQuantity,
-        "user": user,
         "product": product,
-        "createdAt": createdAt.toIso8601String(),
-        "updatedAt": updatedAt.toIso8601String(),
-        "__v": v,
-      };
-}
-
-class Review {
-  Review({
-    required this.id,
-    required this.reviewerName,
-    required this.reviewerId,
-    required this.rating,
-    required this.title,
-    required this.body,
-  });
-
-  final String id;
-  final String reviewerName;
-  final String reviewerId;
-  final int rating;
-  final String title;
-  final String body;
-  factory Review.fromJson(Map<String, dynamic> json) => Review(
-        id: json["_id"],
-        reviewerName: json["reviewerName"],
-        reviewerId: json["reviewerId"],
-        rating: json["rating"],
-        title: json["title"],
-        body: json["body"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "_id": id,
-        "reviewerName": reviewerName,
-        "reviewerId": reviewerId,
-        "rating": rating,
-        "title": title,
-        "body": body,
       };
 }

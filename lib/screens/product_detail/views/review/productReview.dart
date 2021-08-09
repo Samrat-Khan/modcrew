@@ -89,7 +89,7 @@ class _CustomerReviewWidgetsState extends State<CustomerReviewWidgets> {
                         ),
                       ),
                       title: Text(
-                        "${widget.review[index].reviewerName}",
+                        "${widget.review[index].name}",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       subtitle: RichText(

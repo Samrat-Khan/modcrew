@@ -46,9 +46,8 @@ class SnapshotGridBuilder extends StatelessWidget {
           sellingPrice: model.sellingPrice,
           tax: model.tax,
           hsn: model.hsn,
-          createdAt: model.createdAt,
-          updatedAt: model.updatedAt,
-          v: model.v,
+          avgRating: model.avgRating,
+          user: '',
         );
 
         return Padding(
