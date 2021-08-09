@@ -1,0 +1,1 @@
+export 'signUpModel.dart';

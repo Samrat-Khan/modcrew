@@ -6,8 +6,6 @@ export 'util/dividerMessage.dart';
 export 'util/responsive.dart';
 export 'text_keyboard/textField.dart';
 export 'footer/footer.dart';
-
-export 'appBar/appBarOther.dart';
 export 'appBar/modCrewLogo.dart';
 export 'appBar/searchBar.dart';
 export 'util/symbol.dart';
@@ -21,3 +19,4 @@ export 'signin_signup_buttons/signIn_SignUp_Buttons.dart';
 export 'signin_signup_buttons/logOutButton.dart';
 export 'error_dialouge/error_dialouge.dart';
 export 'dateTimePicker/dateTimePicker.dart';
+export '../screens/screens.dart';

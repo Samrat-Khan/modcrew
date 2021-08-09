@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shopping_page/controller/authController.dart';
+
 import 'package:shopping_page/routes/routeNames.dart';
+
+import '../widgets.dart';
 
 class ForAuthUser extends StatelessWidget {
   final Widget cartBadge;

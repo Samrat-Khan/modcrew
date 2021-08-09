@@ -1,11 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:shopping_page/const_and_theme/colors.dart';
-import 'package:shopping_page/const_and_theme/textStyles.dart';
-import 'package:shopping_page/models/models.dart';
-import 'package:shopping_page/screens/product_detail/product_detail_screen.dart';
-import 'package:shopping_page/widgets/util/responsive.dart';
 import 'package:shopping_page/widgets/widgets.dart';
 
 class ProductCard extends StatelessWidget {

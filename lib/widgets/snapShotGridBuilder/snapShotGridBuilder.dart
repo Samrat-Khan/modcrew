@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shopping_page/models/models.dart';
 import 'package:shopping_page/widgets/widgets.dart';
 
 class SnapshotGridBuilder extends StatelessWidget {

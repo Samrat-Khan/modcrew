@@ -2,9 +2,10 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
-import 'package:shopping_page/controller/authController.dart';
+
 import 'package:shopping_page/env/apiRoutes.dart';
-import 'package:shopping_page/screens/orderConfirm/controller/orderConfirmController.dart';
+
+import '../../screens.dart';
 
 class OrderConfirmStatus {
   final authController = AuthController.to;

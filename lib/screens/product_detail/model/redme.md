@@ -1,0 +1,1 @@
+### No need for Seperate Model. It's similar to Product Model.

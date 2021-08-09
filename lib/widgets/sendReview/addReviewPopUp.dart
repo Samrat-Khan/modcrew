@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rating_dialog/rating_dialog.dart';
-import 'package:shopping_page/controller/authController.dart';
-import 'package:shopping_page/services/services.dart';
+import 'package:shopping_page/widgets/widgets.dart';
 
 class PopupReviewProduct extends StatelessWidget {
   final String productId;

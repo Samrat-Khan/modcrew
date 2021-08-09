@@ -1,4 +1,4 @@
-const String baseUrl = 'https://modcrew.herokuapp.com/api/v1';
+const String baseUrl = 'https://modcrew-dev.herokuapp.com/api/v1';
 const String env_PaymentApi = "$baseUrl/v1/payments/pay";
 const String env_GetProducts = "$baseUrl/products";
 const String env_SignIn = '$baseUrl/auth/login';
