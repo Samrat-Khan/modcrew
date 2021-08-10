@@ -12,7 +12,7 @@ class CollectibleCategory extends StatefulWidget {
 }
 
 class _CollectibleCategoryState extends State<CollectibleCategory> {
-  GetAllProductsHTTPService httpService = GetAllProductsHTTPService();
+  GetProductsHTTPService httpService = GetProductsHTTPService();
   final List<String> collectibleCategory = [
     "Diary",
     "Sticker",
@@ -28,6 +28,8 @@ class _CollectibleCategoryState extends State<CollectibleCategory> {
     false
   ];
   bool priceLowToHigh = false, priceHighToLow = false;
+  String selectedProduct = '';
+  String byPrice = '';
   @override
   void initState() {
     super.initState();
@@ -35,7 +37,7 @@ class _CollectibleCategoryState extends State<CollectibleCategory> {
 
   getCollectibleProducts() async {
     Map<String, dynamic> data =
-        await httpService.getSelectedProductes(qString: "collectible");
+        await httpService.getAllProduct(productType: "collectibles");
     return (data["data"]);
   }
 
@@ -97,6 +99,9 @@ class _CollectibleCategoryState extends State<CollectibleCategory> {
               selectedCollectibleCategory[0] = selectedCollectibleCategory[2] =
                   selectedCollectibleCategory[3] =
                       selectedCollectibleCategory[4] = false;
+              selectedCollectibleCategory[1]
+                  ? selectedProduct = ''
+                  : selectedProduct = '';
             });
           },
         ),
@@ -109,6 +114,9 @@ class _CollectibleCategoryState extends State<CollectibleCategory> {
               selectedCollectibleCategory[0] = selectedCollectibleCategory[1] =
                   selectedCollectibleCategory[3] =
                       selectedCollectibleCategory[4] = false;
+              selectedCollectibleCategory[2]
+                  ? selectedProduct = ''
+                  : selectedProduct = '';
             });
           },
         ),
@@ -121,6 +129,9 @@ class _CollectibleCategoryState extends State<CollectibleCategory> {
               selectedCollectibleCategory[0] = selectedCollectibleCategory[1] =
                   selectedCollectibleCategory[2] =
                       selectedCollectibleCategory[4] = false;
+              selectedCollectibleCategory[3]
+                  ? selectedProduct = ''
+                  : selectedProduct = '';
             });
           },
         ),
@@ -133,6 +144,9 @@ class _CollectibleCategoryState extends State<CollectibleCategory> {
               selectedCollectibleCategory[0] = selectedCollectibleCategory[1] =
                   selectedCollectibleCategory[2] =
                       selectedCollectibleCategory[3] = false;
+              selectedCollectibleCategory[4]
+                  ? selectedProduct = ''
+                  : selectedProduct = '';
             });
           },
         ),
@@ -168,6 +182,7 @@ class _CollectibleCategoryState extends State<CollectibleCategory> {
             setState(() {
               priceLowToHigh = false;
               priceHighToLow = !priceHighToLow;
+              priceHighToLow ? byPrice = "price" : byPrice = '';
             });
           },
           isSelected: priceHighToLow,
@@ -181,6 +196,7 @@ class _CollectibleCategoryState extends State<CollectibleCategory> {
             setState(() {
               priceHighToLow = false;
               priceLowToHigh = !priceLowToHigh;
+              priceLowToHigh ? byPrice = "-price" : byPrice = '';
             });
           },
           isSelected: priceLowToHigh,

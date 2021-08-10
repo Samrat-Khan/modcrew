@@ -15,4 +15,5 @@ class RouteName {
   static String initScreen = '/initScreen';
   static String orderConfrim = '/orderConfrim';
   // static String  = '/privecy_policy';
+  static String sizeChart = '/sizechart';
 }

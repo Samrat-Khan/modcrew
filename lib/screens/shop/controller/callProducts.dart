@@ -2,21 +2,26 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shopping_page/env/apiRoutes.dart';
 
-class GetAllProductsHTTPService {
-  Future getAllProduct() async {
-    var response = await http.get(Uri.parse(env_GetProducts));
-
+class GetProductsHTTPService {
+  Future getAllProduct({required String productType}) async {
+    String url = baseUrl + "/products";
+    Map<String, dynamic> qParams = {
+      "category": productType,
+    };
+    String query = Uri(queryParameters: qParams).query;
+    String uri = url + '?' + query;
+    var response = await http.get(Uri.parse(uri));
     Map<String, dynamic> jsonBody = json.decode(response.body);
 
     return jsonBody;
   }
 
-  Future getSelectedProductes({
-    required String qString,
+  Future getProductesByCategory({
+    required String mainCategory,
   }) async {
     String url = baseUrl + "/products";
     Map<String, dynamic> qParams = {
-      "category": qString,
+      "category": mainCategory,
     };
     String query = Uri(queryParameters: qParams).query;
 
@@ -26,13 +31,31 @@ class GetAllProductsHTTPService {
     return jsonBody;
   }
 
-  Future getSelectedProductFromFilter({
-    required String qString,
-    required String filter,
+  Future getProductsByCategoryAndSubCategory({
+    required String mainCategory,
+    required String subCategory,
   }) async {
     String url = baseUrl + "/products";
     Map<String, dynamic> qParams = {
-      "category": qString + ',' + filter,
+      "category": mainCategory + ',' + subCategory,
+    };
+    String query = Uri(queryParameters: qParams).query;
+
+    String uri = url + '?' + query;
+
+    var response = await http.get(Uri.parse(uri));
+    Map<String, dynamic> jsonBody = json.decode(response.body);
+    return jsonBody;
+  }
+
+  Future getProductesByCategoryAndPrice({
+    required String mainCategory,
+    required String byPrice,
+  }) async {
+    String url = baseUrl + "/products";
+    Map<String, dynamic> qParams = {
+      "category": mainCategory,
+      "sort": byPrice,
     };
     String query = Uri(queryParameters: qParams).query;
 
@@ -42,17 +65,28 @@ class GetAllProductsHTTPService {
     return jsonBody;
   }
 
-  Future getSelectedProductFromPrcie({
-    required bool highToLow,
-    required String productMainCategory,
-    required String filter,
-  }) async {
-    String byPrice = highToLow ? "price" : "-price";
+  Future getProductsByPrice(
+      {required String byPrice, required String productType}) async {
     String url = baseUrl + "/products";
     Map<String, dynamic> qParams = {
-      "category": filter == "price"
-          ? productMainCategory
-          : productMainCategory + "," + filter,
+      "category": productType,
+      "sort": byPrice,
+    };
+    String query = Uri(queryParameters: qParams).query;
+
+    String uri = url + '?' + query;
+    var response = await http.get(Uri.parse(uri));
+    Map<String, dynamic> jsonBody = json.decode(response.body);
+    return jsonBody;
+  }
+
+  Future getProductsByAllFilter(
+      {required String productMainCategory,
+      required String productSubCategory,
+      required String byPrice}) async {
+    String url = baseUrl + "/products";
+    Map<String, dynamic> qParams = {
+      "category": productMainCategory + "," + productSubCategory,
       "sort": byPrice,
     };
     String query = Uri(queryParameters: qParams).query;

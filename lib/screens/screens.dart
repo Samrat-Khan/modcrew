@@ -14,3 +14,4 @@ export 'signup_login/signup_login.dart';
 export 'home/home.dart';
 export 'aboutUs/aboutUs.dart';
 export 'splashScreen/splashScreen.dart';
+export 'sizeChart/sizeChart.dart';

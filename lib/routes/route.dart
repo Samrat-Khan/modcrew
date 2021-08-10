@@ -84,6 +84,10 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => InitScreen(),
         );
+      case '/sizechart':
+        return MaterialPageRoute(
+          builder: (_) => SizeChart(),
+        );
 
       default:
         return _errorRoute();

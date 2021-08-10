@@ -12,33 +12,86 @@ class FashionCategory extends StatefulWidget {
 }
 
 class _FashionCategoryState extends State<FashionCategory> {
-  GetAllProductsHTTPService httpService = GetAllProductsHTTPService();
+  GetProductsHTTPService httpService = GetProductsHTTPService();
   final List<String> mainCategoryList = [
     "Active Wear",
     "Top Wear",
     "Bottom Wear",
     "Accessories"
   ];
-  final List<String> activeWear = ["Jogger", "Jersey"];
+  final List<String> activeWear = ["jogger", "jersey"];
   final List<bool> selectedActiveWear = [false, false];
-  final List<String> topWear = ["Henly", "Round Neck", "Crop Top"];
+  final List<String> topWear = ["henly", "round-neck", "crop-top"];
   final List<bool> selectedTopWear = [false, false, false];
-  final List<String> bottomWear = ["Shorts"];
+  final List<String> bottomWear = ["shorts"];
   final List<bool> selectedBottomWear = [false];
-  final List<String> accessoried = ["Cap", "Bandana", "Bag"];
+  final List<String> accessoried = ["cap", "bandana", "bag"];
   final List<bool> selectedAccessoried = [false, false, false];
   bool priceLowToHigh = false, priceHighToLow = false;
   final List<bool> selectedCategory = [false, false, false, false];
   String mainSelectItem = '';
   String subSelectItem = '';
+  String byPrice = '';
   @override
   void initState() {
     super.initState();
   }
 
   getProductData() async {
-    Map<String, dynamic> data = await httpService.getAllProduct();
-    return data["data"];
+    if (mainSelectItem == '' && subSelectItem == '' && byPrice == '') {
+      print("Caling All");
+      Map<String, dynamic> data =
+          await httpService.getAllProduct(productType: "fashion");
+      return data["data"];
+    }
+    if (mainSelectItem.isNotEmpty) {
+      //Checking main.isNotEmpty and Submain.isNotEmpty
+      if (mainSelectItem.isNotEmpty &&
+          subSelectItem.isNotEmpty &&
+          byPrice.isEmpty) {
+        print("Caling  main Cat and Sub");
+        Map<String, dynamic> data =
+            await httpService.getProductsByCategoryAndSubCategory(
+                mainCategory: mainSelectItem, subCategory: subSelectItem);
+        return data["data"];
+      }
+      //Checking main.isNotEmpty and price.isNotEmpty
+
+      else if (mainSelectItem.isNotEmpty &&
+          byPrice.isNotEmpty &&
+          subSelectItem.isEmpty) {
+        print("Caling  main Cat and price");
+        Map<String, dynamic> data =
+            await httpService.getProductesByCategoryAndPrice(
+                mainCategory: mainSelectItem, byPrice: byPrice);
+        return data["data"];
+      }
+      //If all there isNotEmpty
+
+      else if (mainSelectItem.isNotEmpty &&
+          subSelectItem.isNotEmpty &&
+          byPrice.isNotEmpty) {
+        print("Caling  main Cat and Sub and Prce");
+        Map<String, dynamic> data = await httpService.getProductsByAllFilter(
+            productMainCategory: mainSelectItem,
+            productSubCategory: subSelectItem,
+            byPrice: byPrice);
+        return data["data"];
+      }
+      // checking main.isNotEmpty-- Else case
+      else {
+        print("Caling Only main Cat");
+        Map<String, dynamic> data = await httpService.getProductesByCategory(
+            mainCategory: mainSelectItem);
+        return data["data"];
+      }
+    }
+    if (byPrice.isNotEmpty && mainSelectItem.isEmpty && subSelectItem.isEmpty) {
+      print("Caling Only Price");
+      Map<String, dynamic> data = await httpService.getProductsByPrice(
+          byPrice: byPrice, productType: "fashion");
+      return data["data"];
+    }
   }
 
   @override
@@ -87,10 +140,13 @@ class _FashionCategoryState extends State<FashionCategory> {
             setState(() {
               selectedCategory[0] = !selectedCategory[0];
               selectedCategory[0] == true
-                  ? mainSelectItem = mainCategoryList[0]
+                  ? mainSelectItem = 'active-wear'
                   : mainSelectItem = '';
               selectedCategory[1] =
                   selectedCategory[2] = selectedCategory[3] = false;
+              if (!selectedCategory[0]) {
+                subSelectItem = '';
+              }
             });
           },
         ),
@@ -101,10 +157,13 @@ class _FashionCategoryState extends State<FashionCategory> {
             setState(() {
               selectedCategory[1] = !selectedCategory[1];
               selectedCategory[1] == true
-                  ? mainSelectItem = mainCategoryList[1]
+                  ? mainSelectItem = "top-wear"
                   : mainSelectItem = '';
               selectedCategory[0] =
                   selectedCategory[2] = selectedCategory[3] = false;
+              if (!selectedCategory[1]) {
+                subSelectItem = '';
+              }
             });
           },
         ),
@@ -115,10 +174,13 @@ class _FashionCategoryState extends State<FashionCategory> {
             setState(() {
               selectedCategory[2] = !selectedCategory[2];
               selectedCategory[2] == true
-                  ? mainSelectItem = mainCategoryList[2]
+                  ? mainSelectItem = "bottom-wear"
                   : mainSelectItem = '';
               selectedCategory[0] =
                   selectedCategory[1] = selectedCategory[3] = false;
+              if (!selectedCategory[2]) {
+                subSelectItem = '';
+              }
             });
           },
         ),
@@ -129,10 +191,13 @@ class _FashionCategoryState extends State<FashionCategory> {
             setState(() {
               selectedCategory[3] = !selectedCategory[3];
               selectedCategory[3] == true
-                  ? mainSelectItem = mainCategoryList[3]
+                  ? mainSelectItem = "accessories"
                   : mainSelectItem = '';
               selectedCategory[0] =
                   selectedCategory[1] = selectedCategory[2] = false;
+              if (!selectedCategory[3]) {
+                subSelectItem = '';
+              }
             });
           },
         ),
@@ -219,6 +284,7 @@ class _FashionCategoryState extends State<FashionCategory> {
             setState(() {
               priceLowToHigh = false;
               priceHighToLow = !priceHighToLow;
+              priceHighToLow ? byPrice = "-sellingPrice" : byPrice = '';
             });
           },
           isSelected: priceHighToLow,
@@ -232,6 +298,7 @@ class _FashionCategoryState extends State<FashionCategory> {
             setState(() {
               priceHighToLow = false;
               priceLowToHigh = !priceLowToHigh;
+              priceLowToHigh ? byPrice = "sellingPrice" : byPrice = '';
             });
           },
           isSelected: priceLowToHigh,

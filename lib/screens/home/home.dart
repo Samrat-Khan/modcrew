@@ -15,7 +15,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   Colorize colorString = new Colorize();
-  GetAllProductsHTTPService httpService = GetAllProductsHTTPService();
+  GetProductsHTTPService httpService = GetProductsHTTPService();
   TabController? _tabController;
 
   @override
