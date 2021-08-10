@@ -5,3 +5,4 @@ const int activeColorAndBg = 0xffffffff;
 const int infoColor = 0xff031e49;
 const int starColor = 0xfff2994a;
 const int bgRedColor = 0xffee0405;
+const int textFieldBg = 0xffebeaef;
