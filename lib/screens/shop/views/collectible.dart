@@ -36,9 +36,34 @@ class _CollectibleCategoryState extends State<CollectibleCategory> {
   }
 
   getCollectibleProducts() async {
-    Map<String, dynamic> data =
-        await httpService.getAllProduct(productType: "collectibles");
-    return (data["data"]);
+    //if only main category Selected
+    if (selectedProduct.isNotEmpty && byPrice.isEmpty) {
+      Map<String, dynamic> data = await httpService.getProductesByCategory(
+          mainCategory: selectedProduct);
+      return (data["data"]);
+    }
+    //if only price selcted
+    if (byPrice.isNotEmpty && selectedProduct.isEmpty) {
+      Map<String, dynamic> data = await httpService.getProductsByPrice(
+          byPrice: byPrice, productType: "collectibles");
+      return (data["data"]);
+    }
+
+    //if both selected
+    if (byPrice.isNotEmpty && selectedProduct.isNotEmpty) {
+      Map<String, dynamic> data =
+          await httpService.getProductesByCategoryAndPrice(
+              mainCategory: selectedProduct, byPrice: byPrice);
+
+      return (data["data"]);
+    }
+
+    //if nothing selected
+    if (byPrice.isEmpty && selectedProduct.isEmpty) {
+      Map<String, dynamic> data =
+          await httpService.getAllProduct(productType: "collectibles");
+      return (data["data"]);
+    }
   }
 
   @override
@@ -83,10 +108,16 @@ class _CollectibleCategoryState extends State<CollectibleCategory> {
           selected: selectedCollectibleCategory[0],
           function: (val) {
             setState(() {
+              //only seleted chip T/F
               selectedCollectibleCategory[0] = !selectedCollectibleCategory[0];
+              //making rest of Chip false
               selectedCollectibleCategory[1] = selectedCollectibleCategory[2] =
                   selectedCollectibleCategory[3] =
                       selectedCollectibleCategory[4] = false;
+              //setting val of selectedProduct
+              selectedCollectibleCategory[0]
+                  ? selectedProduct = collectibleCategory[0].toLowerCase()
+                  : selectedProduct = '';
             });
           },
         ),
@@ -95,12 +126,15 @@ class _CollectibleCategoryState extends State<CollectibleCategory> {
           selected: selectedCollectibleCategory[1],
           function: (val) {
             setState(() {
+              //only seleted chip T/F
               selectedCollectibleCategory[1] = !selectedCollectibleCategory[1];
+              //making rest of Chip false
               selectedCollectibleCategory[0] = selectedCollectibleCategory[2] =
                   selectedCollectibleCategory[3] =
                       selectedCollectibleCategory[4] = false;
+              //setting val of selectedProduct
               selectedCollectibleCategory[1]
-                  ? selectedProduct = ''
+                  ? selectedProduct = collectibleCategory[1].toLowerCase()
                   : selectedProduct = '';
             });
           },
@@ -110,12 +144,15 @@ class _CollectibleCategoryState extends State<CollectibleCategory> {
           selected: selectedCollectibleCategory[2],
           function: (val) {
             setState(() {
+              //only seleted chip T/F
               selectedCollectibleCategory[2] = !selectedCollectibleCategory[2];
+              //making rest of Chip false
               selectedCollectibleCategory[0] = selectedCollectibleCategory[1] =
                   selectedCollectibleCategory[3] =
                       selectedCollectibleCategory[4] = false;
+              //setting val of selectedProduct
               selectedCollectibleCategory[2]
-                  ? selectedProduct = ''
+                  ? selectedProduct = collectibleCategory[2].toLowerCase()
                   : selectedProduct = '';
             });
           },
@@ -125,12 +162,15 @@ class _CollectibleCategoryState extends State<CollectibleCategory> {
           selected: selectedCollectibleCategory[3],
           function: (val) {
             setState(() {
+              //only seleted chip T/F
               selectedCollectibleCategory[3] = !selectedCollectibleCategory[3];
+              //making rest of Chip false
               selectedCollectibleCategory[0] = selectedCollectibleCategory[1] =
                   selectedCollectibleCategory[2] =
                       selectedCollectibleCategory[4] = false;
+              //setting val of selectedProduct
               selectedCollectibleCategory[3]
-                  ? selectedProduct = ''
+                  ? selectedProduct = collectibleCategory[3].toLowerCase()
                   : selectedProduct = '';
             });
           },
@@ -140,12 +180,15 @@ class _CollectibleCategoryState extends State<CollectibleCategory> {
           selected: selectedCollectibleCategory[4],
           function: (val) {
             setState(() {
+              //only seleted chip T/F
               selectedCollectibleCategory[4] = !selectedCollectibleCategory[4];
+              //making rest of Chip false
               selectedCollectibleCategory[0] = selectedCollectibleCategory[1] =
                   selectedCollectibleCategory[2] =
                       selectedCollectibleCategory[3] = false;
+              //setting val of selectedProduct
               selectedCollectibleCategory[4]
-                  ? selectedProduct = ''
+                  ? selectedProduct = collectibleCategory[4].toLowerCase()
                   : selectedProduct = '';
             });
           },
@@ -182,7 +225,7 @@ class _CollectibleCategoryState extends State<CollectibleCategory> {
             setState(() {
               priceLowToHigh = false;
               priceHighToLow = !priceHighToLow;
-              priceHighToLow ? byPrice = "price" : byPrice = '';
+              priceHighToLow ? byPrice = "-sellingPrice" : byPrice = '';
             });
           },
           isSelected: priceHighToLow,
@@ -196,7 +239,7 @@ class _CollectibleCategoryState extends State<CollectibleCategory> {
             setState(() {
               priceHighToLow = false;
               priceLowToHigh = !priceLowToHigh;
-              priceLowToHigh ? byPrice = "-price" : byPrice = '';
+              priceLowToHigh ? byPrice = "sellingPrice" : byPrice = '';
             });
           },
           isSelected: priceLowToHigh,
