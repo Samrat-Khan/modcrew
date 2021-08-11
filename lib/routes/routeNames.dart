@@ -8,12 +8,14 @@ class RouteName {
   static String login = '/login';
   static String account = '/account';
   static String signup = '/signup';
+  // ignore: non_constant_identifier_names
   static String privacy_policy = '/privacy_policy';
   static String search = '/search';
   static String checkout = '/checkout';
   static String webPayment = '/webPayment';
   static String initScreen = '/initScreen';
   static String orderConfrim = '/orderConfrim';
-  // static String  = '/privecy_policy';
+  static String fashion = '/fashion';
+  static String collectibles = '/collectibles';
   static String sizeChart = '/sizechart';
 }

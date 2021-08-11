@@ -52,6 +52,15 @@ class _NewTemplateState extends State<NewTemplate> {
                 ),
                 SizedBox(width: 15),
                 InkWell(
+                  onTap: () => naviagtion(routeName: RouteName.fashion),
+                  child: Text(
+                    "Shop",
+                    style:
+                        GoogleFonts.ubuntu(color: Colors.white, fontSize: 12),
+                  ),
+                ),
+                SizedBox(width: 15),
+                InkWell(
                   onTap: () => naviagtion(routeName: RouteName.contactus),
                   child: Text(
                     "Contact Us",

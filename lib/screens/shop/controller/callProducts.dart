@@ -3,13 +3,22 @@ import 'package:http/http.dart' as http;
 import 'package:shopping_page/env/apiRoutes.dart';
 
 class GetProductsHTTPService {
-  Future getAllProduct({required String productType}) async {
+  Future getAllProduct() async {
+    String url = baseUrl + "/products";
+    var response = await http.get(Uri.parse(url));
+    Map<String, dynamic> jsonBody = json.decode(response.body);
+
+    return jsonBody;
+  }
+
+  Future getProductByType({required String productType}) async {
     String url = baseUrl + "/products";
     Map<String, dynamic> qParams = {
       "category": productType,
     };
     String query = Uri(queryParameters: qParams).query;
     String uri = url + '?' + query;
+
     var response = await http.get(Uri.parse(uri));
     Map<String, dynamic> jsonBody = json.decode(response.body);
 

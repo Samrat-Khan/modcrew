@@ -39,9 +39,8 @@ class _FashionCategoryState extends State<FashionCategory> {
 
   getProductData() async {
     if (mainSelectItem == '' && subSelectItem == '' && byPrice == '') {
-      print("Caling All");
       Map<String, dynamic> data =
-          await httpService.getAllProduct(productType: "fashion");
+          await httpService.getProductByType(productType: "fashion");
       return data["data"];
     }
     if (mainSelectItem.isNotEmpty) {
@@ -49,7 +48,6 @@ class _FashionCategoryState extends State<FashionCategory> {
       if (mainSelectItem.isNotEmpty &&
           subSelectItem.isNotEmpty &&
           byPrice.isEmpty) {
-        print("Caling  main Cat and Sub");
         Map<String, dynamic> data =
             await httpService.getProductsByCategoryAndSubCategory(
                 mainCategory: mainSelectItem, subCategory: subSelectItem);
@@ -60,7 +58,6 @@ class _FashionCategoryState extends State<FashionCategory> {
       else if (mainSelectItem.isNotEmpty &&
           byPrice.isNotEmpty &&
           subSelectItem.isEmpty) {
-        print("Caling  main Cat and price");
         Map<String, dynamic> data =
             await httpService.getProductesByCategoryAndPrice(
                 mainCategory: mainSelectItem, byPrice: byPrice);
@@ -71,7 +68,6 @@ class _FashionCategoryState extends State<FashionCategory> {
       else if (mainSelectItem.isNotEmpty &&
           subSelectItem.isNotEmpty &&
           byPrice.isNotEmpty) {
-        print("Caling  main Cat and Sub and Prce");
         Map<String, dynamic> data = await httpService.getProductsByAllFilter(
             productMainCategory: mainSelectItem,
             productSubCategory: subSelectItem,
@@ -80,14 +76,12 @@ class _FashionCategoryState extends State<FashionCategory> {
       }
       // checking main.isNotEmpty-- Else case
       else {
-        print("Caling Only main Cat");
         Map<String, dynamic> data = await httpService.getProductesByCategory(
             mainCategory: mainSelectItem);
         return data["data"];
       }
     }
     if (byPrice.isNotEmpty && mainSelectItem.isEmpty && subSelectItem.isEmpty) {
-      print("Caling Only Price");
       Map<String, dynamic> data = await httpService.getProductsByPrice(
           byPrice: byPrice, productType: "fashion");
       return data["data"];

@@ -61,7 +61,7 @@ class _CollectibleCategoryState extends State<CollectibleCategory> {
     //if nothing selected
     if (byPrice.isEmpty && selectedProduct.isEmpty) {
       Map<String, dynamic> data =
-          await httpService.getAllProduct(productType: "collectibles");
+          await httpService.getProductByType(productType: "collectibles");
       return (data["data"]);
     }
   }

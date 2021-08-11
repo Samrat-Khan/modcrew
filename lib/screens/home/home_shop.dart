@@ -6,14 +6,16 @@ import 'package:shopping_page/const_and_theme/theme.dart';
 import 'package:shopping_page/screens/screens.dart';
 import 'package:shopping_page/widgets/widgets.dart';
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+class ShopScreen extends StatefulWidget {
+  final int pageIndex;
+  const ShopScreen({Key? key, this.pageIndex = 0}) : super(key: key);
 
   @override
-  _HomeState createState() => _HomeState();
+  _ShopScreenState createState() => _ShopScreenState();
 }
 
-class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
+class _ShopScreenState extends State<ShopScreen>
+    with SingleTickerProviderStateMixin {
   Colorize colorString = new Colorize();
   GetProductsHTTPService httpService = GetProductsHTTPService();
   TabController? _tabController;
@@ -21,7 +23,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this, initialIndex: 0);
+    _tabController =
+        TabController(length: 2, vsync: this, initialIndex: widget.pageIndex);
   }
 
   @override

@@ -85,7 +85,7 @@ class ProductCard extends StatelessWidget {
                   color: Color(starColor),
                 ),
               ),
-              TextSpan(text: productModelData.reviews.length.toString()),
+              TextSpan(text: productModelData.avgRating.toString()),
             ],
           ),
         ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shopping_page/const_and_theme/colors.dart';
 import 'package:shopping_page/const_and_theme/textStyles.dart';
+import 'package:shopping_page/routes/routeNames.dart';
 import 'package:shopping_page/widgets/widgets.dart';
 
 class Footer extends StatelessWidget {
@@ -28,7 +29,7 @@ class Footer extends StatelessWidget {
                     FirstFooterContent(),
                     SecondFooterContent(),
                     ThirstFooterContent(),
-                    fifthFooterContent(),
+                    fifthFooterContent(context: context),
                   ],
                 )
               : Column(
@@ -40,7 +41,7 @@ class Footer extends StatelessWidget {
                     SizedBox(height: 20),
                     ThirstFooterContent(),
                     SizedBox(height: 20),
-                    fifthFooterContent(),
+                    fifthFooterContent(context: context),
                   ],
                 ),
           Container(
@@ -63,19 +64,23 @@ class Footer extends StatelessWidget {
     );
   }
 
-  Column fifthFooterContent() {
+  Column fifthFooterContent({required BuildContext context}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         FooterContentTitle(text: "SUPPORT"),
         SizedBox(height: 10),
         InkWell(
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).pushNamed(RouteName.aboutus);
+          },
           child: FooterContent(text: "About Us"),
         ),
         SizedBox(height: 10),
         InkWell(
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).pushNamed(RouteName.contactus);
+          },
           child: FooterContent(text: "Contact Us"),
         ),
         SizedBox(height: 8),
@@ -112,12 +117,16 @@ class ThirstFooterContent extends StatelessWidget {
             onTap: () {}, child: FooterContent(text: "Returns & Exchanges")),
         SizedBox(height: 8),
         InkWell(
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).pushNamed(RouteName.privacy_policy);
+          },
           child: FooterContent(text: "Privacy Policy"),
         ),
         SizedBox(height: 8),
         InkWell(
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).pushNamed(RouteName.signup);
+          },
           child: FooterContent(text: "Account Login"),
         ),
       ],
@@ -138,25 +147,32 @@ class SecondFooterContent extends StatelessWidget {
         FooterContentTitle(text: "BROWSE BY CATEGORY"),
         SizedBox(height: 10),
         InkWell(
-          onTap: () {},
-          child: FooterContent(text: "Home"),
+          onTap: () {
+            Navigator.of(context).pushReplacementNamed(RouteName.fashion);
+          },
+          child: FooterContent(text: "Fashion"),
         ),
         SizedBox(height: 8),
         InkWell(
-          onTap: () {},
-          child: FooterContent(text: "About Us"),
+          onTap: () {
+            Navigator.of(context).pushReplacementNamed(RouteName.collectibles);
+          },
+          child: FooterContent(text: "Collectibles"),
         ),
         SizedBox(height: 8),
         InkWell(
-          onTap: () {},
-          child: FooterContent(text: "Contact Us"),
+          onTap: () {
+            Navigator.of(context).pushNamed(RouteName.sizeChart);
+          },
+          child: FooterContent(text: "Size Chart"),
         ),
-        SizedBox(height: 8),
-        InkWell(
-          onTap: () {},
-          child: FooterContent(text: "Help"),
-        ),
-        SizedBox(height: 8),
+
+        // SizedBox(height: 8),
+        // InkWell(
+        //   onTap: () {},
+        //   child: FooterContent(text: "Help"),
+        // ),
+        // SizedBox(height: 8),
       ],
     );
   }

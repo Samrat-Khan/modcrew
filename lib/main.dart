@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       title: 'Modcrew',
       theme: Customtheme.lightTheme,
       onGenerateRoute: AppRouter.generatedRoute,
-      initialRoute: RouteName.sizeChart,
+      initialRoute: RouteName.home,
       // home: TestWidget(),
     );
   }

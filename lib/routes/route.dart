@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:shopping_page/screens/screens.dart';
 import 'package:shopping_page/screens/search/views/search_view.dart';
 
@@ -10,7 +11,21 @@ class AppRouter {
       case '/':
         return MaterialPageRoute(
           settings: settings,
-          builder: (_) => Home(),
+          builder: (_) => HomeScreen(),
+        );
+      case '/fashion':
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => ShopScreen(
+            pageIndex: 0,
+          ),
+        );
+      case '/collectibles':
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => ShopScreen(
+            pageIndex: 1,
+          ),
         );
 
       case '/aboutus':
@@ -23,16 +38,7 @@ class AppRouter {
           settings: settings,
           builder: (_) => ContactUs(),
         );
-      // case '/aboutus':
-      //   return MaterialPageRoute(
-      //     settings: settings,
-      //     builder: (_) => AboutUs(),
-      //   );
-      // case '/contact':
-      //   return MaterialPageRoute(
-      //     settings: settings,
-      //     builder: (_) => ContactUs(),
-      //   );
+
       case '/login':
         return MaterialPageRoute(
           settings: settings,
@@ -86,6 +92,7 @@ class AppRouter {
         );
       case '/sizechart':
         return MaterialPageRoute(
+          settings: settings,
           builder: (_) => SizeChart(),
         );
 
