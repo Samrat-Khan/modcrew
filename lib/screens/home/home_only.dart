@@ -1,3 +1,4 @@
+import 'package:banner_carousel/banner_carousel.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -13,10 +14,19 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   GetProductsHTTPService httpService = GetProductsHTTPService();
-  List<Color> colors = [
-    Colors.pink,
-    Colors.brown,
-    Colors.yellow,
+  List<String> colors = [
+    "https://cdn.shopify.com/s/files/1/0330/1977/files/desktop-bonus-launch-week_2000x768.jpg?v=1627365312",
+    "https://cdn.shopify.com/s/files/1/0330/1977/files/desktop-slider_cd1f89aa-f247-41fc-800e-e77066256457_2000x768.jpg?v=1627011360",
+  ];
+  List<BannerModel> listBanners = [
+    BannerModel(
+        id: "1",
+        imagePath:
+            "https://cdn.shopify.com/s/files/1/0330/1977/files/desktop-bonus-launch-week_2000x768.jpg?v=1627365312"),
+    BannerModel(
+        id: "2",
+        imagePath:
+            "https://cdn.shopify.com/s/files/1/0330/1977/files/desktop-slider_cd1f89aa-f247-41fc-800e-e77066256457_2000x768.jpg?v=1627011360"),
   ];
   getAllProduct() async {
     Map<String, dynamic> data = await httpService.getAllProduct();
@@ -34,25 +44,11 @@ class _HomeScreenState extends State<HomeScreen> {
           scrollDirection: Axis.vertical,
           children: [
             Container(
-              child: CarouselSlider.builder(
-                itemCount: colors.length,
-                itemBuilder: (context, itemIndex, pageIndex) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 50, vertical: 20),
-                    child: Container(
-                      width: size.width,
-                      decoration: BoxDecoration(
-                        color: colors[itemIndex],
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                    ),
-                  );
-                },
-                options: CarouselOptions(
-                  height: size.width * 0.25,
-                  autoPlay: true,
-                  autoPlayInterval: const Duration(seconds: 5),
+              child: Container(
+                width: size.width,
+                child: BannerCarousel.fullScreen(
+                  banners: listBanners,
+                  height: 300,
                 ),
               ),
             ),

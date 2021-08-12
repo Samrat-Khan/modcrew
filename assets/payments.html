@@ -15,7 +15,9 @@
    const orderId = urlParams.get('orderId')
 //    const image = urlParams.get('image')
    const email = urlParams.get('email')
-  
+      if(orderId===null || orderId ===''){
+         window.parent.postMessage("NULL","*"); 
+      }
       options = {
          "key": "rzp_test_5bt00IcxhJIvJ3",
           "amount": price ,

@@ -14,47 +14,48 @@ class ContainerForProductImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var containerHeight = Responsive.isMobile(context) ? 0.3 : 0.6;
-    var containerWidth = 0.2;
+    var containerWidth = 0.25;
     return Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            height: size.height * containerHeight,
-            width: Responsive.isMobile(context)
-                ? size.width
-                : size.width * containerWidth,
-            decoration: BoxDecoration(),
-            child: CarouselSlider.builder(
-              carouselController: buttonCarouselController,
-              itemCount: productImages.length,
-              itemBuilder: (_, itemIndex, pageIndex) {
-                return Container(
-                  width: size.width * 0.19,
-                  height: size.height * 0.18,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage(productImages[itemIndex]),
+          Card(
+            elevation: 5,
+            child: Container(
+              height: size.height * containerHeight,
+              width: Responsive.isMobile(context)
+                  ? size.width
+                  : size.width * containerWidth,
+              decoration: BoxDecoration(),
+              child: CarouselSlider.builder(
+                carouselController: buttonCarouselController,
+                itemCount: productImages.length,
+                itemBuilder: (_, itemIndex, pageIndex) {
+                  return Container(
+                    width: size.width * 0.25,
+                    height: size.height * 0.18,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(productImages[itemIndex]),
+                      ),
                     ),
-                  ),
-                  //       child: PhotoView(
-                  //   imageProvider: NetworkImage(productImages[itemIndex]),
-                  // ),
-                );
-              },
-              options: CarouselOptions(),
+                    //       child: PhotoView(
+                    //   imageProvider: NetworkImage(productImages[itemIndex]),
+                    // ),
+                  );
+                },
+                options: CarouselOptions(),
+              ),
             ),
           ),
-          SizedBox(height: 20),
+          SizedBox(width: 50),
           Container(
-            width: Responsive.isMobile(context)
-                ? size.width
-                : size.width * containerWidth,
-            height: 50,
+            width: Responsive.isMobile(context) ? size.width : 70,
+            height: 200,
             child: ListView.builder(
               shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
+              scrollDirection: Axis.vertical,
               itemCount: productImages.length,
               itemBuilder: (_, i) {
                 return Card(
@@ -65,8 +66,8 @@ class ContainerForProductImage extends StatelessWidget {
                     },
                     child: Container(
                       margin: const EdgeInsets.symmetric(horizontal: 10),
-                      height: 30,
-                      width: 30,
+                      height: 50,
+                      width: 50,
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image: NetworkImage(productImages[i]),

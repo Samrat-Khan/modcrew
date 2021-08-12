@@ -39,7 +39,6 @@ class ProductModelData {
     required this.sellingPrice,
     required this.tax,
     required this.hsn,
-    required this.user,
     required this.avgRating,
     required this.reviews,
     required this.variations,
@@ -57,7 +56,7 @@ class ProductModelData {
   final int sellingPrice;
   final int tax;
   final int hsn;
-  final String user;
+
   final double avgRating;
   final List<Review> reviews;
   final List<Variation> variations;
@@ -81,7 +80,6 @@ class ProductModelData {
         sellingPrice: json["sellingPrice"],
         tax: json["tax"],
         hsn: json["hsn"],
-        user: json["user"],
         avgRating: json["avgRating"].toDouble(),
         reviews:
             List<Review>.from(json["reviews"].map((x) => Review.fromJson(x))),
@@ -102,7 +100,6 @@ class ProductModelData {
         "sellingPrice": sellingPrice,
         "tax": tax,
         "hsn": hsn,
-        "user": user,
         "avgRating": avgRating,
         "reviews": List<dynamic>.from(reviews.map((x) => x.toJson())),
         "variations": List<dynamic>.from(variations.map((x) => x.toJson())),

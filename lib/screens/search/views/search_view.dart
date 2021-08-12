@@ -17,7 +17,6 @@ class _SearchPageState extends State<SearchPage> {
     print(widget.productName);
     Map<String, dynamic> jsonData =
         await searchProduct.findProduct(productName: widget.productName);
-
     return jsonData["data"];
   }
 

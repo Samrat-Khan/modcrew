@@ -1,3 +1,4 @@
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shopping_page/routes/routeNames.dart';
@@ -29,11 +30,6 @@ class _OrderConfirmState extends State<OrderConfirm> {
       orderStatus = OrderConfirmStatusModel.fromJson(response);
       isLoading = false;
     });
-
-    print(orderStatus!.payment.status);
-    print(orderStatus!.payment.amount);
-    print(orderStatus!.paymentMethod);
-    print(orderStatus!.payment.paymentId);
   }
 
   @override
@@ -51,29 +47,12 @@ class _OrderConfirmState extends State<OrderConfirm> {
             ? CircularProgressIndicator()
             : Card(
                 child: Container(
-                  width: size.width,
+                  width: size.width * 0.3,
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      // Stack(
-                      //   alignment: Alignment.center,
-                      //   children: [
-                      //     CircularCountDownTimer(
-                      //       width: 50,
-                      //       height: 50,
-                      //       strokeWidth: 10,
-                      //       duration: 5,
-                      //       fillColor: Colors.green,
-                      //       ringColor: Colors.white,
-                      //       onComplete: onCompleteNaviagateToHome,
-                      //       textStyle: TextStyle(color: Colors.transparent),
-                      //     ),
-                      //     Text(orderStatus!.payment.status,
-                      //         style: GoogleFonts.ubuntu()),
-                      //   ],
-                      // ),
                       SizedBox(height: 10),
                       orderRow(
                           lable: "Payment Method",
@@ -109,6 +88,7 @@ class _OrderConfirmState extends State<OrderConfirm> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Container(
+          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
           child: SelectableText(
             lable,
             style: GoogleFonts.ubuntu(
@@ -117,6 +97,7 @@ class _OrderConfirmState extends State<OrderConfirm> {
           ),
         ),
         Container(
+          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
           child: SelectableText(
             value,
             style: GoogleFonts.ubuntu(

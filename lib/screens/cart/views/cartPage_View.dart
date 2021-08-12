@@ -130,10 +130,12 @@ class _CartPageState extends State<CartPage> {
                                                   Text(
                                                     cartController.cartList
                                                         .value[index].name,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
                                                     style: GoogleFonts.ubuntu(
                                                       fontWeight:
-                                                          FontWeight.w900,
-                                                      fontSize: 18,
+                                                          FontWeight.w600,
+                                                      fontSize: 14,
                                                     ),
                                                   ),
                                                   SizedBox(height: 10),

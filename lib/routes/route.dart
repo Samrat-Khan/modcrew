@@ -6,7 +6,6 @@ import 'package:shopping_page/screens/search/views/search_view.dart';
 class AppRouter {
   static Route<dynamic> generatedRoute(RouteSettings settings) {
     final args = settings.arguments;
-    print(settings.name);
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(
@@ -63,7 +62,7 @@ class AppRouter {
         return MaterialPageRoute(
           settings: settings,
           builder: (_) => SearchPage(
-            productName: args == null ? " " : args as String,
+            productName: args == null ? "" : args as String,
           ),
         );
       case '/checkout':
@@ -75,7 +74,7 @@ class AppRouter {
         return MaterialPageRoute(
           settings: settings,
           builder: (_) => WebPayment(
-            orderId: args as String,
+            orderId: args == null ? "" : args as String,
           ),
         );
       case '/orderConfrim':
@@ -86,10 +85,7 @@ class AppRouter {
             // orderId: "order_DaZlswtdcn9UNV",
           ),
         );
-      case '/initScreen':
-        return MaterialPageRoute(
-          builder: (_) => InitScreen(),
-        );
+
       case '/sizechart':
         return MaterialPageRoute(
           settings: settings,

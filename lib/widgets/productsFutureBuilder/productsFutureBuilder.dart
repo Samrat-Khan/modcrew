@@ -13,7 +13,11 @@ class ProductFutureBuilder extends StatelessWidget {
       future: future,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return LoadingSpiner();
+          return Container(
+            child: Center(
+              child: LoadingSpiner(),
+            ),
+          );
         }
         if (!snapshot.hasData || snapshot.hasError)
           return NoData(noDataType: "product");

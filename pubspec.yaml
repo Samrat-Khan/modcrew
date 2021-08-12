@@ -8,6 +8,7 @@ dependencies:
   app_dialog: ^1.1.0
   awesome_dropdown: ^0.0.4
   badges: ^2.0.1
+  banner_carousel: ^1.2.1
   carousel_slider: ^4.0.0
   circular_countdown_timer: ^0.2.0
   colorize: ^3.0.0

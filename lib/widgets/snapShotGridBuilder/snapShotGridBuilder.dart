@@ -49,7 +49,6 @@ class SnapshotGridBuilder extends StatelessWidget {
             tax: model.tax,
             hsn: model.hsn,
             avgRating: model.avgRating,
-            user: '',
           );
 
           return AnimationConfiguration.staggeredGrid(

@@ -32,14 +32,15 @@ class PlaceOrderHttpService {
   uploadAddress() async {
     final userData = authController.userData.value[0];
     final mockUserAddress = CheckOutAddress(
-        billingCustomerName: userData.firstName,
-        billingAddress: "Taltala, Kolkata",
-        billingCity: "Kolkata",
-        billingPincode: "700008",
-        billingState: "WB",
-        billingCountry: "IND",
-        billingEmail: userData.email,
-        billingPhone: userData.phone.toString());
+      customerName: userData.firstName + " " + userData.lastName,
+      address: "Taltala, Kolkata",
+      city: "Kolkata",
+      pincode: "700008",
+      state: "WB",
+      country: "IND",
+      email: userData.email,
+      phone: userData.phone.toString(),
+    );
 
     var jsonBody = jsonEncode(mockUserAddress);
 
@@ -59,7 +60,7 @@ class PlaceOrderHttpService {
 
       return id;
     } catch (e) {
-      print("Error during $e");
+      print("Error during upload address $e");
     }
   }
 

@@ -83,7 +83,7 @@ class _SignUpTabState extends State<SignUpTab> {
               });
         }
         authController.authToken.value = data["token"];
-
+        authController.storeAuthToken(tokenValue: data["token"]);
         Map<String, dynamic> userData =
             await signInSignUp.getUserData(token: data["token"]);
         authController.addUserData(

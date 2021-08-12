@@ -20,6 +20,7 @@ class Footer extends StatelessWidget {
       // margin: const EdgeInsets.symmetric(horizontal: 50),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Responsive.isDesktop(context)
               ? Row(
@@ -106,7 +107,7 @@ class ThirstFooterContent extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        FooterContentTitle(text: "Resources"),
+        FooterContentTitle(text: "Resources".toUpperCase()),
         SizedBox(height: 8),
         InkWell(
           onTap: () {},

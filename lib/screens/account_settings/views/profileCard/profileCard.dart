@@ -139,6 +139,7 @@ class _AccountDetailsCardState extends State<AccountDetailsCard> {
                   height: 20,
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
                       "Address:",

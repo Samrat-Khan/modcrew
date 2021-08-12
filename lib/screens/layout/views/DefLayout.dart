@@ -39,55 +39,6 @@ class _NewTemplateState extends State<NewTemplate> {
             leadingWidth: size.width * 0.15,
             centerTitle: true,
             leading: ModCrewLogo(),
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                InkWell(
-                  onTap: () => naviagtion(routeName: RouteName.home),
-                  child: Text(
-                    "Home",
-                    style:
-                        GoogleFonts.ubuntu(color: Colors.white, fontSize: 12),
-                  ),
-                ),
-                SizedBox(width: 15),
-                InkWell(
-                  onTap: () => naviagtion(routeName: RouteName.fashion),
-                  child: Text(
-                    "Shop",
-                    style:
-                        GoogleFonts.ubuntu(color: Colors.white, fontSize: 12),
-                  ),
-                ),
-                SizedBox(width: 15),
-                InkWell(
-                  onTap: () => naviagtion(routeName: RouteName.contactus),
-                  child: Text(
-                    "Contact Us",
-                    style:
-                        GoogleFonts.ubuntu(color: Colors.white, fontSize: 12),
-                  ),
-                ),
-                SizedBox(width: 15),
-                InkWell(
-                  onTap: () => naviagtion(routeName: RouteName.aboutus),
-                  child: Text(
-                    "About Us",
-                    style:
-                        GoogleFonts.ubuntu(color: Colors.white, fontSize: 12),
-                  ),
-                ),
-                SizedBox(width: 15),
-                InkWell(
-                  onTap: () => naviagtion(routeName: RouteName.home),
-                  child: Text(
-                    "Help",
-                    style:
-                        GoogleFonts.ubuntu(color: Colors.white, fontSize: 12),
-                  ),
-                ),
-              ],
-            ),
             actions: [
               authController.authToken.value != ""
                   ? InkWell(
@@ -114,46 +65,110 @@ class _NewTemplateState extends State<NewTemplate> {
               SizedBox(width: 10),
             ],
             bottom: PreferredSize(
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: Row(
+              child: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Spacer(),
-                    SearchBar(
-                      controller: _searchController,
+                    Row(
+                      children: [
+                        Spacer(),
+                        DismissKeyboard(
+                          child: SearchBar(
+                            controller: _searchController,
+                          ),
+                        ),
+                        Spacer(),
+                        Container(
+                          padding: const EdgeInsets.all(1),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: Color(primaryColor),
+                          ),
+                          child: Icon(
+                            Icons.favorite,
+                            color: Colors.white,
+                            size: 25,
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            primary: Color(primaryColor),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pushNamed('/cart');
+                          },
+                          icon: Icon(Icons.shopping_cart),
+                          label: Obx(
+                            () => Text(
+                                "Cart (${cartController.cartList.value.length})"),
+                          ),
+                        ),
+                        SizedBox(width: 20),
+                      ],
                     ),
-                    Spacer(),
+                    SizedBox(height: 20),
                     Container(
-                      padding: const EdgeInsets.all(1),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        color: Color(primaryColor),
-                      ),
-                      child: Icon(
-                        Icons.favorite,
-                        color: Colors.white,
-                        size: 25,
+                      color: Color(primaryColor),
+                      height: 40,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          InkWell(
+                            onTap: () => naviagtion(routeName: RouteName.home),
+                            child: Text(
+                              "Home",
+                              style: GoogleFonts.ubuntu(
+                                  color: Colors.white, fontSize: 12),
+                            ),
+                          ),
+                          SizedBox(width: 15),
+                          InkWell(
+                            onTap: () =>
+                                naviagtion(routeName: RouteName.fashion),
+                            child: Text(
+                              "Shop",
+                              style: GoogleFonts.ubuntu(
+                                  color: Colors.white, fontSize: 12),
+                            ),
+                          ),
+                          SizedBox(width: 15),
+                          InkWell(
+                            onTap: () =>
+                                naviagtion(routeName: RouteName.contactus),
+                            child: Text(
+                              "Contact Us",
+                              style: GoogleFonts.ubuntu(
+                                  color: Colors.white, fontSize: 12),
+                            ),
+                          ),
+                          SizedBox(width: 15),
+                          InkWell(
+                            onTap: () =>
+                                naviagtion(routeName: RouteName.aboutus),
+                            child: Text(
+                              "About Us",
+                              style: GoogleFonts.ubuntu(
+                                  color: Colors.white, fontSize: 12),
+                            ),
+                          ),
+                          SizedBox(width: 15),
+                          InkWell(
+                            onTap: () => naviagtion(routeName: RouteName.home),
+                            child: Text(
+                              "Help",
+                              style: GoogleFonts.ubuntu(
+                                  color: Colors.white, fontSize: 12),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    SizedBox(width: 10),
-                    ElevatedButton.icon(
-                      style: ElevatedButton.styleFrom(
-                        primary: Color(primaryColor),
-                      ),
-                      onPressed: () {
-                        Navigator.of(context).pushNamed('/cart');
-                      },
-                      icon: Icon(Icons.shopping_cart),
-                      label: Obx(
-                        () => Text(
-                            "Cart (${cartController.cartList.value.length})"),
-                      ),
-                    ),
-                    SizedBox(width: 20),
                   ],
                 ),
               ),
-              preferredSize: Size.fromHeight(60),
+              preferredSize: Size.fromHeight(90),
             ),
           ),
           SliverFillRemaining(

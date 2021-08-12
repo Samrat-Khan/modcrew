@@ -17,7 +17,7 @@ class ModCrewLogo extends StatelessWidget {
       },
       child: Container(
         width: 190,
-        height: 80,
+        height: 60,
         // padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 3),
         decoration: BoxDecoration(
           image: DecorationImage(

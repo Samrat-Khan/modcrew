@@ -1,9 +1,5 @@
-import 'dart:html';
-
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:shopping_page/const_and_theme/colors.dart';
 import 'package:shopping_page/routes/route.dart';
 import 'package:shopping_page/const_and_theme/theme.dart';
 import 'package:shopping_page/routes/routeNames.dart';
@@ -16,12 +12,14 @@ void main() {
   setPathUrlStrategy();
   Get.put(CartController());
   Get.put(AuthController());
-  // Get.put(NavChangeController());
+  Get.put(VariationController());
   Get.put(OrderIdController());
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  final authController = AuthController.to;
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(

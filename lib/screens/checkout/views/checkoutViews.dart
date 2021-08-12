@@ -14,15 +14,13 @@ class CheckOut extends StatefulWidget {
 
 class _CheckOutState extends State<CheckOut> {
   final authController = AuthController.to;
-  // final CreateOrderService createOrderService = CreateOrderService();
-  // CreateOrderModel? createOrderModel;
+
   final PlaceOrderHttpService placeOrderHttpService = PlaceOrderHttpService();
   final String orderId = '';
   int selectedButtonIndex = 1;
   final orderIdController = OrderIdController.to;
   order() async {
     String id = await placeOrderHttpService.uploadAddress();
-    // orderIdController.setOrderId(id: id);
     String razorPayId = await placeOrderHttpService.razorPayOrder(orderId: id);
 
     Navigator.of(context)
