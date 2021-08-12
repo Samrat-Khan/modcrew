@@ -61,28 +61,81 @@ class UserDataModel {
       };
 }
 
+// class AddressBook {
+//   AddressBook({
+//     required this.name,
+//     required this.phone,
+//     required this.state,
+//     required this.district,
+//     required this.city,
+//     required this.locality,
+//     required this.landmark,
+//     required this.pincode,
+//     required this.addressType,
+//   });
+
+//   final String name;
+//   final int phone;
+//   final String state;
+//   final String district;
+//   final String city;
+//   final String locality;
+//   final String landmark;
+//   final int pincode;
+//   final String addressType;
+
+//   factory AddressBook.fromRawJson(String str) =>
+//       AddressBook.fromJson(json.decode(str));
+
+//   String toRawJson() => json.encode(toJson());
+
+//   factory AddressBook.fromJson(Map<String, dynamic> json) => AddressBook(
+//         name: json["name"],
+//         phone: json["phone"],
+//         state: json["state"],
+//         district: json["district"],
+//         city: json["city"],
+//         locality: json["locality"],
+//         landmark: json["landmark"],
+//         pincode: json["pincode"],
+//         addressType: json["addressType"],
+//       );
+
+//   Map<String, dynamic> toJson() => {
+//         "name": name,
+//         "phone": phone,
+//         "state": state,
+//         "district": district,
+//         "city": city,
+//         "locality": locality,
+//         "landmark": landmark,
+//         "pincode": pincode,
+//         "addressType": addressType,
+//       };
+// }
+
 class AddressBook {
   AddressBook({
-    required this.name,
-    required this.phone,
-    required this.state,
-    required this.district,
+    required this.id,
+    required this.customerName,
+    required this.address,
     required this.city,
-    required this.locality,
-    required this.landmark,
     required this.pincode,
-    required this.addressType,
+    required this.state,
+    required this.country,
+    required this.phone,
+    required this.user,
   });
 
-  final String name;
-  final int phone;
-  final String state;
-  final String district;
+  final String id;
+  final String customerName;
+  final String address;
   final String city;
-  final String locality;
-  final String landmark;
-  final int pincode;
-  final String addressType;
+  final String pincode;
+  final String state;
+  final String country;
+  final String phone;
+  final String user;
 
   factory AddressBook.fromRawJson(String str) =>
       AddressBook.fromJson(json.decode(str));
@@ -90,26 +143,26 @@ class AddressBook {
   String toRawJson() => json.encode(toJson());
 
   factory AddressBook.fromJson(Map<String, dynamic> json) => AddressBook(
-        name: json["name"],
-        phone: json["phone"],
-        state: json["state"],
-        district: json["district"],
+        id: json["_id"],
+        customerName: json["customer_name"],
+        address: json["address"],
         city: json["city"],
-        locality: json["locality"],
-        landmark: json["landmark"],
         pincode: json["pincode"],
-        addressType: json["addressType"],
+        state: json["state"],
+        country: json["country"],
+        phone: json["phone"],
+        user: json["user"],
       );
 
   Map<String, dynamic> toJson() => {
-        "name": name,
-        "phone": phone,
-        "state": state,
-        "district": district,
+        "_id": id,
+        "customer_name": customerName,
+        "address": address,
         "city": city,
-        "locality": locality,
-        "landmark": landmark,
         "pincode": pincode,
-        "addressType": addressType,
+        "state": state,
+        "country": country,
+        "phone": phone,
+        "user": user,
       };
 }

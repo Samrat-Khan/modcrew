@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shopping_page/const_and_theme/colors.dart';
 import 'package:shopping_page/const_and_theme/textStyles.dart';
+import 'package:shopping_page/routes/routeNames.dart';
 import 'package:shopping_page/widgets/widgets.dart';
 
 import '../../../screens.dart';
@@ -44,7 +45,7 @@ class _AccountDetailsCardState extends State<AccountDetailsCard> {
   final TextEditingController cityController = TextEditingController();
   final TextEditingController stateController = TextEditingController();
   String selectedState = "Select";
-
+  final UploadAdress uploadAdress = UploadAdress();
   @override
   void dispose() {
     super.dispose();
@@ -53,6 +54,14 @@ class _AccountDetailsCardState extends State<AccountDetailsCard> {
     pinCodeController.dispose();
     cityController.dispose();
     stateController.dispose();
+  }
+
+  uploadAddress(
+      {required BuildContext context, required AddressBook address}) async {
+    await uploadAdress.uploadAddress(
+      addressBook: address,
+    );
+    Navigator.of(context).pushNamed(RouteName.home);
   }
 
   @override
@@ -139,49 +148,53 @@ class _AccountDetailsCardState extends State<AccountDetailsCard> {
                   height: 20,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       "Address:",
                       style: Styles.contentTitleStyle,
                     ),
                     TextButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        updateAdress(model: model);
+                      },
                       icon: Icon(Icons.add),
                       label: Text("Address"),
                     ),
                   ],
                 ),
+                SizedBox(height: 20),
                 model.addressBook.isEmpty
                     ? Center(
-                        child: Text("Data no added"),
+                        child: Text("No addres found"),
                       )
                     : ListView.builder(
                         shrinkWrap: true,
-                        itemCount: 1,
+                        itemCount: model.addressBook.length,
                         itemBuilder: (context, index) {
+                          AddressBook address = model.addressBook[index];
                           return ListTile(
                             title: Text(
-                              "address.address",
+                              address.address + ", " + address.pincode,
                               style: Styles.contentStyle,
                             ),
                             subtitle: Text(
-                              "address.primary ? Default",
+                              address.city + ", " + address.state,
                               style: Styles.subContentStyle,
                             ),
-                            trailing: PopupMenuButton(
-                              icon: Icon(Icons.more_vert),
-                              itemBuilder: (context) => [
-                                PopupMenuItem(
-                                  child: Text("Default"),
-                                  value: 1,
-                                ),
-                                PopupMenuItem(
-                                  child: Text("Delete"),
-                                  value: 2,
-                                ),
-                              ],
-                            ),
+                            // trailing: PopupMenuButton(
+                            //   icon: Icon(Icons.more_vert),
+                            //   itemBuilder: (context) => [
+                            //     PopupMenuItem(
+                            //       child: Text("Default"),
+                            //       value: 1,
+                            //     ),
+                            //     PopupMenuItem(
+                            //       child: Text("Delete"),
+                            //       value: 2,
+                            //     ),
+                            //   ],
+                            // ),
                           );
                         },
                       ),
@@ -193,7 +206,7 @@ class _AccountDetailsCardState extends State<AccountDetailsCard> {
     );
   }
 
-  updateAdress() {
+  updateAdress({required UserDataModel model}) {
     return showDialog(
         context: context,
         builder: (context) {
@@ -203,11 +216,30 @@ class _AccountDetailsCardState extends State<AccountDetailsCard> {
             title: Text("Address"),
             actions: [
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
                 child: Text("Cancel"),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  uploadAddress(
+                    context: context,
+                    address: AddressBook(
+                      id: "",
+                      customerName: model.firstName + " " + model.lastName,
+                      address: addressLineController.text +
+                          ", Near " +
+                          nearLandMarkController.text,
+                      city: cityController.text,
+                      pincode: pinCodeController.text,
+                      state: selectedState,
+                      country: "India",
+                      phone: model.phone.toString(),
+                      user: " ",
+                    ),
+                  );
+                },
                 child: Text("Save"),
               ),
             ],

@@ -2,6 +2,7 @@ import 'package:banner_carousel/banner_carousel.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:shopping_page/const_and_theme/colors.dart';
 import 'package:shopping_page/screens/layout/layout.dart';
 import 'package:shopping_page/widgets/widgets.dart';
 
@@ -48,7 +49,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 width: size.width,
                 child: BannerCarousel.fullScreen(
                   banners: listBanners,
-                  height: 300,
+                  height: 350,
+                  activeColor: Color(infoColor),
                 ),
               ),
             ),
