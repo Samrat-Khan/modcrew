@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:shopping_page/const_and_theme/colors.dart';
 import 'package:shopping_page/routes/routeNames.dart';
 import 'package:shopping_page/widgets/widgets.dart';
@@ -22,6 +23,7 @@ class _NewTemplateState extends State<NewTemplate> {
   TextEditingController _searchController = TextEditingController();
   final cartController = CartController.to;
   final authController = AuthController.to;
+  final navController = NavController.to;
 
   naviagtion({required String routeName}) {
     Navigator.of(context).pushNamed(routeName);
@@ -30,6 +32,7 @@ class _NewTemplateState extends State<NewTemplate> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       body: CustomScrollView(
         shrinkWrap: true,
@@ -38,8 +41,78 @@ class _NewTemplateState extends State<NewTemplate> {
             backgroundColor: Color(appBarAndFooterBGColor),
             leadingWidth: size.width * 0.15,
             centerTitle: true,
-            leading: ModCrewLogo(),
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                InkWell(
+                  onTap: () {
+                    naviagtion(routeName: RouteName.home);
+                  },
+                  child: Text(
+                    "Home",
+                    style:
+                        GoogleFonts.ubuntu(color: Colors.white, fontSize: 12),
+                  ),
+                ),
+                SizedBox(width: 7.5),
+                SizedBox(width: 7.5),
+                InkWell(
+                  onTap: () {
+                    naviagtion(routeName: RouteName.fashion);
+                  },
+                  child: Text(
+                    "Shop",
+                    style:
+                        GoogleFonts.ubuntu(color: Colors.white, fontSize: 12),
+                  ),
+                ),
+                SizedBox(width: 7.5),
+                SizedBox(width: 7.5),
+                InkWell(
+                  onTap: () {
+                    naviagtion(routeName: RouteName.contactus);
+                  },
+                  child: Text(
+                    "Contact Us",
+                    style:
+                        GoogleFonts.ubuntu(color: Colors.white, fontSize: 12),
+                  ),
+                ),
+                SizedBox(width: 7.5),
+                SizedBox(width: 7.5),
+                InkWell(
+                  onTap: () {
+                    naviagtion(routeName: RouteName.aboutus);
+                  },
+                  child: Text(
+                    "About",
+                    style:
+                        GoogleFonts.ubuntu(color: Colors.white, fontSize: 12),
+                  ),
+                ),
+                SizedBox(width: 7.5),
+                SizedBox(width: 7.5),
+                InkWell(
+                  onTap: () {
+                    naviagtion(routeName: RouteName.home);
+                  },
+                  child: Text(
+                    "Help",
+                    style:
+                        GoogleFonts.ubuntu(color: Colors.white, fontSize: 12),
+                  ),
+                ),
+              ],
+            ),
             actions: [
+              Icon(LineIcons.whatSApp, color: Colors.white),
+              SizedBox(width: 5),
+              Icon(LineIcons.facebook, color: Colors.white),
+              SizedBox(width: 5),
+              Icon(LineIcons.instagram, color: Colors.white),
+              SizedBox(width: 5),
+              Icon(LineIcons.twitter, color: Colors.white),
+              SizedBox(width: 20),
               authController.authToken.value != ""
                   ? InkWell(
                       onTap: () {
@@ -72,6 +145,8 @@ class _NewTemplateState extends State<NewTemplate> {
                   children: [
                     Row(
                       children: [
+                        SizedBox(width: 20),
+                        ModCrewLogo(),
                         Spacer(),
                         DismissKeyboard(
                           child: SearchBar(
@@ -108,67 +183,127 @@ class _NewTemplateState extends State<NewTemplate> {
                         SizedBox(width: 20),
                       ],
                     ),
-                    SizedBox(height: 20),
-                    Container(
-                      color: Color(primaryColor),
-                      height: 40,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          InkWell(
-                            onTap: () => naviagtion(routeName: RouteName.home),
-                            child: Text(
-                              "Home",
-                              style: GoogleFonts.ubuntu(
-                                  color: Colors.white, fontSize: 12),
-                            ),
-                          ),
-                          SizedBox(width: 15),
-                          InkWell(
-                            onTap: () =>
-                                naviagtion(routeName: RouteName.fashion),
-                            child: Text(
-                              "Shop",
-                              style: GoogleFonts.ubuntu(
-                                  color: Colors.white, fontSize: 12),
-                            ),
-                          ),
-                          SizedBox(width: 15),
-                          InkWell(
-                            onTap: () =>
-                                naviagtion(routeName: RouteName.contactus),
-                            child: Text(
-                              "Contact Us",
-                              style: GoogleFonts.ubuntu(
-                                  color: Colors.white, fontSize: 12),
-                            ),
-                          ),
-                          SizedBox(width: 15),
-                          InkWell(
-                            onTap: () =>
-                                naviagtion(routeName: RouteName.aboutus),
-                            child: Text(
-                              "About Us",
-                              style: GoogleFonts.ubuntu(
-                                  color: Colors.white, fontSize: 12),
-                            ),
-                          ),
-                          SizedBox(width: 15),
-                          InkWell(
-                            onTap: () => naviagtion(routeName: RouteName.home),
-                            child: Text(
-                              "Help",
-                              style: GoogleFonts.ubuntu(
-                                  color: Colors.white, fontSize: 12),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    // SizedBox(height: 20),
+                    // Container(
+                    //   color: Color(primaryColor),
+                    //   height: 40,
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.center,
+                    //     children: [
+                    //       Obx(() => InkWell(
+                    //             onTap: () {
+                    //               naviagtion(routeName: RouteName.home);
+                    //               navController.setIndex(i: 0);
+                    //             },
+                    //             child: Text(
+                    //               "Home",
+                    //               style: GoogleFonts.ubuntu(
+                    //                   color:
+                    //                       navController.selectedIndex.value == 0
+                    //                           ? Colors.white
+                    //                           : Colors.black,
+                    //                   fontSize: 12),
+                    //             ),
+                    //           )),
+                    //       SizedBox(width: 7.5),
+                    //       VerticalDivider(
+                    //         color: Colors.black,
+                    //         indent: 10,
+                    //         endIndent: 10,
+                    //         width: 2,
+                    //       ),
+                    //       SizedBox(width: 7.5),
+                    //       Obx(() => InkWell(
+                    //             onTap: () {
+                    //               naviagtion(routeName: RouteName.fashion);
+                    //               navController.setIndex(i: 1);
+                    //             },
+                    //             child: Text(
+                    //               "Shop",
+                    //               style: GoogleFonts.ubuntu(
+                    //                   color:
+                    //                       navController.selectedIndex.value == 1
+                    //                           ? Colors.white
+                    //                           : Colors.black,
+                    //                   fontSize: 12),
+                    //             ),
+                    //           )),
+                    //       SizedBox(width: 7.5),
+                    //       VerticalDivider(
+                    //         color: Colors.black,
+                    //         indent: 10,
+                    //         endIndent: 10,
+                    //         width: 2,
+                    //       ),
+                    //       SizedBox(width: 7.5),
+                    //       Obx(() => InkWell(
+                    //             onTap: () {
+                    //               naviagtion(routeName: RouteName.contactus);
+                    //               navController.setIndex(i: 2);
+                    //             },
+                    //             child: Text(
+                    //               "Contact Us",
+                    //               style: GoogleFonts.ubuntu(
+                    //                   color:
+                    //                       navController.selectedIndex.value == 2
+                    //                           ? Colors.white
+                    //                           : Colors.black,
+                    //                   fontSize: 12),
+                    //             ),
+                    //           )),
+                    //       SizedBox(width: 7.5),
+                    //       VerticalDivider(
+                    //         color: Colors.black,
+                    //         indent: 10,
+                    //         endIndent: 10,
+                    //         width: 2,
+                    //       ),
+                    //       SizedBox(width: 7.5),
+                    //       Obx(() => InkWell(
+                    //             onTap: () {
+                    //               naviagtion(routeName: RouteName.aboutus);
+                    //               navController.setIndex(i: 3);
+                    //             },
+                    //             child: Text(
+                    //               "About Us",
+                    //               style: GoogleFonts.ubuntu(
+                    //                   color:
+                    //                       navController.selectedIndex.value == 3
+                    //                           ? Colors.white
+                    //                           : Colors.black,
+                    //                   fontSize: 12),
+                    //             ),
+                    //           )),
+                    //       SizedBox(width: 7.5),
+                    //       VerticalDivider(
+                    //         color: Colors.black,
+                    //         indent: 10,
+                    //         endIndent: 10,
+                    //         width: 2,
+                    //       ),
+                    //       SizedBox(width: 7.5),
+                    //       Obx(() => InkWell(
+                    //             onTap: () {
+                    //               naviagtion(routeName: RouteName.home);
+                    //               navController.setIndex(i: 4);
+                    //             },
+                    //             child: Text(
+                    //               "Help",
+                    //               style: GoogleFonts.ubuntu(
+                    //                   color:
+                    //                       navController.selectedIndex.value == 4
+                    //                           ? Colors.white
+                    //                           : Colors.black,
+                    //                   fontSize: 12),
+                    //             ),
+                    //           )),
+                    //     ],
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
-              preferredSize: Size.fromHeight(90),
+              preferredSize: Size.fromHeight(40),
             ),
           ),
           SliverFillRemaining(

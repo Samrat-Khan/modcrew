@@ -1,4 +1,3 @@
-import 'package:colorize/colorize.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shopping_page/const_and_theme/colors.dart';
@@ -16,7 +15,6 @@ class ShopScreen extends StatefulWidget {
 
 class _ShopScreenState extends State<ShopScreen>
     with SingleTickerProviderStateMixin {
-  Colorize colorString = new Colorize();
   GetProductsHTTPService httpService = GetProductsHTTPService();
   TabController? _tabController;
 
