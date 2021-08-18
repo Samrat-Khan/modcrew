@@ -61,6 +61,7 @@ class _AccountDetailsCardState extends State<AccountDetailsCard> {
     await uploadAdress.uploadAddress(
       addressBook: address,
     );
+
     Navigator.of(context).pushNamed(RouteName.home);
   }
 
@@ -216,7 +217,8 @@ class _AccountDetailsCardState extends State<AccountDetailsCard> {
             title: Text("Address"),
             actions: [
               TextButton(
-                onPressed: () {
+                onPressed: () async {
+                  await uploadAdress.getAddress();
                   Navigator.of(context).pop();
                 },
                 child: Text("Cancel"),

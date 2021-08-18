@@ -190,11 +190,39 @@ class FirstFooterContent extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ModCrewLogo(),
-        FooterContent(
-          text: "support@modcrew.com",
+        RichText(
+          text: TextSpan(
+            children: [
+              WidgetSpan(
+                  child: Icon(
+                Icons.email,
+                color: Color(primaryColor),
+                size: 14,
+              )),
+              TextSpan(
+                text: "  support@modcrew.com",
+                style: Styles.kFooterContent,
+              ),
+            ],
+          ),
         ),
         SizedBox(height: 8),
-        FooterContent(text: "Call Us: +91-123456789"),
+        RichText(
+          text: TextSpan(
+            children: [
+              WidgetSpan(
+                  child: Icon(
+                Icons.phone,
+                color: Color(primaryColor),
+                size: 14,
+              )),
+              TextSpan(
+                text: "  Call Us: +91-123456789",
+                style: Styles.kFooterContent,
+              ),
+            ],
+          ),
+        ),
         SizedBox(height: 8),
       ],
     );
@@ -224,7 +252,7 @@ class FooterContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      text,
+      "• " + text,
       style: Styles.kFooterContent,
     );
   }

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:shopping_page/env/apiRoutes.dart';
 
@@ -29,4 +30,26 @@ class UploadAdress {
       },
     );
   }
+
+  getAddress() async {
+    final authController = AuthController.to;
+    var res = await http.get(
+      Uri.parse(env_uploadAddress),
+      headers: <String, String>{
+        HttpHeaders.contentTypeHeader: 'application/json',
+        HttpHeaders.authorizationHeader:
+            'Bearer ${authController.authToken.value}',
+      },
+    );
+  }
+}
+
+class AddressController extends GetxController {
+  static AddressController get to => AddressController.to;
+  var addresList = <AddressBook>[].obs;
+  // setAddress({required List<Map> jsondata}) {
+  //   jsondata.forEach((element) {
+  //     addresList.value.add(element);
+  //   });
+  // }
 }

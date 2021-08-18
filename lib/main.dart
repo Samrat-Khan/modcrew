@@ -14,6 +14,7 @@ void main() {
   Get.put(AuthController());
   Get.put(VariationController());
   Get.put(OrderIdController());
+  Get.put(AddressController());
   runApp(MyApp());
 }
 
