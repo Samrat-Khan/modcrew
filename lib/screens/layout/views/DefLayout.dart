@@ -24,7 +24,7 @@ class _NewTemplateState extends State<NewTemplate> {
   final cartController = CartController.to;
   final authController = AuthController.to;
   final navController = NavController.to;
-
+  SocialLauncher socialLauncher = SocialLauncher();
   naviagtion({required String routeName}) {
     Navigator.of(context).pushNamed(routeName);
   }
@@ -41,6 +41,7 @@ class _NewTemplateState extends State<NewTemplate> {
             backgroundColor: Color(appBarAndFooterBGColor),
             leadingWidth: size.width * 0.15,
             centerTitle: true,
+            automaticallyImplyLeading: false,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -105,13 +106,21 @@ class _NewTemplateState extends State<NewTemplate> {
               ],
             ),
             actions: [
-              Icon(LineIcons.whatSApp, color: Colors.white),
+              InkWell(
+                  onTap: socialLauncher.launchWhatsApp,
+                  child: Icon(LineIcons.whatSApp, color: Colors.white)),
               SizedBox(width: 5),
-              Icon(LineIcons.facebook, color: Colors.white),
+              InkWell(
+                  onTap: socialLauncher.launchFacebook,
+                  child: Icon(LineIcons.facebook, color: Colors.white)),
               SizedBox(width: 5),
-              Icon(LineIcons.instagram, color: Colors.white),
+              InkWell(
+                  onTap: socialLauncher.launchInstagram,
+                  child: Icon(LineIcons.instagram, color: Colors.white)),
               SizedBox(width: 5),
-              Icon(LineIcons.twitter, color: Colors.white),
+              InkWell(
+                  onTap: socialLauncher.launchTwitter,
+                  child: Icon(LineIcons.twitter, color: Colors.white)),
               SizedBox(width: 20),
               authController.authToken.value != ""
                   ? InkWell(
