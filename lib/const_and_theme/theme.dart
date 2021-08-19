@@ -14,6 +14,7 @@ class Customtheme {
         color: Colors.white,
         size: 18,
       ),
+      fontFamily: 'MyFlutterApp',
       dialogTheme: DialogTheme(
         backgroundColor: Color(0xffebeaef),
         elevation: 5,

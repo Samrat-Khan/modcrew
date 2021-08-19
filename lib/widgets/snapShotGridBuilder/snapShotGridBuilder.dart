@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:shopping_page/screens/screens.dart';
 import 'package:shopping_page/widgets/widgets.dart';
 
 class SnapshotGridBuilder extends StatelessWidget {

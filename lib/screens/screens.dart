@@ -16,4 +16,3 @@ export 'aboutUs/aboutUs.dart';
 
 export 'sizeChart/sizeChart.dart';
 export 'home/home_only.dart';
-export '../const_and_theme/const_and_theme.dart';

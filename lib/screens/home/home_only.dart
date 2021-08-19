@@ -7,6 +7,8 @@ import 'package:shopping_page/const_and_theme/colors.dart';
 import 'package:shopping_page/screens/layout/layout.dart';
 import 'package:shopping_page/widgets/widgets.dart';
 
+import '../screens.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 

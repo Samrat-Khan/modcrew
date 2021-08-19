@@ -19,5 +19,3 @@ export 'signin_signup_buttons/signIn_SignUp_Buttons.dart';
 export 'signin_signup_buttons/logOutButton.dart';
 export 'error_dialouge/error_dialouge.dart';
 export 'dateTimePicker/dateTimePicker.dart';
-export '../screens/screens.dart';
-export '../const_and_theme/const_and_theme.dart';

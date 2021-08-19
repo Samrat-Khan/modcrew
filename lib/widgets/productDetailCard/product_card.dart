@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shopping_page/const_and_theme/colors.dart';
+import 'package:shopping_page/screens/screens.dart';
 import 'package:shopping_page/widgets/widgets.dart';
 
 class ProductCard extends StatelessWidget {

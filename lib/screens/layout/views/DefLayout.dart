@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:shopping_page/const_and_theme/colors.dart';
+import 'package:shopping_page/const_and_theme/const_and_theme.dart';
 import 'package:shopping_page/routes/routeNames.dart';
 import 'package:shopping_page/widgets/widgets.dart';
 
@@ -39,7 +40,13 @@ class _NewTemplateState extends State<NewTemplate> {
         slivers: [
           SliverAppBar(
             backgroundColor: Color(appBarAndFooterBGColor),
-            leadingWidth: size.width * 0.15,
+            leadingWidth: size.width * 0.18,
+            leading: Row(
+              children: [
+                SizedBox(width: 20),
+                ModCrewLogo(),
+              ],
+            ),
             centerTitle: true,
             automaticallyImplyLeading: false,
             title: Row(
@@ -115,11 +122,11 @@ class _NewTemplateState extends State<NewTemplate> {
                   child: Icon(LineIcons.facebook, color: Colors.white)),
               SizedBox(width: 5),
               InkWell(
-                  onTap: socialLauncher.launchInstagram,
+                  onTap: () {},
                   child: Icon(LineIcons.instagram, color: Colors.white)),
               SizedBox(width: 5),
               InkWell(
-                  onTap: socialLauncher.launchTwitter,
+                  onTap: () {},
                   child: Icon(LineIcons.twitter, color: Colors.white)),
               SizedBox(width: 20),
               authController.authToken.value != ""
@@ -147,6 +154,7 @@ class _NewTemplateState extends State<NewTemplate> {
               SizedBox(width: 10),
             ],
             bottom: PreferredSize(
+              preferredSize: Size.fromHeight(100),
               child: Container(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -154,8 +162,6 @@ class _NewTemplateState extends State<NewTemplate> {
                   children: [
                     Row(
                       children: [
-                        SizedBox(width: 20),
-                        ModCrewLogo(),
                         Spacer(),
                         DismissKeyboard(
                           child: SearchBar(
@@ -192,127 +198,111 @@ class _NewTemplateState extends State<NewTemplate> {
                         SizedBox(width: 20),
                       ],
                     ),
-                    // SizedBox(height: 20),
-                    // Container(
-                    //   color: Color(primaryColor),
-                    //   height: 40,
-                    //   child: Row(
-                    //     mainAxisAlignment: MainAxisAlignment.center,
-                    //     children: [
-                    //       Obx(() => InkWell(
-                    //             onTap: () {
-                    //               naviagtion(routeName: RouteName.home);
-                    //               navController.setIndex(i: 0);
-                    //             },
-                    //             child: Text(
-                    //               "Home",
-                    //               style: GoogleFonts.ubuntu(
-                    //                   color:
-                    //                       navController.selectedIndex.value == 0
-                    //                           ? Colors.white
-                    //                           : Colors.black,
-                    //                   fontSize: 12),
-                    //             ),
-                    //           )),
-                    //       SizedBox(width: 7.5),
-                    //       VerticalDivider(
-                    //         color: Colors.black,
-                    //         indent: 10,
-                    //         endIndent: 10,
-                    //         width: 2,
-                    //       ),
-                    //       SizedBox(width: 7.5),
-                    //       Obx(() => InkWell(
-                    //             onTap: () {
-                    //               naviagtion(routeName: RouteName.fashion);
-                    //               navController.setIndex(i: 1);
-                    //             },
-                    //             child: Text(
-                    //               "Shop",
-                    //               style: GoogleFonts.ubuntu(
-                    //                   color:
-                    //                       navController.selectedIndex.value == 1
-                    //                           ? Colors.white
-                    //                           : Colors.black,
-                    //                   fontSize: 12),
-                    //             ),
-                    //           )),
-                    //       SizedBox(width: 7.5),
-                    //       VerticalDivider(
-                    //         color: Colors.black,
-                    //         indent: 10,
-                    //         endIndent: 10,
-                    //         width: 2,
-                    //       ),
-                    //       SizedBox(width: 7.5),
-                    //       Obx(() => InkWell(
-                    //             onTap: () {
-                    //               naviagtion(routeName: RouteName.contactus);
-                    //               navController.setIndex(i: 2);
-                    //             },
-                    //             child: Text(
-                    //               "Contact Us",
-                    //               style: GoogleFonts.ubuntu(
-                    //                   color:
-                    //                       navController.selectedIndex.value == 2
-                    //                           ? Colors.white
-                    //                           : Colors.black,
-                    //                   fontSize: 12),
-                    //             ),
-                    //           )),
-                    //       SizedBox(width: 7.5),
-                    //       VerticalDivider(
-                    //         color: Colors.black,
-                    //         indent: 10,
-                    //         endIndent: 10,
-                    //         width: 2,
-                    //       ),
-                    //       SizedBox(width: 7.5),
-                    //       Obx(() => InkWell(
-                    //             onTap: () {
-                    //               naviagtion(routeName: RouteName.aboutus);
-                    //               navController.setIndex(i: 3);
-                    //             },
-                    //             child: Text(
-                    //               "About Us",
-                    //               style: GoogleFonts.ubuntu(
-                    //                   color:
-                    //                       navController.selectedIndex.value == 3
-                    //                           ? Colors.white
-                    //                           : Colors.black,
-                    //                   fontSize: 12),
-                    //             ),
-                    //           )),
-                    //       SizedBox(width: 7.5),
-                    //       VerticalDivider(
-                    //         color: Colors.black,
-                    //         indent: 10,
-                    //         endIndent: 10,
-                    //         width: 2,
-                    //       ),
-                    //       SizedBox(width: 7.5),
-                    //       Obx(() => InkWell(
-                    //             onTap: () {
-                    //               naviagtion(routeName: RouteName.home);
-                    //               navController.setIndex(i: 4);
-                    //             },
-                    //             child: Text(
-                    //               "Help",
-                    //               style: GoogleFonts.ubuntu(
-                    //                   color:
-                    //                       navController.selectedIndex.value == 4
-                    //                           ? Colors.white
-                    //                           : Colors.black,
-                    //                   fontSize: 12),
-                    //             ),
-                    //           )),
-                    //     ],
-                    //   ),
-                    // ),
+                    SizedBox(height: 10),
+                    Container(
+                      width: size.width,
+                      height: 40,
+                      color: Color(primaryColor),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              navController.setIndex(i: 1);
+                            },
+                            child: Obx(
+                              () => Text(
+                                "Active Wear",
+                                style: GoogleFonts.ubuntu(
+                                  color: navController.selectedIndex.value == 1
+                                      ? Colors.white
+                                      : Colors.black,
+                                ),
+                              ),
+                            ),
+                          ),
+                          VerticalDivider(
+                            indent: 10,
+                            endIndent: 10,
+                            color: Colors.black,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              navController.setIndex(i: 2);
+                            },
+                            child: Obx(() => Text(
+                                  "Top Wear",
+                                  style: GoogleFonts.ubuntu(
+                                    color:
+                                        navController.selectedIndex.value == 2
+                                            ? Colors.white
+                                            : Colors.black,
+                                  ),
+                                )),
+                          ),
+                          VerticalDivider(
+                            indent: 10,
+                            endIndent: 10,
+                            color: Colors.black,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              navController.setIndex(i: 3);
+                            },
+                            child: Obx(() => Text(
+                                  "Bottom Wear",
+                                  style: GoogleFonts.ubuntu(
+                                    color:
+                                        navController.selectedIndex.value == 3
+                                            ? Colors.white
+                                            : Colors.black,
+                                  ),
+                                )),
+                          ),
+                          VerticalDivider(
+                            indent: 10,
+                            endIndent: 10,
+                            color: Colors.black,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              navController.setIndex(i: 4);
+                            },
+                            child: Obx(() => Text(
+                                  "Accessories",
+                                  style: GoogleFonts.ubuntu(
+                                    color:
+                                        navController.selectedIndex.value == 4
+                                            ? Colors.white
+                                            : Colors.black,
+                                  ),
+                                )),
+                          ),
+                          VerticalDivider(
+                            indent: 10,
+                            endIndent: 10,
+                            color: Colors.black,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              navController.setIndex(i: 5);
+                            },
+                            child: Obx(() => Text(
+                                  "Collectibles",
+                                  style: GoogleFonts.ubuntu(
+                                    color:
+                                        navController.selectedIndex.value == 5
+                                            ? Colors.white
+                                            : Colors.black,
+                                  ),
+                                )),
+                          ),
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ),
-              preferredSize: Size.fromHeight(40),
             ),
           ),
           SliverFillRemaining(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rating_dialog/rating_dialog.dart';
+import 'package:shopping_page/screens/screens.dart';
 import 'package:shopping_page/widgets/widgets.dart';
 
 class PopupReviewProduct extends StatelessWidget {
