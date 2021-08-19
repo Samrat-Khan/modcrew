@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:shopping_page/const_and_theme/colors.dart';
 import 'package:shopping_page/const_and_theme/textStyles.dart';
 import 'package:shopping_page/routes/routeNames.dart';
@@ -8,7 +9,10 @@ import 'package:shopping_page/widgets/widgets.dart';
 
 class Footer extends StatelessWidget {
   Footer({Key? key}) : super(key: key);
-
+  final List<String> imageUrl = [
+    "https://cdn.razorpay.com/static/assets/merchant-badge/badge-light.png",
+    "https://www.paypalobjects.com/digitalassets/c/website/marketing/na/us/logo-center/12_bdg_payments_by_pp_2line.png",
+  ];
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,6 +35,7 @@ class Footer extends StatelessWidget {
                     SecondFooterContent(),
                     ThirstFooterContent(),
                     fifthFooterContent(context: context),
+                    SocialNetworksList(),
                   ],
                 )
               : Column(
@@ -43,21 +48,53 @@ class Footer extends StatelessWidget {
                     ThirstFooterContent(),
                     SizedBox(height: 20),
                     fifthFooterContent(context: context),
+                    SizedBox(height: 20),
+                    SocialNetworksList(),
                   ],
                 ),
           Container(
             width: MediaQuery.of(context).size.width,
-            padding: const EdgeInsets.symmetric(vertical: 10),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             color: Color(primaryColor),
-            child: Center(
-              child: Text(
-                "Copyright © 2021\nModCrew, All rights reserved",
-                textAlign: TextAlign.center,
-                style: GoogleFonts.ubuntu(
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Copyright © 2021\nModCrew, All rights reserved",
+                  textAlign: TextAlign.start,
+                  style: GoogleFonts.ubuntu(
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                  ),
                 ),
-              ),
+                Row(
+                  children: [
+                    Container(
+                      width: 100,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: NetworkImage(
+                            imageUrl[0],
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 20),
+                    Container(
+                      width: 100,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: NetworkImage(
+                            imageUrl[1],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ],
@@ -93,6 +130,78 @@ class Footer extends StatelessWidget {
         //   ),
         // ),
       ],
+    );
+  }
+}
+
+class SocialNetworksList extends StatelessWidget {
+  const SocialNetworksList({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        FooterContentTitle(text: "Connect".toUpperCase()),
+        SizedBox(height: 8),
+        InkWell(
+          child: ContentWithIcon(
+            iconData: LineIcons.facebook,
+            title: "Facebook",
+          ),
+        ),
+        SizedBox(height: 8),
+        InkWell(
+          child: ContentWithIcon(
+            iconData: LineIcons.whatSApp,
+            title: "WhatsApp",
+          ),
+        ),
+        SizedBox(height: 8),
+        InkWell(
+          child: ContentWithIcon(
+            iconData: LineIcons.instagram,
+            title: "Instagram",
+          ),
+        ),
+        SizedBox(height: 8),
+        InkWell(
+          child: ContentWithIcon(
+            iconData: LineIcons.twitter,
+            title: "Twitter",
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class ContentWithIcon extends StatelessWidget {
+  final IconData iconData;
+  final String title;
+  const ContentWithIcon({
+    Key? key,
+    required this.iconData,
+    required this.title,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return RichText(
+      text: TextSpan(
+        children: [
+          WidgetSpan(
+              child: Icon(
+            iconData,
+            color: Color(primaryColor),
+            size: 14,
+          )),
+          TextSpan(
+            text: "  $title",
+            style: Styles.kFooterContent,
+          ),
+        ],
+      ),
     );
   }
 }
