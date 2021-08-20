@@ -30,6 +30,13 @@ class _NewTemplateState extends State<NewTemplate> {
     Navigator.of(context).pushNamed(routeName);
   }
 
+  bottomNavFun({required int i, required String routeName}) {
+    ModalRoute.of(context)!.settings.name == routeName
+        ? null
+        : Navigator.of(context).pushNamed(routeName);
+    navController.setIndex(i: i);
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -68,6 +75,7 @@ class _NewTemplateState extends State<NewTemplate> {
                 InkWell(
                   onTap: () {
                     naviagtion(routeName: RouteName.contactus);
+                    navController.setIndex(i: 0);
                   },
                   child: Text(
                     "Contact Us",
@@ -80,6 +88,7 @@ class _NewTemplateState extends State<NewTemplate> {
                 InkWell(
                   onTap: () {
                     naviagtion(routeName: RouteName.aboutus);
+                    navController.setIndex(i: 0);
                   },
                   child: Text(
                     "About",
@@ -92,6 +101,7 @@ class _NewTemplateState extends State<NewTemplate> {
                 InkWell(
                   onTap: () {
                     naviagtion(routeName: RouteName.home);
+                    navController.setIndex(i: 0);
                   },
                   child: Text(
                     "Help",
@@ -196,9 +206,8 @@ class _NewTemplateState extends State<NewTemplate> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           InkWell(
-                            onTap: () {
-                              navController.setIndex(i: 1);
-                            },
+                            onTap: () =>
+                                bottomNavFun(i: 1, routeName: RouteName.home),
                             child: Obx(
                               () => navbarIcon(
                                 labelName: "Active Wear",
@@ -213,9 +222,8 @@ class _NewTemplateState extends State<NewTemplate> {
                             color: Colors.black,
                           ),
                           InkWell(
-                            onTap: () {
-                              navController.setIndex(i: 2);
-                            },
+                            onTap: () =>
+                                bottomNavFun(i: 2, routeName: RouteName.home),
                             child: Obx(
                               () => navbarIcon(
                                 labelName: "Top Wear",
@@ -230,9 +238,8 @@ class _NewTemplateState extends State<NewTemplate> {
                             color: Colors.black,
                           ),
                           InkWell(
-                            onTap: () {
-                              navController.setIndex(i: 3);
-                            },
+                            onTap: () =>
+                                bottomNavFun(i: 3, routeName: RouteName.home),
                             child: Obx(
                               () => navbarIcon(
                                 labelName: "Bottom Wear",
@@ -247,9 +254,8 @@ class _NewTemplateState extends State<NewTemplate> {
                             color: Colors.black,
                           ),
                           InkWell(
-                            onTap: () {
-                              navController.setIndex(i: 4);
-                            },
+                            onTap: () =>
+                                bottomNavFun(i: 4, routeName: RouteName.home),
                             child: Obx(
                               () => navbarIcon(
                                 labelName: "Accessories",
@@ -264,9 +270,8 @@ class _NewTemplateState extends State<NewTemplate> {
                             color: Colors.black,
                           ),
                           InkWell(
-                            onTap: () {
-                              navController.setIndex(i: 5);
-                            },
+                            onTap: () =>
+                                bottomNavFun(i: 5, routeName: RouteName.home),
                             child: Obx(
                               () => navbarIcon(
                                 labelName: "Collectibles",

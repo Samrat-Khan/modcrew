@@ -23,47 +23,50 @@ class _ContactUsState extends State<ContactUs> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Container(
-                  child: Column(
-                    children: [
-                      container(
-                        child: CustomTextField(
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: Container(
+                    child: Column(
+                      children: [
+                        container(
+                          child: CustomTextField(
+                            size: size,
+                            hintText: "Your Name",
+                            controller: _name,
+                            valiadtor: (val) {},
+                          ),
                           size: size,
-                          hintText: "Your Name",
-                          controller: _name,
-                          valiadtor: (val) {},
                         ),
-                        size: size,
-                      ),
-                      container(
-                        child: CustomTextField(
+                        container(
+                          child: CustomTextField(
+                            size: size,
+                            hintText: "Your Email",
+                            controller: _email,
+                            valiadtor: (val) {},
+                          ),
                           size: size,
-                          hintText: "Your Email",
-                          controller: _email,
-                          valiadtor: (val) {},
                         ),
-                        size: size,
-                      ),
-                      container(
-                        child: CustomTextField(
+                        container(
+                          child: CustomTextField(
+                            size: size,
+                            hintText: "Your Messgae",
+                            needMultiline: true,
+                            controller: _message,
+                            valiadtor: (val) {},
+                          ),
                           size: size,
-                          hintText: "Your Messgae",
-                          needMultiline: true,
-                          controller: _message,
-                          valiadtor: (val) {},
                         ),
-                        size: size,
-                      ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        width: size.width * 0.18,
-                        height: 60,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          child: Text("Send"),
+                        Container(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          width: size.width * 0.18,
+                          height: 60,
+                          child: ElevatedButton(
+                            onPressed: () {},
+                            child: Text("Send"),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 Container(
