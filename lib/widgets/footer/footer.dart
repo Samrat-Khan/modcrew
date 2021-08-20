@@ -5,6 +5,7 @@ import 'package:line_icons/line_icons.dart';
 import 'package:shopping_page/const_and_theme/colors.dart';
 import 'package:shopping_page/const_and_theme/textStyles.dart';
 import 'package:shopping_page/routes/routeNames.dart';
+import 'package:shopping_page/screens/layout/controller/nav_controller.dart';
 import 'package:shopping_page/widgets/widgets.dart';
 
 class Footer extends StatelessWidget {
@@ -52,49 +53,52 @@ class Footer extends StatelessWidget {
                     SocialNetworksList(),
                   ],
                 ),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            color: Color(primaryColor),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Copyright © 2021\nModCrew, All rights reserved",
-                  textAlign: TextAlign.start,
-                  style: GoogleFonts.ubuntu(
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white,
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              color: Color(primaryColor),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Copyright © 2021\nModCrew, All rights reserved",
+                    textAlign: TextAlign.start,
+                    style: GoogleFonts.ubuntu(
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                Row(
-                  children: [
-                    Container(
-                      width: 100,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(
-                            imageUrl[0],
+                  Row(
+                    children: [
+                      Container(
+                        width: 100,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: NetworkImage(
+                              imageUrl[0],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    SizedBox(width: 20),
-                    Container(
-                      width: 100,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(
-                            imageUrl[1],
+                      SizedBox(width: 20),
+                      Container(
+                        width: 100,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: NetworkImage(
+                              imageUrl[1],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ],
@@ -245,10 +249,10 @@ class ThirstFooterContent extends StatelessWidget {
 }
 
 class SecondFooterContent extends StatelessWidget {
-  const SecondFooterContent({
+  SecondFooterContent({
     Key? key,
   }) : super(key: key);
-
+  final navController = NavController.to;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -258,14 +262,48 @@ class SecondFooterContent extends StatelessWidget {
         SizedBox(height: 10),
         InkWell(
           onTap: () {
-            Navigator.of(context).pushReplacementNamed(RouteName.fashion);
+            Navigator.of(context).pushNamed(RouteName.home);
+            navController.setIndex(i: 0);
           },
-          child: FooterContent(text: "Fashion"),
+          child: FooterContent(text: "Home"),
         ),
         SizedBox(height: 8),
         InkWell(
           onTap: () {
-            Navigator.of(context).pushReplacementNamed(RouteName.collectibles);
+            Navigator.of(context).pushNamed(RouteName.home);
+            navController.setIndex(i: 1);
+          },
+          child: FooterContent(text: "Active Wear"),
+        ),
+        SizedBox(height: 8),
+        InkWell(
+          onTap: () {
+            Navigator.of(context).pushNamed(RouteName.home);
+            navController.setIndex(i: 2);
+          },
+          child: FooterContent(text: "Top Wear"),
+        ),
+        SizedBox(height: 8),
+        InkWell(
+          onTap: () {
+            Navigator.of(context).pushNamed(RouteName.home);
+            navController.setIndex(i: 3);
+          },
+          child: FooterContent(text: "Bottom Wear"),
+        ),
+        SizedBox(height: 8),
+        InkWell(
+          onTap: () {
+            Navigator.of(context).pushNamed(RouteName.home);
+            navController.setIndex(i: 4);
+          },
+          child: FooterContent(text: "Accessories"),
+        ),
+        SizedBox(height: 8),
+        InkWell(
+          onTap: () {
+            Navigator.of(context).pushNamed(RouteName.home);
+            navController.setIndex(i: 5);
           },
           child: FooterContent(text: "Collectibles"),
         ),

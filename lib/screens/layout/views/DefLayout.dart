@@ -55,21 +55,10 @@ class _NewTemplateState extends State<NewTemplate> {
                 InkWell(
                   onTap: () {
                     naviagtion(routeName: RouteName.home);
+                    navController.setIndex(i: 0);
                   },
                   child: Text(
                     "Home",
-                    style:
-                        GoogleFonts.ubuntu(color: Colors.white, fontSize: 12),
-                  ),
-                ),
-                SizedBox(width: 7.5),
-                SizedBox(width: 7.5),
-                InkWell(
-                  onTap: () {
-                    naviagtion(routeName: RouteName.fashion);
-                  },
-                  child: Text(
-                    "Shop",
                     style:
                         GoogleFonts.ubuntu(color: Colors.white, fontSize: 12),
                   ),
@@ -211,13 +200,10 @@ class _NewTemplateState extends State<NewTemplate> {
                               navController.setIndex(i: 1);
                             },
                             child: Obx(
-                              () => Text(
-                                "Active Wear",
-                                style: GoogleFonts.ubuntu(
-                                  color: navController.selectedIndex.value == 1
-                                      ? Colors.white
-                                      : Colors.black,
-                                ),
+                              () => navbarIcon(
+                                labelName: "Active Wear",
+                                index: 1,
+                                iconImagePath: "assets/icons/aw.png",
                               ),
                             ),
                           ),
@@ -230,15 +216,13 @@ class _NewTemplateState extends State<NewTemplate> {
                             onTap: () {
                               navController.setIndex(i: 2);
                             },
-                            child: Obx(() => Text(
-                                  "Top Wear",
-                                  style: GoogleFonts.ubuntu(
-                                    color:
-                                        navController.selectedIndex.value == 2
-                                            ? Colors.white
-                                            : Colors.black,
-                                  ),
-                                )),
+                            child: Obx(
+                              () => navbarIcon(
+                                labelName: "Top Wear",
+                                index: 2,
+                                iconImagePath: "assets/icons/tw.png",
+                              ),
+                            ),
                           ),
                           VerticalDivider(
                             indent: 10,
@@ -249,15 +233,13 @@ class _NewTemplateState extends State<NewTemplate> {
                             onTap: () {
                               navController.setIndex(i: 3);
                             },
-                            child: Obx(() => Text(
-                                  "Bottom Wear",
-                                  style: GoogleFonts.ubuntu(
-                                    color:
-                                        navController.selectedIndex.value == 3
-                                            ? Colors.white
-                                            : Colors.black,
-                                  ),
-                                )),
+                            child: Obx(
+                              () => navbarIcon(
+                                labelName: "Bottom Wear",
+                                index: 3,
+                                iconImagePath: "assets/icons/bw.png",
+                              ),
+                            ),
                           ),
                           VerticalDivider(
                             indent: 10,
@@ -268,15 +250,13 @@ class _NewTemplateState extends State<NewTemplate> {
                             onTap: () {
                               navController.setIndex(i: 4);
                             },
-                            child: Obx(() => Text(
-                                  "Accessories",
-                                  style: GoogleFonts.ubuntu(
-                                    color:
-                                        navController.selectedIndex.value == 4
-                                            ? Colors.white
-                                            : Colors.black,
-                                  ),
-                                )),
+                            child: Obx(
+                              () => navbarIcon(
+                                labelName: "Accessories",
+                                index: 4,
+                                iconImagePath: "assets/icons/access.png",
+                              ),
+                            ),
                           ),
                           VerticalDivider(
                             indent: 10,
@@ -287,15 +267,13 @@ class _NewTemplateState extends State<NewTemplate> {
                             onTap: () {
                               navController.setIndex(i: 5);
                             },
-                            child: Obx(() => Text(
-                                  "Collectibles",
-                                  style: GoogleFonts.ubuntu(
-                                    color:
-                                        navController.selectedIndex.value == 5
-                                            ? Colors.white
-                                            : Colors.black,
-                                  ),
-                                )),
+                            child: Obx(
+                              () => navbarIcon(
+                                labelName: "Collectibles",
+                                index: 5,
+                                iconImagePath: "assets/icons/collec.png",
+                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -320,6 +298,37 @@ class _NewTemplateState extends State<NewTemplate> {
             child: Footer(),
           ),
         ],
+      ),
+    );
+  }
+
+  Padding navbarIcon(
+      {required String iconImagePath,
+      required int index,
+      required String labelName}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 5),
+      child: RichText(
+        text: TextSpan(
+          children: [
+            WidgetSpan(
+              child: ImageIcon(
+                AssetImage(iconImagePath),
+                color: navController.selectedIndex.value == index
+                    ? Colors.white
+                    : Colors.black,
+              ),
+            ),
+            TextSpan(
+              text: "  $labelName",
+              style: GoogleFonts.ubuntu(
+                color: navController.selectedIndex.value == index
+                    ? Colors.white
+                    : Colors.black,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

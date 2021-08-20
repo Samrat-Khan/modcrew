@@ -9,6 +9,7 @@ class ProductFutureBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var isDesktop = Responsive.isDesktop(context);
+
     return FutureBuilder(
       future: future,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -19,8 +20,9 @@ class ProductFutureBuilder extends StatelessWidget {
             ),
           );
         }
-        if (!snapshot.hasData || snapshot.hasError)
+        if (!snapshot.hasData || snapshot.hasError) {
           return NoData(noDataType: "product");
+        }
         if (snapshot.hasData) {
           return SnapshotGridBuilder(
             isDesktop: isDesktop,

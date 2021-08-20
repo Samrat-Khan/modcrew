@@ -11,8 +11,8 @@ export 'checkout/checkout.dart';
 export 'cart/cart.dart';
 export 'account_settings/account_settings.dart';
 export 'auth_page/signup_login.dart';
-export 'home/home_shop.dart';
+
 export 'aboutUs/aboutUs.dart';
 
 export 'sizeChart/sizeChart.dart';
-export 'home/home_only.dart';
+export 'home/home.dart';
