@@ -76,4 +76,19 @@ class SignInSignUp {
       print(e.message);
     }
   }
+
+  Future forgotPassword({required String token, required String email}) async {
+    var body = {
+      "email": email,
+    };
+    var encodeBody = jsonEncode(body);
+    await http.post(
+      Uri.parse(env_SignIn),
+      body: encodeBody,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        HttpHeaders.authorizationHeader: 'Bearer $token',
+      },
+    );
+  }
 }

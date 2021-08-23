@@ -61,52 +61,55 @@ class _SignUpLogInState extends State<SignUpLogIn>
       sliverChild: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10),
-          child: Container(
-            height: desktop ? size.height : size.height,
-            width: size.width * width,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Column(
-              children: [
-                TabBar(
-                  controller: _tabController,
-                  labelStyle: Styles.logInPageTitle,
-                  tabs: [
-                    Tab(
-                      text: "LogIn",
-                    ),
-                    Tab(
-                      text: "SignUp",
-                    ),
-                  ],
-                ),
-                Expanded(
-                  child: TabBarView(
+          child: Card(
+            elevation: 7,
+            child: Container(
+              height: desktop ? size.height : size.height,
+              width: size.width * width,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Column(
+                children: [
+                  TabBar(
                     controller: _tabController,
-                    children: [
-                      LogInTab(
-                        size: size,
-                        emailController: _logInEmailController,
-                        passwordController: _logInPasswordController,
-                        onTap: () => chnageTab(1),
+                    labelStyle: Styles.logInPageTitle,
+                    tabs: [
+                      Tab(
+                        text: "LogIn",
                       ),
-                      SignUpTab(
-                        size: size,
-                        emailController: _signUpEmailController,
-                        passwordController: _signUpPasswordController,
-                        signUpConfirmPasswordController:
-                            _signUpConfirmPasswordController,
-                        signUpPhoneController: _signUpPhoneController,
-                        signUpFirstNameController: _signUpFirstNameController,
-                        signUpLastNameController: _signUpLastNameController,
-                        onTap: () => chnageTab(0),
+                      Tab(
+                        text: "SignUp",
                       ),
                     ],
                   ),
-                ),
-              ],
+                  Expanded(
+                    child: TabBarView(
+                      controller: _tabController,
+                      children: [
+                        LogInTab(
+                          size: size,
+                          emailController: _logInEmailController,
+                          passwordController: _logInPasswordController,
+                          onTap: () => chnageTab(1),
+                        ),
+                        SignUpTab(
+                          size: size,
+                          emailController: _signUpEmailController,
+                          passwordController: _signUpPasswordController,
+                          signUpConfirmPasswordController:
+                              _signUpConfirmPasswordController,
+                          signUpPhoneController: _signUpPhoneController,
+                          signUpFirstNameController: _signUpFirstNameController,
+                          signUpLastNameController: _signUpLastNameController,
+                          onTap: () => chnageTab(0),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

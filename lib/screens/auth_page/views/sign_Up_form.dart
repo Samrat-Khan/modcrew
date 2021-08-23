@@ -191,6 +191,7 @@ class _SignUpTabState extends State<SignUpTab> {
                   size: widget.size,
                   hintText: "password",
                   controller: widget._signUpPasswordController,
+                  needPassword: true,
                   valiadtor: (value) {
                     if (!validatePassoword(value!))
                       return "Password must have 1 number\n 1 symbol and cammel case";
@@ -203,6 +204,7 @@ class _SignUpTabState extends State<SignUpTab> {
                   size: widget.size,
                   hintText: "confirm password",
                   controller: widget._signUpConfirmPasswordController,
+                  needPassword: true,
                   valiadtor: (value) {
                     if (widget._signUpPasswordController.text !=
                         widget._signUpConfirmPasswordController.text)

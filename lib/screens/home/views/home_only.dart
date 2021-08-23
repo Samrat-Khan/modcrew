@@ -104,8 +104,10 @@ class _HomeScreenState extends State<HomeScreen>
                         child: BannerCarousel.fullScreen(
                           banners: listBanners,
                           height: 350,
+                          disableColor: Colors.white,
                           activeColor: Color(primaryColor),
                           indicatorBottom: false,
+                          animation: true,
                         ),
                       ),
                     ),

@@ -1,3 +1,3 @@
-export 'sign_In.dart';
-export 'sign_Up.dart';
-export 'signup_login.dart';
+export 'sign_In_form.dart';
+export 'sign_Up_form.dart';
+export 'auth_screen.dart';

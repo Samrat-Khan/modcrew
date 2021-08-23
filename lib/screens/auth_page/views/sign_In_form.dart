@@ -1,6 +1,8 @@
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:shopping_page/const_and_theme/const_and_theme.dart';
 import 'package:shopping_page/const_and_theme/textStyles.dart';
 
 import 'package:shopping_page/routes/routeNames.dart';
@@ -32,6 +34,9 @@ class _LogInTabState extends State<LogInTab> {
   bool isLoading = false;
   final authController = AuthController.to;
   final SignInSignUp signInSignUp = SignInSignUp();
+  final TextEditingController forgotPasswordController =
+      TextEditingController();
+  final CountDownController countDownController = CountDownController();
   signInUser() async {
     setState(() {
       isLoading = true;
@@ -72,15 +77,28 @@ class _LogInTabState extends State<LogInTab> {
       });
       print("Log In error $e");
     }
+  }
 
-    // try {
+  resetPassword() async {
+    await signInSignUp
+        .forgotPassword(
+            token: authController.authToken.value,
+            email: forgotPasswordController.text)
+        .whenComplete(() {
+      confirmMessage(
+        context: context,
+        message: "An password rest link is send to your email",
+        ringColor: Colors.green,
+        duration: 5,
+        countDownController: countDownController,
+      );
+    });
+  }
 
-    // } catch (e) {
-    //   setState(() {
-    //     isLoading = false;
-    //   });
-    //   print("Error on adding data ${e}");
-    // }
+  @override
+  void dispose() {
+    forgotPasswordController.dispose();
+    super.dispose();
   }
 
   @override
@@ -107,6 +125,7 @@ class _LogInTabState extends State<LogInTab> {
             size: widget.size,
             hintText: "password",
             controller: widget._passwordController,
+            needPassword: true,
             valiadtor: (value) {},
           ),
           SizedBox(height: 10),
@@ -132,36 +151,54 @@ class _LogInTabState extends State<LogInTab> {
             ),
           ),
           SizedBox(height: 15),
-          Text(
-            "Forgot password",
-            style: Styles.logInPageForgotPassword,
+          InkWell(
+            onTap: () =>
+                forgotPasswordPopUp(context: context, size: widget.size),
+            child: Text(
+              "Forgot password",
+              style: Styles.logInPageForgotPassword,
+            ),
           ),
           SizedBox(height: 18),
-          // Text("Or Login with", style: Styles.logInPageOtherStyle),
-          // SizedBox(height: 18),
-          // Row(
-          //   children: [
-          //     Spacer(),
-          //     InkWell(
-          //       onTap: () => print("Google"),
-          //       child: IconButtonWidget(path: 'assets/icons/google.png'),
-          //     ),
-          //     SizedBox(width: 10),
-          //     InkWell(
-          //       onTap: () => print("Facebook"),
-          //       child: IconButtonWidget(path: 'assets/icons/facebook.png'),
-          //     ),
-          //     SizedBox(width: 10),
-          //     InkWell(
-          //       onTap: () => print("Twitter"),
-          //       child: IconButtonWidget(path: 'assets/icons/twitter.png'),
-          //     ),
-          //     Spacer(),
-          //   ],
-          // ),
         ],
       ),
     );
+  }
+
+  forgotPasswordPopUp({required BuildContext context, required Size size}) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            elevation: 7,
+            backgroundColor: Colors.white,
+            title: Text("Reset Password"),
+            content: CustomTextField(
+              controller: forgotPasswordController,
+              hintText: "Email",
+              size: size,
+              valiadtor: (val) {},
+            ),
+            actions: [
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Color(primaryColor),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("Cancel"),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Color(0xff65e866),
+                ),
+                onPressed: () => resetPassword(),
+                child: Text("Rest"),
+              ),
+            ],
+          );
+        });
   }
 }
 

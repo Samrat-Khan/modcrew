@@ -8,7 +8,7 @@ class CustomTextField extends StatefulWidget {
   final Size size;
   final String hintText;
   final Function(String?) valiadtor;
-  final bool isPassword, isNeedMaxLength;
+  final bool needPassword, isNeedMaxLength;
 
   const CustomTextField({
     Key? key,
@@ -18,7 +18,7 @@ class CustomTextField extends StatefulWidget {
     required this.hintText,
     required this.controller,
     required this.valiadtor,
-    this.isPassword = false,
+    this.needPassword = false,
     this.isNeedMaxLength = false,
   }) : super(key: key);
 
@@ -27,11 +27,16 @@ class CustomTextField extends StatefulWidget {
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
-  bool _isVisible = false;
+  bool _isVisible = true;
   switchIcon() {
     setState(() {
       _isVisible = !_isVisible;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
@@ -53,16 +58,23 @@ class _CustomTextFieldState extends State<CustomTextField> {
         validator: (val) => widget.valiadtor(val),
         keyboardType:
             widget.needMultiline ? TextInputType.multiline : TextInputType.name,
-        maxLines: null,
+        maxLines: widget.needPassword ? 1 : null,
         minLines: null,
         expands: widget.needMultiline,
-        obscureText: widget.isPassword ? true : false,
+        obscureText: widget.needPassword
+            ? _isVisible
+                ? true
+                : false
+            : false,
         decoration: InputDecoration(
-          suffixIcon: _isVisible
+          suffixIcon: widget.needPassword
               ? IconButton(
                   onPressed: switchIcon,
                   icon: Icon(
-                      _isVisible ? Icons.visibility : Icons.visibility_off))
+                    _isVisible ? Icons.visibility : Icons.visibility_off,
+                    color: Colors.black,
+                  ),
+                )
               : null,
           filled: true,
           contentPadding: EdgeInsets.only(left: 10),
