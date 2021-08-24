@@ -288,7 +288,7 @@ class _NewTemplateState extends State<NewTemplate> {
               ),
             ),
           ),
-          SliverFillRemaining(
+          SliverToBoxAdapter(
             child: widget.sliverChild,
           ),
           SliverPadding(

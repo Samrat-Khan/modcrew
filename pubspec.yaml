@@ -11,6 +11,7 @@ dependencies:
   banner_carousel: ^1.2.1
   carousel_slider: ^4.0.0
   circular_countdown_timer: ^0.2.0
+  connectivity: ^3.0.6
   cupertino_icons: ^1.0.2
   expandable: ^5.0.1
   fluro: ^2.0.3

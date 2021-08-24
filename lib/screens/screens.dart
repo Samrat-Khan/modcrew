@@ -12,7 +12,9 @@ export 'cart/cart.dart';
 export 'account_settings/account_settings.dart';
 export 'auth_page/signup_login.dart';
 
-export 'aboutUs/aboutUs.dart';
+export 'aboutUs/views/aboutUs.dart';
 
 export 'sizeChart/sizeChart.dart';
 export 'home/home.dart';
+export 'no_Internet/no_internet_controller.dart';
+export 'no_Internet/no_internet_views.dart';

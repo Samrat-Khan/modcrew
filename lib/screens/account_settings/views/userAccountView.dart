@@ -1,8 +1,7 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:shopping_page/screens/account_settings/model/orderOnWayModel.dart';
 import 'package:shopping_page/screens/screens.dart';
-import 'package:shopping_page/widgets/widgets.dart';
+import 'package:shopping_page/widgets/loading_no_data/loading.dart';
 
 class UserAccount extends StatefulWidget {
   const UserAccount({Key? key}) : super(key: key);
@@ -22,6 +21,15 @@ class _UserAccountState extends State<UserAccount> {
   final TextEditingController _confirmPasswordController =
       TextEditingController();
   final authController = AuthController.to;
+  final OrderOnTheWay orderOnTheWay = OrderOnTheWay();
+
+  placeOrders() async {
+    Map<String, dynamic> data = await orderOnTheWay.getPlaceOrderDetails(
+        token: authController.authToken.value);
+    print(data["data"]);
+    return data["data"];
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -39,29 +47,77 @@ class _UserAccountState extends State<UserAccount> {
                     emailController: _emailController,
                     passwordController: _passwordController,
                     confirmPasswordController: _confirmPasswordController),
-                OrderHistoryCard(size: size),
               ],
             ),
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 50),
-              width: size.width,
-              height: 200,
-              child: Center(
-                child: Text("No Orders Found"),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Card(
+                elevation: 7,
+                child: Container(
+                  width: size.width,
+                  height: size.height * 0.6,
+                  child: FutureBuilder(
+                    future: placeOrders(),
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return LoadingSpiner();
+                      }
+                      if (snapshot.hasData) {
+                        return ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: snapshot.data.length,
+                          itemBuilder: (context, i) {
+                            OrderStatusModel model =
+                                OrderStatusModel.fromJson(snapshot.data[i]);
+
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 20),
+                              child: Card(
+                                elevation: 5,
+                                child: Container(
+                                  width: size.width * 0.25,
+                                  height: 150,
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 5, horizontal: 5),
+                                        child: Container(
+                                          width: size.width,
+                                          height: 200,
+                                          decoration: BoxDecoration(
+                                            color: Colors.amberAccent,
+                                            borderRadius: borderRadius,
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 5, horizontal: 5),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      }
+                      return Center(
+                        child: Text("You have not placed any order"),
+                      );
+                    },
+                  ),
+                ),
               ),
-              // child: ListView.builder(
-              //   scrollDirection: Axis.horizontal,
-              //   itemCount: 1,
-              //   itemBuilder: (_, i) {
-              //     return Card(
-              //       child: Container(
-              //         height: 150,
-              //         width: 200,
-              //       ),
-              //       color: Colors.amberAccent,
-              //     );
-              //   },
-              // ),
             ),
           ],
         ),
@@ -69,6 +125,7 @@ class _UserAccountState extends State<UserAccount> {
     );
   }
 
+  BorderRadius borderRadius = BorderRadius.circular(10);
   popUpForAddReview() {}
 }
 

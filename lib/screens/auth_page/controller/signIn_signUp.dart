@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:shopping_page/env/apiRoutes.dart';
 
@@ -52,7 +51,7 @@ class SignInSignUp {
         },
       );
       var jsonBody = jsonDecode(token.body);
-
+      print(jsonBody);
       return jsonBody;
     } on HttpException catch (e) {
       print("Error duing sign in ${e.message}");

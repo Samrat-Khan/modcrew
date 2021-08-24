@@ -9,12 +9,13 @@ class ProductFutureBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var isDesktop = Responsive.isDesktop(context);
-
+    Size size = MediaQuery.of(context).size;
     return FutureBuilder(
       future: future,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Container(
+            height: size.width / 2,
             child: Center(
               child: LoadingSpiner(),
             ),

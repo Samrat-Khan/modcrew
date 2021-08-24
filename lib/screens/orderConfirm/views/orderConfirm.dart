@@ -1,5 +1,6 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shopping_page/routes/routeNames.dart';
 
@@ -21,7 +22,8 @@ class _OrderConfirmState extends State<OrderConfirm> {
   OrderConfirmStatusModel? orderStatus;
   bool isLoading = true;
   onCompleteNaviagateToHome() {
-    Navigator.of(context).pushReplacementNamed(RouteName.home);
+    Navigator.pushNamedAndRemoveUntil(context, RouteName.home, (_) => false);
+    // Get.offAllNamed(RouteName.home);
   }
 
   orderGet() async {

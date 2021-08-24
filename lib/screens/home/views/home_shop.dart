@@ -36,51 +36,53 @@ class _ShopScreenState extends State<ShopScreen>
     Size size = MediaQuery.of(context).size;
 
     return NewTemplate(
-      sliverChild: ListView(
-        shrinkWrap: true,
-        children: [
-          Container(
-            width: size.width,
-            height: 40,
-            color: Color(primaryColor),
-            child: TabBar(
-              controller: _tabController,
-              indicatorSize: TabBarIndicatorSize.tab,
-              labelStyle: GoogleFonts.ubuntu(
-                fontWeight: FontWeight.w700,
+      sliverChild: Container(
+        child: ListView(
+          shrinkWrap: true,
+          children: [
+            Container(
+              width: size.width,
+              height: 40,
+              color: Color(primaryColor),
+              child: TabBar(
+                controller: _tabController,
+                indicatorSize: TabBarIndicatorSize.tab,
+                labelStyle: GoogleFonts.ubuntu(
+                  fontWeight: FontWeight.w700,
+                ),
+                isScrollable: Responsive.isDesktop(context) ? false : true,
+                indicator: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
+                  ),
+                  color: Customtheme.lightTheme.scaffoldBackgroundColor,
+                ),
+                unselectedLabelColor: Colors.white,
+                tabs: [
+                  Tab(
+                    text: "Fashion",
+                  ),
+                  Tab(
+                    text: "Collectibles",
+                  ),
+                ],
               ),
-              isScrollable: Responsive.isDesktop(context) ? false : true,
-              indicator: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
-                ),
-                color: Customtheme.lightTheme.scaffoldBackgroundColor,
+            ),
+            Container(
+              width: size.width,
+              height: size.height,
+              color: Colors.amber,
+              child: TabBarView(
+                controller: _tabController,
+                children: <Widget>[
+                  FashionCategory(),
+                  CollectibleCategory(),
+                ],
               ),
-              unselectedLabelColor: Colors.white,
-              tabs: [
-                Tab(
-                  text: "Fashion",
-                ),
-                Tab(
-                  text: "Collectibles",
-                ),
-              ],
             ),
-          ),
-          Container(
-            width: size.width,
-            height: size.height,
-            color: Colors.amber,
-            child: TabBarView(
-              controller: _tabController,
-              children: <Widget>[
-                FashionCategory(),
-                CollectibleCategory(),
-              ],
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

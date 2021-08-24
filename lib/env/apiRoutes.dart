@@ -16,3 +16,4 @@ String env_razor_pay_order({required String orderId}) =>
 String env_orderStaus({required String orderId}) => '$baseUrl/orders/$orderId';
 
 const String env_uploadAddress = '$baseUrl/address';
+const String env_placeOrders = '$baseUrl/auth/me/orders';

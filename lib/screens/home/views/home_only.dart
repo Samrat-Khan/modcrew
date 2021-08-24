@@ -85,15 +85,20 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
-    print("Nav ${navController.selectedTab.value}");
     Size size = MediaQuery.of(context).size;
     return NewTemplate(
       sliverChild: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: GetX<NavController>(
           builder: (_) => navController.selectedTab > 0
-              ? ProductByCategoryScreen(
-                  future: loadProducts(i: navController.selectedTab.value))
+              ? Expanded(
+                  child: Container(
+                    height: size.width / 2,
+                    child: ProductByCategoryScreen(
+                        future:
+                            loadProducts(i: navController.selectedTab.value)),
+                  ),
+                )
               : ListView(
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,

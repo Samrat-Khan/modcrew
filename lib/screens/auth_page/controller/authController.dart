@@ -18,6 +18,7 @@ class AuthController extends GetxController {
 
   addUserData({required UserDataModel userDataModel}) {
     userData.value.add(userDataModel);
+    update();
   }
 
   // clearAuthToken() {

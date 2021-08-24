@@ -91,6 +91,11 @@ class AppRouter {
           settings: settings,
           builder: (_) => SizeChart(),
         );
+      case '/noNetwork':
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => NoInternetPage(),
+        );
 
       default:
         return _errorRoute();

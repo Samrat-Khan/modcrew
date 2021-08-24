@@ -18,4 +18,5 @@ class RouteName {
   static String fashion = '/fashion';
   static String collectibles = '/collectibles';
   static String sizeChart = '/sizechart';
+  static String noNetwork = '/noNetwork';
 }

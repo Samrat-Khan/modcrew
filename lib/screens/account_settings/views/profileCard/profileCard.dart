@@ -76,6 +76,7 @@ class _AccountDetailsCardState extends State<AccountDetailsCard> {
         child: GetBuilder<AuthController>(
           builder: (controller) {
             UserDataModel model = controller.userData.value[0];
+
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

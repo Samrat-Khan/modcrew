@@ -48,14 +48,14 @@ class _LogInTabState extends State<LogInTab> {
 
       if (tokenData["success"] == false ||
           tokenData["error"] == "Invalid credentials") {
-        showDialog(
-            context: context,
-            builder: (context) {
-              return InfoDialogForError(
-                title: "Error",
-                content: "Check you credentials",
-              );
-            });
+        widget._passwordController.clear();
+        confirmMessage(
+          context: context,
+          message: "Please Check Your Credentials",
+          ringColor: Colors.orange,
+          duration: 2,
+          countDownController: countDownController,
+        );
       }
 
       authController.authToken.value = tokenData["token"];
@@ -75,7 +75,13 @@ class _LogInTabState extends State<LogInTab> {
       setState(() {
         isLoading = false;
       });
-      print("Log In error $e");
+      confirmMessage(
+        context: context,
+        message: "Something went wrong",
+        ringColor: Colors.yellowAccent,
+        duration: 3,
+        countDownController: countDownController,
+      );
     }
   }
 
