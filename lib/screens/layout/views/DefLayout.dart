@@ -168,16 +168,21 @@ class _NewTemplateState extends State<NewTemplate> {
                           ),
                         ),
                         Spacer(),
-                        Container(
-                          padding: const EdgeInsets.all(1),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: Color(primaryColor),
-                          ),
-                          child: Icon(
-                            Icons.favorite,
-                            color: Colors.white,
-                            size: 25,
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).pushNamed(RouteName.wishlist);
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(1),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Color(primaryColor),
+                            ),
+                            child: Icon(
+                              Icons.favorite,
+                              color: Colors.white,
+                              size: 25,
+                            ),
                           ),
                         ),
                         SizedBox(width: 10),

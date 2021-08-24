@@ -68,6 +68,7 @@ class OrderItem {
     required this.sellingPrice,
     required this.hsn,
     required this.tax,
+    required this.image,
   });
 
   final String id;
@@ -77,6 +78,7 @@ class OrderItem {
   final int sellingPrice;
   final int hsn;
   final int tax;
+  final String image;
 
   factory OrderItem.fromRawJson(String str) =>
       OrderItem.fromJson(json.decode(str));
@@ -91,6 +93,7 @@ class OrderItem {
         sellingPrice: json["selling_price"],
         hsn: json["hsn"],
         tax: json["tax"],
+        image: json["image"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -101,5 +104,6 @@ class OrderItem {
         "selling_price": sellingPrice,
         "hsn": hsn,
         "tax": tax,
+        "image": image,
       };
 }

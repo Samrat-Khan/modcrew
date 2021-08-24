@@ -27,11 +27,15 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return NewTemplate(
-      sliverChild: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 25),
-        child: ProductFutureBuilder(
-          future: getSerachProduct(),
+      sliverChild: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+        child: Container(
+          height: size.width / 2,
+          child: ProductFutureBuilder(
+            future: getSerachProduct(),
+          ),
         ),
       ),
     );

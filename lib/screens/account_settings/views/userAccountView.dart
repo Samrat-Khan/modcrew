@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shopping_page/screens/account_settings/model/orderOnWayModel.dart';
 import 'package:shopping_page/screens/screens.dart';
 import 'package:shopping_page/widgets/loading_no_data/loading.dart';
+import 'package:shopping_page/widgets/util/symbol.dart';
 
 class UserAccount extends StatefulWidget {
   const UserAccount({Key? key}) : super(key: key);
@@ -69,14 +71,14 @@ class _UserAccountState extends State<UserAccount> {
                           itemBuilder: (context, i) {
                             OrderStatusModel model =
                                 OrderStatusModel.fromJson(snapshot.data[i]);
-
+                            var orderItem = model.orderItems[i];
                             return Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 20, vertical: 20),
                               child: Card(
                                 elevation: 5,
                                 child: Container(
-                                  width: size.width * 0.25,
+                                  width: size.width * 0.2,
                                   height: 150,
                                   child: Column(
                                     children: [
@@ -87,8 +89,11 @@ class _UserAccountState extends State<UserAccount> {
                                           width: size.width,
                                           height: 200,
                                           decoration: BoxDecoration(
-                                            color: Colors.amberAccent,
                                             borderRadius: borderRadius,
+                                            image: DecorationImage(
+                                              image: NetworkImage(
+                                                  model.orderItems[i].image),
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -97,10 +102,18 @@ class _UserAccountState extends State<UserAccount> {
                                             vertical: 5, horizontal: 5),
                                         child: Column(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                              MainAxisAlignment.spaceEvenly,
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
-                                          children: [],
+                                          children: [
+                                            SelectableText(
+                                              orderItem.name,
+                                              style: GoogleFonts.ubuntu(),
+                                            ),
+                                            SelectableText(
+                                                "Total Price($rupee): ${orderItem.sellingPrice} x ${orderItem.units} = ${orderItem.sellingPrice * orderItem.units}"),
+                                            SelectableText("${model.orderId}"),
+                                          ],
                                         ),
                                       ),
                                     ],

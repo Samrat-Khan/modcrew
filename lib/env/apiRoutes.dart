@@ -17,3 +17,6 @@ String env_orderStaus({required String orderId}) => '$baseUrl/orders/$orderId';
 
 const String env_uploadAddress = '$baseUrl/address';
 const String env_placeOrders = '$baseUrl/auth/me/orders';
+const String env_wishlistCreate = '$baseUrl/wishlist';
+// ignore: non_constant_identifier_names
+String env_singleProduct({required String id}) => '$baseUrl/products/$id';

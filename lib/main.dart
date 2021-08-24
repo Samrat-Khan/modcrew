@@ -17,6 +17,7 @@ void main() {
   Get.put(AddressController());
   Get.put(NavController());
   Get.put(NetworkController());
+  Get.put(ProductIdController());
   runApp(MyApp());
 }
 

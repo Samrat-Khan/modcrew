@@ -73,243 +73,247 @@ class _ContainerForProductBuyState extends State<ContainerForProductBuy> {
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
     Size size = MediaQuery.of(context).size;
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            margin: Responsive.isMobile(context)
-                ? EdgeInsets.symmetric(horizontal: 30)
-                : EdgeInsets.all(0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                //Product Title
-                Text(
-                  "${widget.productModelData.title}",
-                  style: GoogleFonts.ubuntu(
-                      fontSize: 28, fontWeight: FontWeight.w600),
-                ),
-                SizedBox(height: 5),
-                //Product Price
-                Row(
-                  children: [
-                    Text(
-                      "₹ ${widget.productModelData.sellingPrice}",
-                      style: GoogleFonts.ubuntu(
-                          fontSize: 20, fontWeight: FontWeight.w500),
-                    ),
-                    SizedBox(width: 15),
-                    Text(
-                      "₹ ${widget.productModelData.mrp}",
-                      style: GoogleFonts.ubuntu(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        decoration: TextDecoration.lineThrough,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 10),
-                //Product Variations
-                widget.productModelData.variations.length == 0
-                    ? SizedBox()
-                    :
-                    // Dropdown Button for Product Variation
-                    Row(
-                        children: [
-                          Container(
-                            width: widget.size.width * 0.2,
-                            height: 60,
-                            child: MenuButton<String>(
-                              child: NormalChildButton(sku: sku),
-                              items: sizeList,
-                              itemBuilder: (String value) => Container(
-                                height: 40,
-                                alignment: Alignment.centerLeft,
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 0.0, horizontal: 16),
-                                child: Text(value),
-                              ),
-                              toggledChild: Container(
-                                child: NormalChildButton(sku: sku),
-                              ),
-                              onItemSelected: (String value) {
-                                setState(() {
-                                  sku = value;
-                                });
-                                variationController.setWaring(value: false);
-                              },
-                              onMenuButtonToggle: (bool isToggle) {
-                                print(isToggle);
-                              },
-                            ),
-                          ),
-                          SizedBox(width: 50),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context)
-                                  .pushNamed(RouteName.sizeChart);
-                            },
-                            child: Text("Size Chart"),
-                          ),
-                        ],
-                      ),
-                Divider(
-                  color: Colors.white,
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.2,
-                  height: 300,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20),
+      child: Container(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              margin: Responsive.isMobile(context)
+                  ? EdgeInsets.symmetric(horizontal: 30)
+                  : EdgeInsets.all(0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  //Product Title
+                  Text(
+                    "${widget.productModelData.title}",
+                    style: GoogleFonts.ubuntu(
+                        fontSize: 28, fontWeight: FontWeight.w600),
+                  ),
+                  SizedBox(height: 5),
+                  //Product Price
+                  Row(
                     children: [
                       Text(
-                        "Prduct Details",
+                        "₹ ${widget.productModelData.sellingPrice}",
                         style: GoogleFonts.ubuntu(
-                          fontWeight: FontWeight.w900,
-                        ),
+                            fontSize: 20, fontWeight: FontWeight.w500),
                       ),
-                      SizedBox(height: 10),
-                      ListView.builder(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.vertical,
-                        itemCount: widget.productModelData.description.length,
-                        itemBuilder: (context, index) {
-                          return ListTile(
-                            leading: Icon(
-                              Icons.circle,
-                              size: 8,
-                              color: Colors.black,
-                            ),
-                            title: Text(
-                              widget.productModelData.description[index]
-                                  .toString(),
-                              softWrap: true,
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                          );
-                        },
+                      SizedBox(width: 15),
+                      Text(
+                        "₹ ${widget.productModelData.mrp}",
+                        style: GoogleFonts.ubuntu(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          decoration: TextDecoration.lineThrough,
+                        ),
                       ),
                     ],
                   ),
-                ),
-              ],
-            ),
-          ),
-          Divider(
-            indent: 10,
-            endIndent: 10,
-          ),
-          Column(
-            children: [
-              Obx(() => variationController.isNeedWaring.value
-                  ? showWaring
-                  : SizedBox()),
-              SizedBox(height: 5),
-              Row(
-                children: [
-                  Container(
-                    child: Row(
-                      children: [
-                        Card(
-                          color: Colors.black,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          child: IconButton(
-                            onPressed: () {
-                              cartController.itemCount.value == 1
-                                  ? () {}
-                                  : decrement();
-                            },
-                            icon: Icon(
-                              Icons.remove,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: Responsive.isDesktop(context) ? 15 : 15,
-                        ),
-                        Container(
-                          child: Center(
-                            child: Obx(
-                              () => Text(
-                                "${cartController.itemCount.value}",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w800,
+                  SizedBox(height: 10),
+                  //Product Variations
+                  widget.productModelData.variations.length == 0
+                      ? SizedBox()
+                      :
+                      // Dropdown Button for Product Variation
+                      Row(
+                          children: [
+                            Container(
+                              width: widget.size.width * 0.2,
+                              height: 60,
+                              child: MenuButton<String>(
+                                child: NormalChildButton(sku: sku),
+                                items: sizeList,
+                                itemBuilder: (String value) => Container(
+                                  height: 40,
+                                  alignment: Alignment.centerLeft,
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 0.0, horizontal: 16),
+                                  child: Text(value),
                                 ),
+                                toggledChild: Container(
+                                  child: NormalChildButton(sku: sku),
+                                ),
+                                onItemSelected: (String value) {
+                                  setState(() {
+                                    sku = value;
+                                  });
+                                  variationController.setWaring(value: false);
+                                },
+                                onMenuButtonToggle: (bool isToggle) {
+                                  print(isToggle);
+                                },
                               ),
                             ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: Responsive.isDesktop(context) ? 15 : 15,
-                        ),
-                        Card(
-                          elevation: 7,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          child: IconButton(
-                            onPressed: increment,
-                            icon: Icon(
-                              Icons.add,
-                              color: Colors.black,
+                            SizedBox(width: 50),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pushNamed(RouteName.sizeChart);
+                              },
+                              child: Text("Size Chart"),
                             ),
+                          ],
+                        ),
+                  Divider(
+                    color: Colors.white,
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    height: 300,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Prduct Details",
+                          style: GoogleFonts.ubuntu(
+                            fontWeight: FontWeight.w900,
                           ),
+                        ),
+                        SizedBox(height: 10),
+                        ListView.builder(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          itemCount: widget.productModelData.description.length,
+                          itemBuilder: (context, index) {
+                            return ListTile(
+                              leading: Icon(
+                                Icons.circle,
+                                size: 8,
+                                color: Colors.black,
+                              ),
+                              title: Text(
+                                widget.productModelData.description[index]
+                                    .toString(),
+                                softWrap: true,
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            );
+                          },
                         ),
                       ],
                     ),
                   ),
-                  SizedBox(width: 10),
-                  Container(
-                    width: Responsive.isMobile(context)
-                        ? widget.size.width
-                        : widget.size.width / 7,
-                    padding: Responsive.isMobile(context)
-                        ? const EdgeInsets.symmetric(horizontal: 30)
-                        : const EdgeInsets.all(0),
-                    height: 40,
-                    child: ElevatedButton.icon(
-                      style: ElevatedButton.styleFrom(
-                        onSurface: Colors.brown,
-                        primary: Color(primaryColor),
-                      ),
-                      onPressed: () {
-                        !checkVariationClicked()
-                            ? null
-                            : addToCart(
-                                CartModel(
-                                  image: widget.productModelData.images[0],
-                                  name: widget.productModelData.title,
-                                  productId: widget.productModelData.id,
-                                  productUnits: cartController.itemCount.value,
-                                  productPrice: widget
-                                      .productModelData.sellingPrice
-                                      .toDouble(),
-                                  sku: sku,
-                                  subTotal:
-                                      (widget.productModelData.sellingPrice *
-                                              cartController.itemCount.value)
-                                          .toDouble(),
-                                ),
-                              );
-                      },
-                      icon: Icon(Icons.shopping_cart),
-                      label: Text("Add to cart"),
-                    ),
-                  ),
                 ],
               ),
-            ],
-          ),
-        ],
+            ),
+            Divider(
+              indent: 10,
+              endIndent: 10,
+            ),
+            Column(
+              children: [
+                Obx(() => variationController.isNeedWaring.value
+                    ? showWaring
+                    : SizedBox()),
+                SizedBox(height: 5),
+                Row(
+                  children: [
+                    Container(
+                      child: Row(
+                        children: [
+                          Card(
+                            color: Colors.black,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: IconButton(
+                              onPressed: () {
+                                cartController.itemCount.value == 1
+                                    ? () {}
+                                    : decrement();
+                              },
+                              icon: Icon(
+                                Icons.remove,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: Responsive.isDesktop(context) ? 15 : 15,
+                          ),
+                          Container(
+                            child: Center(
+                              child: Obx(
+                                () => Text(
+                                  "${cartController.itemCount.value}",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: Responsive.isDesktop(context) ? 15 : 15,
+                          ),
+                          Card(
+                            elevation: 7,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: IconButton(
+                              onPressed: increment,
+                              icon: Icon(
+                                Icons.add,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    Container(
+                      width: Responsive.isMobile(context)
+                          ? widget.size.width
+                          : widget.size.width / 7,
+                      padding: Responsive.isMobile(context)
+                          ? const EdgeInsets.symmetric(horizontal: 30)
+                          : const EdgeInsets.all(0),
+                      height: 40,
+                      child: ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          onSurface: Colors.brown,
+                          primary: Color(primaryColor),
+                        ),
+                        onPressed: () {
+                          !checkVariationClicked()
+                              ? null
+                              : addToCart(
+                                  CartModel(
+                                    image: widget.productModelData.images[0],
+                                    name: widget.productModelData.title,
+                                    productId: widget.productModelData.id,
+                                    productUnits:
+                                        cartController.itemCount.value,
+                                    productPrice: widget
+                                        .productModelData.sellingPrice
+                                        .toDouble(),
+                                    sku: sku,
+                                    subTotal:
+                                        (widget.productModelData.sellingPrice *
+                                                cartController.itemCount.value)
+                                            .toDouble(),
+                                  ),
+                                );
+                        },
+                        icon: Icon(Icons.shopping_cart),
+                        label: Text("Add to cart"),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

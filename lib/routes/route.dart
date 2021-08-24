@@ -96,7 +96,11 @@ class AppRouter {
           settings: settings,
           builder: (_) => NoInternetPage(),
         );
-
+      case '/wishlist':
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => WishListView(),
+        );
       default:
         return _errorRoute();
     }

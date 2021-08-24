@@ -18,3 +18,4 @@ export 'sizeChart/sizeChart.dart';
 export 'home/home.dart';
 export 'no_Internet/no_internet_controller.dart';
 export 'no_Internet/no_internet_views.dart';
+export 'wishlist/wishlist.dart';
