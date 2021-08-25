@@ -20,3 +20,4 @@ const String env_placeOrders = '$baseUrl/auth/me/orders';
 const String env_wishlistCreate = '$baseUrl/wishlist';
 // ignore: non_constant_identifier_names
 String env_singleProduct({required String id}) => '$baseUrl/products/$id';
+const String env_forgotPassword = '$baseUrl/auth/forgot-password';

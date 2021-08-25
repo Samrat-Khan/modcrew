@@ -76,18 +76,20 @@ class SignInSignUp {
     }
   }
 
-  Future forgotPassword({required String token, required String email}) async {
+  Future forgotPassword({required String email}) async {
     var body = {
       "email": email,
     };
     var encodeBody = jsonEncode(body);
-    await http.post(
-      Uri.parse(env_SignIn),
+    var res = await http.post(
+      Uri.parse(env_forgotPassword),
       body: encodeBody,
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        HttpHeaders.authorizationHeader: 'Bearer $token',
       },
     );
+    Map data = jsonDecode(res.body);
+
+    return data;
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_utils/src/get_utils/get_utils.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:shopping_page/const_and_theme/colors.dart';
 import 'package:shopping_page/const_and_theme/textStyles.dart';
 
 import 'package:shopping_page/routes/routeNames.dart';
@@ -215,6 +216,9 @@ class _SignUpTabState extends State<SignUpTab> {
                 ),
                 SizedBox(height: 10),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(primaryColor),
+                  ),
                   onPressed: validateAndSubmit,
                   child: Text("      Sign Up      ",
                       style: Styles.logInPageOtherStyle),

@@ -37,6 +37,12 @@ class _NewTemplateState extends State<NewTemplate> {
     navController.setIndex(i: i);
   }
 
+  logout() {
+    authController.clearAuthToken();
+    Navigator.of(context)
+        .pushNamedAndRemoveUntil(RouteName.home, (route) => false);
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -129,14 +135,25 @@ class _NewTemplateState extends State<NewTemplate> {
                   child: Icon(LineIcons.twitter, color: Colors.white)),
               SizedBox(width: 20),
               authController.authToken.value != ""
-                  ? InkWell(
-                      onTap: () {
-                        Navigator.of(context).pushNamed(RouteName.account);
-                      },
-                      child: CircleAvatar(
-                        radius: 15,
-                        backgroundImage: AssetImage("assets/images/u7.png"),
-                      ),
+                  ? Row(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).pushNamed(RouteName.account);
+                          },
+                          child: CircleAvatar(
+                            radius: 15,
+                            backgroundImage: AssetImage("assets/images/u7.png"),
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: logout,
+                          icon: Icon(
+                            Icons.logout_outlined,
+                            color: Color(primaryColor),
+                          ),
+                        ),
+                      ],
                     )
                   : TextButton(
                       onPressed: () {

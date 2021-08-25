@@ -1,3 +1,4 @@
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -47,7 +48,10 @@ class _CartPageState extends State<CartPage> {
     setState(() {
       isLoadingAssetPage = true;
     });
-    String id = await placeOrderHttpService.uploadAddress();
+    String id = await placeOrderHttpService.uploadAddress(
+      context: context,
+      countDownController: CountDownController(),
+    );
 
     String razorPayId = await placeOrderHttpService.razorPayOrder(orderId: id);
 
@@ -63,8 +67,11 @@ class _CartPageState extends State<CartPage> {
     Size size = MediaQuery.of(context).size;
     return NewTemplate(
       sliverChild: isLoadingAssetPage
-          ? Center(
-              child: LoadingSpiner(),
+          ? Container(
+              height: size.width / 2,
+              child: Center(
+                child: LoadingSpiner(),
+              ),
             )
           : CustomScrollView(
               shrinkWrap: true,

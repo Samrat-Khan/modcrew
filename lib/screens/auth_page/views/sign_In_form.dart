@@ -33,6 +33,7 @@ class LogInTab extends StatefulWidget {
 class _LogInTabState extends State<LogInTab> {
   bool isLoading = false;
   final authController = AuthController.to;
+  bool forgotPasswordLoading = false;
   final SignInSignUp signInSignUp = SignInSignUp();
   final TextEditingController forgotPasswordController =
       TextEditingController();
@@ -86,19 +87,42 @@ class _LogInTabState extends State<LogInTab> {
   }
 
   resetPassword() async {
-    await signInSignUp
-        .forgotPassword(
-            token: authController.authToken.value,
-            email: forgotPasswordController.text)
-        .whenComplete(() {
+    try {
+      Map response = await signInSignUp.forgotPassword(
+          email: forgotPasswordController.text);
+      if (response["success"]) {
+        setState(() {
+          forgotPasswordLoading = false;
+        });
+        confirmMessage(
+          context: context,
+          message: "Password rest link is send to your email",
+          ringColor: Colors.green,
+          duration: 5,
+          countDownController: countDownController,
+        );
+      } else {
+        setState(() {
+          forgotPasswordLoading = false;
+        });
+        confirmMessage(
+            context: context,
+            message: "Email not found",
+            ringColor: Colors.redAccent,
+            countDownController: countDownController,
+            duration: 3);
+      }
+    } catch (e) {
+      setState(() {
+        forgotPasswordLoading = false;
+      });
       confirmMessage(
-        context: context,
-        message: "An password rest link is send to your email",
-        ringColor: Colors.green,
-        duration: 5,
-        countDownController: countDownController,
-      );
-    });
+          context: context,
+          message: "Something went wrong try again",
+          ringColor: Colors.redAccent,
+          countDownController: countDownController,
+          duration: 3);
+    }
   }
 
   @override
@@ -112,60 +136,70 @@ class _LogInTabState extends State<LogInTab> {
     return ModalProgressHUD(
       inAsyncCall: isLoading,
       color: Colors.black,
-      child: Column(
+      child: Stack(
+        alignment: Alignment.center,
         children: [
-          SizedBox(height: 10),
-          Text(
-            "Log In",
-            style: Styles.kLoginPageTitie,
-          ),
-          SizedBox(height: 50),
-          CustomTextField(
-            size: widget.size,
-            hintText: "email",
-            controller: widget._emailController,
-            valiadtor: (value) {},
-          ),
-          SizedBox(height: 15),
-          CustomTextField(
-            size: widget.size,
-            hintText: "password",
-            controller: widget._passwordController,
-            needPassword: true,
-            valiadtor: (value) {},
-          ),
-          SizedBox(height: 10),
-          ElevatedButton(
-            onPressed: signInUser,
-            child: Text("      LogIn      ", style: Styles.logInPageOtherStyle),
-          ),
-          SizedBox(height: 15),
-          GestureDetector(
-            onTap: widget.onTap,
-            child: RichText(
-              text: TextSpan(
-                children: [
-                  TextSpan(
-                      text: "Don't have an account ? ",
-                      style: Styles.logInPageOtherStyle),
-                  TextSpan(
-                    text: "click here",
-                    style: Styles.logInPageForgotPassword,
-                  ),
-                ],
+          Column(
+            children: [
+              SizedBox(height: 10),
+              Text(
+                "Log In",
+                style: Styles.kLoginPageTitie,
               ),
-            ),
+              SizedBox(height: 50),
+              CustomTextField(
+                size: widget.size,
+                hintText: "email",
+                controller: widget._emailController,
+                valiadtor: (value) {},
+              ),
+              SizedBox(height: 15),
+              CustomTextField(
+                size: widget.size,
+                hintText: "password",
+                controller: widget._passwordController,
+                needPassword: true,
+                valiadtor: (value) {},
+              ),
+              SizedBox(height: 10),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Color(primaryColor),
+                ),
+                onPressed: signInUser,
+                child: Text("      LogIn      ",
+                    style: Styles.logInPageOtherStyle),
+              ),
+              SizedBox(height: 15),
+              GestureDetector(
+                onTap: widget.onTap,
+                child: RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                          text: "Don't have an account ? ",
+                          style: Styles.logInPageOtherStyle),
+                      TextSpan(
+                        text: "click here",
+                        style: Styles.logInPageForgotPassword,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(height: 15),
+              InkWell(
+                onTap: () =>
+                    forgotPasswordPopUp(context: context, size: widget.size),
+                child: Text(
+                  "Forgot password",
+                  style: Styles.logInPageForgotPassword,
+                ),
+              ),
+              SizedBox(height: 18),
+            ],
           ),
-          SizedBox(height: 15),
-          InkWell(
-            onTap: () =>
-                forgotPasswordPopUp(context: context, size: widget.size),
-            child: Text(
-              "Forgot password",
-              style: Styles.logInPageForgotPassword,
-            ),
-          ),
-          SizedBox(height: 18),
+          forgotPasswordLoading ? LoadingSpiner() : SizedBox(),
         ],
       ),
     );
@@ -199,7 +233,13 @@ class _LogInTabState extends State<LogInTab> {
                 style: ElevatedButton.styleFrom(
                   primary: Color(0xff65e866),
                 ),
-                onPressed: () => resetPassword(),
+                onPressed: () {
+                  setState(() {
+                    forgotPasswordLoading = true;
+                  });
+                  resetPassword();
+                  Navigator.pop(context);
+                },
                 child: Text("Rest"),
               ),
             ],

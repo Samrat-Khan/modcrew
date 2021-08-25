@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:shopping_page/const_and_theme/colors.dart';
 import 'package:shopping_page/screens/screens.dart';
 
 class AboutUs extends StatelessWidget {
@@ -8,16 +10,82 @@ class AboutUs extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return NewTemplate(
-      sliverChild: Container(
-        child: Center(
-          child: Column(
-            children: [
-              Text("About Modcrew"),
-              Container(
-                width: size.width * 0.35,
-                child: Text(message),
-              ),
-            ],
+      sliverChild: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 50),
+        child: Container(
+          height: size.width / 2,
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(width: 50),
+                    SelectableText(
+                      "About Us",
+                      style: GoogleFonts.ubuntu(
+                        fontSize: 40,
+                        fontWeight: FontWeight.w800,
+                        color: Color(primaryColor),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20),
+                Divider(
+                  endIndent: 50,
+                  indent: 50,
+                  color: Color(0xffBDBDBD),
+                ),
+                SizedBox(height: 20),
+                Container(
+                  width: size.width / 2,
+                  child: Text(
+                    message,
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.ubuntu(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w400,
+                      wordSpacing: 2,
+                      height: 1.5,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 40),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SelectableText(
+                      "Check us out on Social Media:",
+                      style: GoogleFonts.ubuntu(
+                        fontSize: 30,
+                        fontWeight: FontWeight.w800,
+                        color: Color(primaryColor),
+                      ),
+                    ),
+                    SizedBox(height: 30),
+                    SelectableText(
+                      "Offical Company Instagram: @Modcrew",
+                      style: GoogleFonts.ubuntu(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 18,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    SelectableText(
+                      "Offical Facebook Page: @Modcrew_FB",
+                      style: GoogleFonts.ubuntu(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 18,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

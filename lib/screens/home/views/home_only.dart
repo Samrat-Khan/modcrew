@@ -91,13 +91,10 @@ class _HomeScreenState extends State<HomeScreen>
         scrollDirection: Axis.vertical,
         child: GetX<NavController>(
           builder: (_) => navController.selectedTab > 0
-              ? Expanded(
-                  child: Container(
-                    height: size.width / 2,
-                    child: ProductByCategoryScreen(
-                        future:
-                            loadProducts(i: navController.selectedTab.value)),
-                  ),
+              ? Container(
+                  height: size.width / 2,
+                  child: ProductByCategoryScreen(
+                      future: loadProducts(i: navController.selectedTab.value)),
                 )
               : ListView(
                   shrinkWrap: true,

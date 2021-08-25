@@ -17,6 +17,7 @@ class OrderOnTheWay {
     );
 
     Map<String, dynamic> jsonData = jsonDecode(res.body);
+    print(jsonData);
     return jsonData;
   }
 }

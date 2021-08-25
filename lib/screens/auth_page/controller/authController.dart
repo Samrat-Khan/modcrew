@@ -61,7 +61,10 @@ class AuthController extends GetxController {
   }
 
   clearAuthToken() async {
+    authToken.value = '';
+    userData.value.clear();
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove("token");
+    update();
   }
 }

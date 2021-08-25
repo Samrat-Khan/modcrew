@@ -1,3 +1,4 @@
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 
 import 'package:shopping_page/routes/routeNames.dart';
@@ -20,7 +21,8 @@ class _CheckOutState extends State<CheckOut> {
   int selectedButtonIndex = 1;
   final orderIdController = OrderIdController.to;
   order() async {
-    String id = await placeOrderHttpService.uploadAddress();
+    String id = await placeOrderHttpService.uploadAddress(
+        context: context, countDownController: CountDownController());
     String razorPayId = await placeOrderHttpService.razorPayOrder(orderId: id);
 
     Navigator.of(context)

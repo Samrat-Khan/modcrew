@@ -114,17 +114,17 @@ class _AccountDetailsCardState extends State<AccountDetailsCard> {
                       ],
                     ),
                     Spacer(),
-                    IconButton(
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return PopupEditProfile();
-                          },
-                        );
-                      },
-                      icon: Icon(Icons.edit, color: Colors.black),
-                    ),
+                    // IconButton(
+                    //   onPressed: () {
+                    //     showDialog(
+                    //       context: context,
+                    //       builder: (BuildContext context) {
+                    //         return PopupEditProfile();
+                    //       },
+                    //     );
+                    //   },
+                    //   icon: Icon(Icons.edit, color: Colors.black),
+                    // ),
                   ],
                 ),
                 SizedBox(height: 20),

@@ -26,7 +26,8 @@ class _WebPaymentState extends State<WebPayment> {
   @override
   void initState() {
     if (widget.orderId.isEmpty) {
-      Get.offAllNamed(RouteName.home);
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil(RouteName.home, (route) => false);
     }
     super.initState();
   }
@@ -48,8 +49,10 @@ class _WebPaymentState extends State<WebPayment> {
             } else if (element.data == 'SUCCESS') {
               cartController.deleteCart();
               Future.delayed(Duration(seconds: 5)).then((value) {});
-              Navigator.of(context).pushReplacementNamed(RouteName.orderConfrim,
-                  arguments: widget.orderId);
+              // Navigator.of(context).pushReplacementNamed(RouteName.orderConfrim,
+              //     arguments: widget.orderId);
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil(RouteName.home, (route) => false);
             }
           },
         );

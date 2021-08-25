@@ -41,6 +41,7 @@ class UploadAdress {
             'Bearer ${authController.authToken.value}',
       },
     );
+    Map data = jsonDecode(res.body);
   }
 }
 

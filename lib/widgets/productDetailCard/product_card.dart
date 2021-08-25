@@ -58,80 +58,61 @@ class _ProductCardState extends State<ProductCard> {
     var saleTextContainer = Responsive.isDesktop(context) ? 0.05 : 0.1;
     var totalStockTextContainer = Responsive.isDesktop(context) ? 0.07 : 0.25;
     Size size = MediaQuery.of(context).size;
-    return Card(
-      elevation: 7,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: Container(
-        width: size.width * 0.2,
-        height: size.height * 0.41,
-        decoration: BoxDecoration(
-          color: Colors.white,
+    return InkWell(
+      onTap: () {
+        productIdController.setProductId(id: widget.productModelData.id);
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => ProductDetailsScreen(
+              productModelData: widget.productModelData,
+            ),
+          ),
+        );
+      },
+      child: Card(
+        elevation: 7,
+        shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),
-        child: Stack(
-          children: [
-            Positioned(
-              top: 5,
-              right: 5,
-              child: IconButton(
-                hoverColor: Colors.transparent,
-                onPressed: () =>
-                    addToWishList(productId: widget.productModelData.id),
-                icon: Icon(
-                  Icons.favorite_border,
-                  color: favColor,
-                  size: 25,
+        child: Container(
+          width: size.width * 0.2,
+          height: size.height * 0.41,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 9),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Container(
+                  height: size.height * 0.2,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(widget.productModelData.images[0]),
+                      fit: BoxFit.contain,
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 9),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    height: size.height * 0.2,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(widget.productModelData.images[0]),
-                        fit: BoxFit.contain,
+                Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.productModelData.title,
+                        softWrap: true,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                    ),
+                      SizedBox(height: 2),
+                      priceAndSellingCount(),
+                    ],
                   ),
-                  InkWell(
-                    onTap: () {
-                      productIdController.setProductId(
-                          id: widget.productModelData.id);
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => ProductDetailsScreen(
-                            productModelData: widget.productModelData,
-                          ),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            widget.productModelData.title,
-                            softWrap: true,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          SizedBox(height: 2),
-                          priceAndSellingCount(),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
