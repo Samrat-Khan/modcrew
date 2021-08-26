@@ -149,7 +149,7 @@ class _NewTemplateState extends State<NewTemplate> {
                         IconButton(
                           onPressed: logout,
                           icon: Icon(
-                            Icons.logout_outlined,
+                            LineIcons.powerOff,
                             color: Color(primaryColor),
                           ),
                         ),

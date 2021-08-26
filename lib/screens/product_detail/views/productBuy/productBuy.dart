@@ -148,12 +148,24 @@ class _ContainerForProductBuyState extends State<ContainerForProductBuy> {
                               ),
                             ),
                             SizedBox(width: 50),
-                            TextButton(
+                            Text(
+                              "Not sure? See   ",
+                              style: GoogleFonts.ubuntu(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            OutlinedButton(
                               onPressed: () {
                                 Navigator.of(context)
                                     .pushNamed(RouteName.sizeChart);
                               },
-                              child: Text("Size Chart"),
+                              child: Text(
+                                "Size Chart",
+                                style: GoogleFonts.ubuntu(
+                                  fontSize: 12,
+                                ),
+                              ),
                             ),
                           ],
                         ),

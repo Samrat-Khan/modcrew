@@ -2,7 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
-import 'package:shopping_page/services/services.dart';
+import 'package:shopping_page/env/apiRoutes.dart';
+import 'package:shopping_page/screens/auth_page/controller/authController.dart';
 
 class ReviewHTTPService {
   // getProductReview({required String productId}) async {
@@ -14,34 +15,35 @@ class ReviewHTTPService {
   //     print("HTTP Exception on Get Reviews ${e.message}");
   //   }
   // }
-
+  final authController = AuthController.to;
   postProductReview({
     required String userId,
     required String review,
     required int rating,
     required String reviwerName,
-    required String token,
+    required String title,
     required String productId,
   }) async {
     try {
       Map qBody = {
-        "reviewerName": reviwerName,
-        "reviewerId": userId,
+        // "reviewerName": reviwerName,
+        // "reviewerId": userId,
         "rating": rating,
-        "title": "",
+        "title": title,
         "body": review,
       };
       var encodedBody = jsonEncode(qBody);
       var response = await http.post(
-        //TODO:
-        Uri.parse("GET_POST_REVIEW(productId: productId)"),
+        Uri.parse(env_addReview(productId: productId)),
         body: encodedBody,
         headers: {
           HttpHeaders.contentTypeHeader: 'application/json',
-          HttpHeaders.authorizationHeader: 'Bearer $token',
+          HttpHeaders.authorizationHeader:
+              'Bearer ${authController.authToken.value}',
         },
       );
       var jsonBody = jsonDecode(response.body);
+      print("data of Review $jsonBody");
       return jsonBody["success"];
     } on HttpException catch (e) {
       print("HTTP Exception on POST Reviews ${e.message}");

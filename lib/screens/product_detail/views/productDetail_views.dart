@@ -24,6 +24,20 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       modelData = ProductModelData.fromJson(res);
       isLoading = false;
     });
+    print(modelData!.reviews);
+  }
+
+  addReview({required String productId}) async {
+    await showDialog(
+        context: context,
+        builder: (context) => PopupReviewProduct(
+              productId: productId,
+            ));
+
+    setState(() {
+      isLoading = true;
+    });
+    await getProductDetails();
   }
 
   @override
@@ -109,11 +123,21 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             fontSize: 22,
                           ),
                         ),
+                        authController.authToken.value.isEmpty
+                            ? SizedBox()
+                            : IconButton(
+                                onPressed: () =>
+                                    addReview(productId: modelData!.id),
+                                icon: Icon(
+                                  Icons.reviews,
+                                  color: Colors.black,
+                                ),
+                              ),
                       ],
                     ),
                   ),
                   CustomerReviewWidgets(
-                    review: [],
+                    review: modelData!.reviews,
                   ),
                 ],
               ),

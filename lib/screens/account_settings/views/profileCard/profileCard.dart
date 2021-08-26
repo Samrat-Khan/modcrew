@@ -68,6 +68,7 @@ class _AccountDetailsCardState extends State<AccountDetailsCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 7,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: Container(
         width: widget.size.width * 0.35,

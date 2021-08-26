@@ -17,7 +17,7 @@ class OrderStatusModel {
   final String status;
   final String paymentMethod;
   final String id;
-  final List<OrderItem> orderItems;
+  final List<OrderItemFromHistory> orderItems;
   final int subTotal;
   final DateTime orderDate;
   final bool shippingIsBilling;
@@ -35,8 +35,8 @@ class OrderStatusModel {
         status: json["status"],
         paymentMethod: json["payment_method"],
         id: json["_id"],
-        orderItems: List<OrderItem>.from(
-            json["order_items"].map((x) => OrderItem.fromJson(x))),
+        orderItems: List<OrderItemFromHistory>.from(
+            json["order_items"].map((x) => OrderItemFromHistory.fromJson(x))),
         subTotal: json["sub_total"],
         orderDate: DateTime.parse(json["order_date"]),
         shippingIsBilling: json["shipping_is_billing"],
@@ -59,8 +59,8 @@ class OrderStatusModel {
       };
 }
 
-class OrderItem {
-  OrderItem({
+class OrderItemFromHistory {
+  OrderItemFromHistory({
     required this.id,
     required this.sku,
     required this.units,
@@ -80,12 +80,13 @@ class OrderItem {
   final int tax;
   final String image;
 
-  factory OrderItem.fromRawJson(String str) =>
-      OrderItem.fromJson(json.decode(str));
+  factory OrderItemFromHistory.fromRawJson(String str) =>
+      OrderItemFromHistory.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory OrderItem.fromJson(Map<String, dynamic> json) => OrderItem(
+  factory OrderItemFromHistory.fromJson(Map<String, dynamic> json) =>
+      OrderItemFromHistory(
         id: json["_id"],
         sku: json["sku"],
         units: json["units"],

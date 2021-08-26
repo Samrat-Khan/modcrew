@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:shopping_page/widgets/widgets.dart';
@@ -23,6 +24,7 @@ class _CustomerReviewWidgetsState extends State<CustomerReviewWidgets> {
     Color(0xffff9f00),
     Color(0xffff6160),
   ];
+
   @override
   void initState() {
     print(widget.review.length.runtimeType);
@@ -36,11 +38,11 @@ class _CustomerReviewWidgetsState extends State<CustomerReviewWidgets> {
     var isDesktop = Responsive.isDesktop(context);
     return Padding(
       padding: isDesktop
-          ? const EdgeInsets.symmetric(horizontal: 50)
+          ? const EdgeInsets.symmetric(horizontal: 50, vertical: 50)
           : const EdgeInsets.symmetric(horizontal: 10),
       child: Responsive.isDesktop(context)
           ? SizedBox(
-              height: 200,
+              height: 150,
               child: reviewContentWidget(context),
             )
           : Container(
@@ -70,10 +72,11 @@ class _CustomerReviewWidgetsState extends State<CustomerReviewWidgets> {
             itemCount: widget.review.length == 0 ? 1 : widget.review.length,
             itemBuilder: (context, index) {
               return Card(
+                elevation: 7,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10)),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: 10),
                     ListTile(
@@ -82,11 +85,13 @@ class _CustomerReviewWidgetsState extends State<CustomerReviewWidgets> {
                         height: 40,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          image: DecorationImage(
-                            //TODO: Set a pic
-                            image: AssetImage(""),
-                          ),
+                          // image: DecorationImage(
+                          //   image: NetworkImage(
+                          //       "https://avatars.dicebear.com/v2/gridy/518bbff4c921264d9eda8f14a04a44d9.svg"),
+                          // ),
                         ),
+                        child: SvgPicture.network(
+                            "https://avatars.dicebear.com/v2/gridy/518bbff4c921264d9eda8f14a04a44d9.svg"),
                       ),
                       title: Text(
                         "${widget.review[index].name}",
